@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AquaPlan — Riego Automático · GBA</title>
+<meta name="description" content="Diseño e instalación de sistemas de riego automático. Aspersores Hunter, goteo y automatización. Gran Buenos Aires."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & ROOT ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dk:#1A2B1E;
+  --sg:#4A8C5C;
+  --sgl:#6FAF7F;
+  --ce:#A5C4D8;
+  --wh:#FFFFFF;
+  --cr:#F4F7F5;
+  --bd:#E2EAE4;
+  --txt:#1A2B1E;
+  --muted:#6B7E72;
+}
+html{scroll-behavior:auto}
+body{font-family:'Inter',sans-serif;background:var(--wh);color:var(--txt);overflow-x:hidden;cursor:none}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ─── CUSTOM CURSOR ─── */
+#cursor{
+  position:fixed;width:8px;height:8px;border-radius:50%;
+  background:var(--sgl);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .25s cubic-bezier(.22,1,.36,1),height .25s cubic-bezier(.22,1,.36,1),opacity .3s;
+  opacity:0;
+}
+@media(pointer:coarse){#cursor{display:none}body{cursor:auto}}
+
+/* ─── NAV ─── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;height:72px;
+  transition:background .4s,box-shadow .4s;
+}
+#nav.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--bd)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.logo-svg{height:40px;width:auto;transition:transform .4s cubic-bezier(.22,1,.36,1);overflow:visible}
+.nav-logo:hover .logo-svg{transform:scale(1.07)}
+/* Colores: transparente sobre hero oscuro */
+.logo-aqua{fill:#ffffff;transition:fill .4s}
+.logo-plan{fill:#A5C4D8}
+#nav.solid .logo-aqua{fill:#1A2B1E}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{
+  font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.8);transition:color .3s;
+}
+#nav.solid .nav-links a{color:var(--dk)}
+.nav-links a:hover{color:var(--sgl)}
+.nav-cta{
+  background:var(--wh);color:var(--dk) !important;
+  padding:.55rem 1.4rem;border-radius:2px;
+  font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  transition:background .3s,color .3s !important;
+}
+#nav.solid .nav-cta{background:var(--dk);color:var(--wh) !important}
+.nav-cta:hover{background:var(--sg) !important;color:var(--wh) !important}
+
+/* ─── HERO VIDEO ─── */
+#hero{
+  position:relative;height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(8,18,10,.6) 0%,rgba(8,18,10,.38) 45%,rgba(8,18,10,.78) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;padding:0 2rem;
+  max-width:860px;
+}
+.hero-tag{
+  font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--sgl);margin-bottom:2rem;
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+}
+.hero-tag::before,.hero-tag::after{content:'';flex:0 0 36px;height:1px;background:var(--sgl);opacity:.6}
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4.5vw,4.2rem);
+  font-weight:600;line-height:1.05;
+  color:var(--wh);margin-bottom:1.5rem;
+  letter-spacing:-.02em;
+}
+.hero-h1 em{font-style:normal;color:inherit}
+.hero-sub{
+  font-size:clamp(.8rem,1.1vw,.95rem);
+  color:rgba(255,255,255,.65);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:3rem;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--wh);color:var(--dk);
+  padding:.9rem 2.2rem;border-radius:2px;
+  font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  transition:background .3s,color .3s;
+}
+.btn-primary:hover{background:var(--sgl);color:var(--wh)}
+.btn-ghost{
+  background:transparent;color:var(--wh);
+  border:1px solid rgba(255,255,255,.4);
+  padding:.9rem 2.2rem;border-radius:2px;
+  font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  transition:border-color .3s,background .3s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.9);background:rgba(255,255,255,.08)}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  animation:bobdown 2.2s ease-in-out infinite;
+}
+.hero-scroll span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.hero-scroll svg{width:15px;height:15px;color:rgba(255,255,255,.4)}
+@keyframes bobdown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* ─── PRODUCTS ─── */
+#productos{background:var(--wh)}
+.prod-intro{
+  text-align:center;
+  padding:5.5rem 3rem 3.5rem;
+}
+.section-eyebrow{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sg);margin-bottom:1rem;
+  display:flex;align-items:center;justify-content:center;gap:.75rem;
+}
+.section-eyebrow::before,.section-eyebrow::after{content:'';flex:0 0 28px;height:1px;background:var(--sg)}
+.prod-intro h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:600;color:var(--dk);line-height:1.1;
+  letter-spacing:-.02em;
+}
+.prod-intro h2 em{font-style:italic;color:inherit}
+
+/* ─── PRODUCTS CIRCLES ─── */
+.prod-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  max-width:1160px;
+  margin:0 auto;
+  padding:0 3rem 6rem;
+}
+.prod-item+.prod-item{border-left:1px solid var(--bd)}
+.prod-item{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:0 2rem;
+  cursor:none;
+}
+.prod-circle-wrap{
+  width:100%;max-width:220px;aspect-ratio:1;
+  position:relative;margin-bottom:1.75rem;
+}
+.prod-circle-ring{
+  position:absolute;inset:-5px;border-radius:50%;
+  border:1.5px solid var(--bd);
+  transition:border-color .5s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+}
+.prod-item:hover .prod-circle-ring{
+  border-color:var(--sgl);transform:scale(1.04);
+}
+.prod-circle{
+  width:100%;height:100%;border-radius:50%;
+  overflow:hidden;position:relative;
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.prod-item:hover .prod-circle{transform:translateY(-5px)}
+.prod-circle img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.3s cubic-bezier(.22,1,.36,1);
+}
+.prod-item:hover .prod-circle img{transform:scale(1.09)}
+.prod-item:first-child .prod-circle img{transform:scale(1.5);object-position:center 15%}
+.prod-item:first-child:hover .prod-circle img{transform:scale(1.6);object-position:center 15%}
+.prod-circle::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at center,transparent 35%,rgba(8,20,12,.4) 100%);
+  pointer-events:none;
+}
+.prod-num{
+  font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--sg);font-weight:500;margin-bottom:.55rem;
+}
+.prod-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.2rem,1.6vw,1.55rem);
+  font-weight:600;color:var(--dk);line-height:1.1;
+  letter-spacing:-.01em;margin-bottom:.8rem;
+}
+.prod-desc{
+  font-size:.8rem;color:var(--muted);line-height:1.72;
+  max-width:20ch;margin:0 auto;
+}
+.prod-cta{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sg);font-weight:500;margin-top:1rem;
+  opacity:0;transform:translateY(5px);
+  transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .4s cubic-bezier(.22,1,.36,1);
+}
+.prod-item:hover .prod-cta{opacity:1;transform:translateY(0)}
+
+/* ─── MARQUEE ─── */
+#marquee{
+  background:var(--sg);overflow:hidden;
+  padding:.9rem 0;
+}
+.mq-track{display:flex;width:max-content;animation:mq 34s linear infinite}
+.mq-set{display:flex;align-items:center}
+.mq-item{
+  font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);padding:0 2rem;white-space:nowrap;
+}
+.mq-dot{color:rgba(255,255,255,.35);padding:0 .25rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── STATS ─── */
+#stats{background:var(--cr);padding:5rem 3rem}
+.stats-inner{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-width:1100px;margin:0 auto;
+  border:1px solid var(--bd);
+}
+.stat-item{
+  padding:2.5rem 1.5rem;border-right:1px solid var(--bd);
+  text-align:center;
+}
+.stat-item:last-child{border-right:none}
+.stat-val{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,4vw,4rem);
+  font-weight:600;color:var(--dk);line-height:1;
+  letter-spacing:-.03em;
+}
+.stat-val em{
+  font-size:52%;font-style:normal;
+  font-family:'Inter',sans-serif;color:var(--sg);
+}
+.stat-label{
+  font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-top:.8rem;
+}
+
+/* ─── CONTACT ─── */
+#contacto{background:var(--wh);padding:7rem 3.5rem}
+.contact-wrap{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;
+}
+.contact-left .section-eyebrow{justify-content:flex-start}
+.contact-left .section-eyebrow::before{display:none}
+.contact-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:600;color:var(--dk);line-height:1.1;
+  letter-spacing:-.02em;margin-bottom:1.2rem;margin-top:.2rem;
+}
+.contact-left h2 em{font-style:italic;color:inherit}
+.contact-left p{
+  font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:38ch;
+}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:.75rem;
+  background:#25D366;color:var(--wh);
+  padding:1rem 2rem;border-radius:2px;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  transition:background .3s;
+}
+.btn-wa:hover{background:#128C7E}
+.btn-wa svg{width:18px;height:18px;flex-shrink:0}
+.contact-schedule{
+  font-size:.72rem;color:var(--muted);letter-spacing:.08em;
+  text-transform:uppercase;margin-top:1rem;
+}
+.contact-right{display:flex;flex-direction:column;gap:0}
+.cinfo{border-bottom:1px solid var(--bd);padding:1.75rem 0}
+.cinfo:first-child{padding-top:0}
+.cinfo-label{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--sg);margin-bottom:.4rem;
+}
+.cinfo-val{font-size:1.08rem;font-weight:600;color:var(--dk);margin-bottom:.2rem}
+.cinfo-sub{font-size:.8rem;color:var(--muted)}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--dk);color:rgba(255,255,255,.45);
+  padding:2rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:600;color:var(--wh);
+}
+.footer-logo span{color:var(--sgl)}
+footer small{font-size:.7rem;letter-spacing:.08em}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .prod-row{grid-template-columns:repeat(2,1fr);gap:0}
+  .prod-item+.prod-item{border-left:none}
+  .prod-item:nth-child(3),.prod-item:nth-child(4){border-top:1px solid var(--bd)}
+  .prod-item:nth-child(2){border-left:1px solid var(--bd)}
+  .prod-item:nth-child(4){border-left:1px solid var(--bd)}
+  .prod-circle-wrap{max-width:180px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid var(--bd)}
+  .contact-wrap{grid-template-columns:1fr;gap:3.5rem}
+  #contacto{padding:5rem 2rem}
+}
+@media(max-width:640px){
+  #nav{padding:0 1.5rem}
+  .nav-links a:not(.nav-cta){display:none}
+  .prod-intro{padding:4rem 1.5rem 2.5rem}
+  #stats{padding:4rem 1.5rem}
+  footer{flex-direction:column;gap:.75rem;text-align:center;padding:2rem 1.5rem}
+  .hero-h1{font-size:clamp(2.2rem,9vw,3rem)}
+}
+
+/* ═══ PRODUCT DETAIL OVERLAYS ═══ */
+.detail-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:var(--cr);overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transform:translateY(32px);
+  transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1);
+  -webkit-overflow-scrolling:touch;
+}
+.detail-overlay.is-open{opacity:1;pointer-events:all;transform:translateY(0)}
+.detail-back{
+  position:sticky;top:0;z-index:10;width:100%;
+  background:rgba(244,247,245,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--bd);
+  padding:.85rem 2.5rem;
+  display:flex;align-items:center;gap:.6rem;
+  cursor:pointer;border:none;border-bottom:1px solid var(--bd);
+  font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sg);transition:color .3s;
+}
+.detail-back svg{transition:transform .3s}
+.detail-back:hover{color:var(--dk)}
+.detail-back:hover svg{transform:translateX(-4px)}
+.detail-body{max-width:1160px;margin:0 auto;padding:0 3rem 6rem}
+
+/* Hero image */
+.dl-hero{width:100%;height:56vh;min-height:320px;position:relative;overflow:hidden;margin-bottom:3.5rem}
+.dl-hero img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s}
+.dl-hero:hover img{transform:scale(1.03)}
+.dl-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,rgba(10,20,12,.72) 100%)}
+.dl-hero-text{position:absolute;bottom:2.75rem;left:3rem;right:3rem;color:var(--wh)}
+.dl-eyebrow{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sgl);margin-bottom:.7rem;display:block}
+.dl-hero-text h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--wh)}
+.dl-hero-text h2 em{color:inherit;font-style:italic}
+
+/* Text blocks */
+.dl-lead{font-size:1.05rem;color:var(--dk);line-height:1.8;max-width:68ch;margin-bottom:3rem}
+.dl-section{margin-bottom:3.5rem}
+.dl-section-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:600;color:var(--dk);letter-spacing:-.015em;margin-bottom:.5rem}
+.dl-section-title em{color:inherit;font-style:italic}
+.dl-section-sub{font-size:.88rem;color:var(--muted);line-height:1.75;max-width:62ch;margin-bottom:1.75rem}
+
+/* Cards */
+.dl-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.dl-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.dl-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.dl-card{background:var(--wh);border:1px solid var(--bd);border-radius:14px;padding:1.6rem;transition:border-color .4s,transform .4s}
+.dl-card:hover{border-color:var(--sgl);transform:translateY(-2px)}
+.dl-card-icon{width:34px;height:34px;border-radius:50%;background:rgba(74,140,92,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--sg)}
+.dl-card h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--dk);margin-bottom:.45rem}
+.dl-card p{font-size:.8rem;color:var(--muted);line-height:1.72}
+
+/* Split layout (photo + text) */
+.dl-split{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bd);border-radius:16px;overflow:hidden;margin-top:2rem}
+.dl-split-img{overflow:hidden}
+.dl-split-img img{width:100%;height:100%;object-fit:cover;min-height:340px;transition:transform 1.3s}
+.dl-split-img:hover img{transform:scale(1.05)}
+.dl-split-text{padding:2.75rem;display:flex;flex-direction:column;justify-content:center;background:var(--wh)}
+.dl-split-text h3{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,1.8vw,1.65rem);font-weight:600;color:var(--dk);letter-spacing:-.01em;margin-bottom:1rem}
+.dl-split-text p{font-size:.86rem;color:var(--muted);line-height:1.82}
+.dl-split-list{list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:.6rem}
+.dl-split-list li{font-size:.83rem;color:var(--dk);display:flex;align-items:center;gap:.55rem}
+.dl-split-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sg);flex-shrink:0}
+
+/* Gallery */
+.dl-gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.dl-gimg{overflow:hidden;border-radius:12px;aspect-ratio:4/3}
+.dl-gimg img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s}
+.dl-gimg:hover img{transform:scale(1.06)}
+
+/* Models table */
+.dl-table-wrap{overflow-x:auto;margin-top:1.5rem;border:1px solid var(--bd);border-radius:14px}
+.dl-table{width:100%;border-collapse:collapse;background:var(--wh)}
+.dl-table th{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:.85rem 1.25rem;border-bottom:1px solid var(--bd);text-align:left;background:var(--cr)}
+.dl-table td{padding:.9rem 1.25rem;border-bottom:1px solid var(--bd);font-size:.85rem;color:var(--dk)}
+.dl-table tr:last-child td{border-bottom:none}
+.dl-table tr:hover td{background:rgba(74,140,92,.04)}
+.dl-model{font-weight:700;color:var(--sg);letter-spacing:.04em}
+
+/* Spec pills */
+.dl-specs{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.5rem}
+.dl-spec{background:var(--wh);border:1px solid var(--bd);border-radius:100px;padding:.4rem 1rem;font-size:.74rem;font-weight:500;color:var(--dk)}
+.dl-spec strong{color:var(--sg)}
+
+/* Goteo tabs */
+.goteo-tabs{display:flex;gap:0;border:2px solid var(--sg);border-radius:12px;overflow:hidden;width:fit-content;margin:0 auto 2.5rem;box-shadow:0 4px 20px rgba(74,140,92,.18)}
+.gtab{padding:.75rem 2.5rem;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;background:transparent;border:none;color:var(--sg);transition:all .3s}
+.gtab.active{background:var(--sg);color:var(--wh);box-shadow:inset 0 0 0 0 transparent}
+/* Agro panel banner */
+.dl-agro-banner{position:relative;height:220px;border-radius:8px;overflow:hidden;margin-bottom:2rem}
+.dl-agro-banner img{width:100%;height:100%;object-fit:cover}
+.dl-agro-banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,25,15,.75) 0%,rgba(10,25,15,.3) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.75rem 2rem}
+.gpanel{display:none}
+.gpanel.active{display:block}
+
+/* CTA bar */
+.dl-cta{background:var(--dk);border-radius:20px;padding:2.75rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;margin-top:4rem}
+.dl-cta h3{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.8rem);color:var(--wh);font-weight:600;letter-spacing:-.01em;flex:1}
+.dl-cta h3 em{color:inherit;font-style:italic}
+.dl-cta a{display:inline-flex;align-items:center;gap:.5rem;background:var(--sg);color:var(--wh);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 1.9rem;border-radius:100px;white-space:nowrap;transition:background .3s}
+.dl-cta a:hover{background:var(--sgl)}
+
+/* ── Diseño overlay layout ── */
+/* Croquis banner: full-width, visible como plano técnico */
+.dl-croquis-banner{
+  width:100%;height:38vh;min-height:240px;
+  overflow:hidden;position:relative;
+  background:#f8f8f8;border-bottom:1px solid var(--bd);
+}
+.dl-croquis-banner img{
+  width:100%;height:100%;object-fit:cover;object-position:center 18%;
+  display:block;
+}
+.dl-croquis-banner-missing{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* Header texto (debajo del croquis) */
+.dl-text-header{
+  background:var(--wh);
+  border-bottom:1px solid var(--bd);
+  padding:3rem 3rem 0;
+}
+.dl-text-header .dl-eyebrow{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sg);margin-bottom:.8rem;display:block}
+.dl-text-header-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;color:var(--dk);line-height:1.08;letter-spacing:-.02em;margin-bottom:0}
+.dl-text-header-title em{color:inherit;font-style:italic}
+
+/* Split: texto izq + plano flotante der */
+.dl-diseno-split{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:start;
+  background:var(--wh);border-bottom:1px solid var(--bd);
+  padding:2.5rem 3rem 3rem;
+}
+.dl-plan-doc-wrap{display:flex;justify-content:flex-end}
+
+.dl-diseno-desc{font-size:.95rem;color:var(--muted);line-height:1.82;max-width:42ch;padding-top:.25rem}
+.dl-diseno-feats{list-style:none;padding:0;margin:1.75rem 0 0;display:flex;flex-direction:column;gap:.7rem}
+.dl-diseno-feats li{font-size:.83rem;color:var(--dk);display:flex;align-items:center;gap:.55rem}
+.dl-diseno-feats li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--sg);flex-shrink:0}
+
+/* Plano completo: tarjeta tipo documento */
+.dl-plan-doc{
+  background:var(--wh);
+  box-shadow:0 2px 0 rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.08), 0 24px 64px rgba(0,0,0,.1);
+  border-radius:4px;
+  transform:rotate(-1.2deg);
+  transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s;
+  overflow:hidden;position:relative;
+  max-width:280px;width:100%;margin-left:auto;
+}
+.dl-plan-doc:hover{transform:rotate(0deg) scale(1.01);box-shadow:0 4px 0 rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.1),0 32px 80px rgba(0,0,0,.12)}
+.dl-plan-doc img{width:100%;height:auto;display:block}
+.dl-plan-doc-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(26,43,30,.85);backdrop-filter:blur(8px);
+  padding:.55rem 1rem;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.75);text-align:center;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .detail-back{padding:.85rem 1.5rem}
+  .detail-body{padding:0 1.5rem 4rem}
+  .dl-hero{height:38vh;min-height:260px}
+  .dl-hero-text{left:1.5rem;right:1.5rem;bottom:1.5rem}
+  .dl-grid-2,.dl-grid-3,.dl-grid-4,.dl-split,.dl-gallery{grid-template-columns:1fr}
+  .dl-split-img img{min-height:220px}
+  .dl-cta{flex-direction:column;text-align:center;padding:2rem 1.5rem}
+  .dl-text-header{padding:2rem 1.5rem 0}
+  .dl-diseno-split{grid-template-columns:1fr;gap:2rem;padding:2rem 1.5rem 2.5rem}
+  .dl-plan-doc{transform:none}
+  .dl-croquis-banner{height:28vh;min-height:180px}
+}
+
+/* ─── ACCESORIOS ─── */
+#accesorios{padding:7rem 0 6rem;background:var(--cr)}
+.acc-header{text-align:center;padding:0 2rem;margin-bottom:3rem}
+.acc-header h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;color:var(--dk);letter-spacing:-.02em;margin:.6rem 0 .8rem}
+.acc-header h2 em{color:inherit;font-style:italic}
+.acc-sub{font-size:.9rem;color:var(--muted);max-width:44ch;margin:0 auto}
+.acc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;padding:0 2rem;margin-bottom:3rem}
+.acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--wh);border:1.5px solid var(--bd);border-radius:100px;color:var(--muted);transition:all .25s}
+.acc-tab.active,.acc-tab:hover{background:var(--sg);border-color:var(--sg);color:var(--wh)}
+.acc-panel{display:none;padding:0 3.5rem 0}
+.acc-panel.active{display:block}
+.acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.acc-card{background:var(--wh);border-radius:12px;overflow:hidden;border:1px solid var(--bd);transition:box-shadow .3s,transform .3s;display:flex;flex-direction:column}
+.acc-card:hover{box-shadow:0 8px 32px rgba(26,43,30,.1);transform:translateY(-3px)}
+.acc-card-img{height:180px;overflow:hidden;background:var(--cr);display:flex;align-items:center;justify-content:center}
+.acc-card-img img{width:100%;height:100%;object-fit:contain;padding:.75rem;transition:transform .5s}
+.acc-card:hover .acc-card-img img{transform:scale(1.05)}
+.acc-card-img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--bd)}
+.acc-card-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.acc-card-name{font-size:.8rem;font-weight:600;color:var(--dk);line-height:1.4;flex:1}
+.acc-card-price{font-size:1.1rem;font-weight:700;color:var(--sg);font-family:'Playfair Display',serif}
+.acc-card-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+.acc-card-actions{display:flex;gap:.5rem;margin-top:.3rem}
+.acc-card-link{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.45rem .9rem;border-radius:6px;background:var(--dk);color:var(--wh);transition:background .25s;text-align:center;flex:1}
+.acc-card-link:hover{background:var(--sg)}
+.acc-card-wa{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.45rem .9rem;border-radius:6px;background:#25D366;color:var(--wh);transition:background .25s;text-align:center;flex:1}
+.acc-card-wa:hover{background:#1da851}
+@media(max-width:1024px){.acc-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.acc-grid{grid-template-columns:repeat(2,1fr)}.acc-panel{padding:0 1.5rem}}
+@media(max-width:480px){.acc-grid{grid-template-columns:1fr 1fr}}
+
+/* ─── SPECS en card ─── */
+.acc-card-specs{margin:.4rem 0 .3rem;padding:.5rem .6rem;background:var(--cr);border-radius:6px}
+.acc-card-specs ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:.18rem}
+.acc-card-specs li{font-size:.66rem;color:var(--muted);line-height:1.4;padding-left:.8rem;position:relative}
+.acc-card-specs li::before{content:'·';position:absolute;left:0;color:var(--sg)}
+.acc-card-add{width:100%;padding:.5rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:6px;background:var(--sg);color:#fff;cursor:pointer;transition:background .25s,transform .15s}
+.acc-card-add:hover{background:var(--dk)}
+.acc-card-add.added{background:#2D7D46}
+.acc-card-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em;margin-top:.1rem}
+
+/* ─── CARRITO ─── */
+#cart-btn{position:relative;background:none;border:none;cursor:pointer;padding:.3rem;display:flex;align-items:center;color:rgba(255,255,255,.85);transition:color .3s}
+#nav.solid #cart-btn{color:var(--dk)}
+#cart-btn svg{width:22px;height:22px}
+#cart-badge{position:absolute;top:-4px;right:-6px;background:var(--sg);color:#fff;font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 2px;display:none}
+#cart-badge.visible{display:flex}
+#cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:800;opacity:0;pointer-events:none;transition:opacity .35s}
+#cart-overlay.open{opacity:1;pointer-events:all}
+#cart-panel{position:fixed;top:0;right:0;width:min(420px,100vw);height:100vh;background:#fff;z-index:801;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:-4px 0 32px rgba(0,0,0,.12)}
+#cart-panel.open{transform:translateX(0)}
+#cart-head{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;border-bottom:1px solid var(--bd)}
+#cart-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--dk)}
+#cart-close{background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--muted);line-height:1;padding:.2rem}
+#cart-close:hover{color:var(--dk)}
+#cart-items{flex:1;overflow-y:auto;padding:1rem 1.6rem;display:flex;flex-direction:column;gap:.9rem}
+.cart-empty{text-align:center;color:var(--muted);font-size:.85rem;margin-top:3rem}
+.cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:.8rem;align-items:center;padding:.8rem;border:1px solid var(--bd);border-radius:10px}
+.cart-item-img{width:60px;height:60px;border-radius:6px;overflow:hidden;background:var(--cr)}
+.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.cart-item-name{font-size:.78rem;font-weight:600;color:var(--dk);line-height:1.35}
+.cart-item-price{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.cart-item-qty{display:flex;align-items:center;gap:.4rem;margin-top:.4rem}
+.qty-btn{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bd);background:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--dk);transition:all .2s}
+.qty-btn:hover{border-color:var(--sg);color:var(--sg)}
+.qty-num{font-size:.82rem;font-weight:600;color:var(--dk);min-width:18px;text-align:center}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--bd);font-size:1.1rem;line-height:1;transition:color .2s;align-self:flex-start}
+.cart-item-remove:hover{color:#e74c3c}
+#cart-foot{padding:1.2rem 1.6rem;border-top:1px solid var(--bd)}
+#cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+#cart-total-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+#cart-total-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--dk)}
+#cart-checkout{width:100%;padding:.85rem;background:var(--sg);color:#fff;border:none;border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .25s}
+#cart-checkout:hover{background:var(--dk)}
+#cart-checkout:disabled{background:var(--bd);cursor:default}
+
+/* ══ DISEÑO OVERLAY — nuevo layout ══ */
+.diseno-hero-zone{
+  background:var(--dk);
+  background-image:radial-gradient(rgba(165,196,216,.07) 1px,transparent 1px);
+  background-size:28px 28px;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:500px;align-items:center;
+}
+.diseno-hz-text{padding:5rem 3.5rem 5rem 3.5rem}
+.diseno-hz-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.8vw,3.4rem);
+  font-weight:600;color:#fff;line-height:1.08;
+  letter-spacing:-.02em;margin:1rem 0 1.4rem;
+}
+.diseno-hz-title em{color:inherit;font-style:italic}
+.diseno-hz-desc{
+  font-size:.88rem;color:rgba(255,255,255,.52);
+  line-height:1.78;max-width:36ch;margin-bottom:2rem;
+}
+.diseno-badges{display:flex;flex-wrap:wrap;gap:.45rem}
+.diseno-badges span{
+  font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:.38rem 1rem;border:1px solid rgba(165,196,216,.22);border-radius:100px;
+  color:rgba(255,255,255,.6);
+}
+.diseno-hz-plan{
+  display:flex;align-items:center;justify-content:center;
+  padding:3.5rem 4rem 3.5rem 1rem;position:relative;
+}
+.diseno-plan-frame{
+  position:relative;background:#fff;border-radius:6px;
+  box-shadow:0 4px 0 rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.26),0 48px 96px rgba(0,0,0,.16);
+  max-width:420px;width:100%;
+  transform:rotate(-1.5deg);
+  transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s;
+}
+.diseno-plan-frame:hover{transform:rotate(0deg) scale(1.015);box-shadow:0 6px 0 rgba(0,0,0,.08),0 20px 60px rgba(0,0,0,.3),0 60px 120px rgba(0,0,0,.18)}
+.diseno-plan-frame>img{width:100%;height:auto;display:block;border-radius:6px}
+.diseno-plan-stamp{
+  position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  background:var(--sg);color:#fff;
+  font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:.42rem 1.4rem;border-radius:100px;white-space:nowrap;
+  box-shadow:0 4px 16px rgba(74,140,92,.5);
+}
+.diseno-plan-callout{
+  position:absolute;
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(26,43,30,.9);backdrop-filter:blur(6px);
+  color:var(--sgl);padding:.32rem .85rem;border-radius:100px;
+  border:1px solid rgba(165,196,216,.18);white-space:nowrap;pointer-events:none;
+}
+.diseno-plan-callout::before{
+  content:'';position:absolute;width:6px;height:6px;background:var(--sgl);border-radius:50%;
+  top:50%;transform:translateY(-50%);
+}
+.diseno-plan-callout.left::before{right:100%;margin-right:6px}
+.diseno-plan-callout.right::before{left:100%;margin-left:6px}
+
+/* Process timeline */
+.diseno-process{background:var(--cr);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:4rem 3.5rem}
+.diseno-process-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.diseno-step{padding:0 2rem 0 0;position:relative}
+.diseno-step+.diseno-step{padding-left:2rem;border-left:1px solid var(--bd)}
+.diseno-step-num{
+  font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:600;
+  color:var(--sg);opacity:.14;line-height:1;letter-spacing:-.04em;margin-bottom:.8rem;
+}
+.diseno-step h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--dk);margin-bottom:.4rem}
+.diseno-step p{font-size:.78rem;color:var(--muted);line-height:1.72}
+
+/* Plan banner */
+.diseno-plan-banner{
+  position:relative;width:100%;height:240px;border-radius:14px;overflow:hidden;margin:2.5rem 0;
+}
+.diseno-plan-banner img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.diseno-plan-banner-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(26,43,30,.78) 0%,rgba(26,43,30,.18) 100%);
+  display:flex;align-items:flex-end;padding:1.75rem 2.5rem;
+}
+.diseno-plan-banner-overlay span{
+  font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);
+}
+@media(max-width:900px){
+  .diseno-hero-zone{grid-template-columns:1fr}
+  .diseno-hz-plan{padding:0 2rem 3rem}
+  .diseno-process-inner{grid-template-columns:1fr 1fr;gap:2rem}
+  .diseno-step+.diseno-step{border-left:none}
+  .diseno-step:nth-child(n+3){border-top:1px solid var(--bd);padding-top:2rem}
+}
+@media(max-width:640px){
+  .diseno-hz-text{padding:3rem 1.5rem}
+  .diseno-process{padding:2.5rem 1.5rem}
+  .diseno-process-inner{grid-template-columns:1fr}
+}
+
+/* ══ ASPERSORES — product cards ══ */
+.asp-products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2rem}
+.asp-prod-card{
+  background:var(--wh);border:1px solid var(--bd);border-radius:16px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:box-shadow .35s,transform .35s;
+}
+.asp-prod-card:hover{box-shadow:0 8px 32px rgba(26,43,30,.1);transform:translateY(-3px)}
+.asp-prod-img{
+  height:150px;background:var(--cr);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.asp-prod-img img{width:100%;height:100%;object-fit:contain;padding:1.1rem;transition:transform .5s}
+.asp-prod-card:hover .asp-prod-img img{transform:scale(1.07)}
+.asp-prod-body{padding:1.1rem 1rem 1.3rem;display:flex;flex-direction:column;flex:1}
+.asp-prod-badge{
+  display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sg);background:rgba(74,140,92,.1);border-radius:100px;padding:.22rem .72rem;
+  margin-bottom:.6rem;align-self:flex-start;
+}
+.asp-prod-badge--alt{color:var(--ce);background:rgba(165,196,216,.15)}
+.asp-prod-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--dk);margin-bottom:.45rem}
+.asp-prod-desc{font-size:.77rem;color:var(--muted);line-height:1.65;margin-bottom:.9rem;flex:1}
+.asp-prod-specs{display:flex;flex-direction:column;gap:.35rem;border-top:1px solid var(--bd);padding-top:.75rem}
+.asp-spec{display:flex;justify-content:space-between;font-size:.71rem}
+.asp-spec span{color:var(--muted)}
+.asp-spec strong{color:var(--dk);font-weight:600}
+@media(max-width:900px){.asp-products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.asp-products-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT DETAIL OVERLAYS
+═══════════════════════════════════════════ -->
+
+<!-- ── OVERLAY: DISEÑO ── -->
+<div id="overlay-diseno" class="detail-overlay" role="dialog" aria-modal="true">
+  <button class="detail-back" onclick="closeOverlay()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+
+  <!-- HERO ZONE: oscuro, grilla blueprint, plano protagonista -->
+  <div class="diseno-hero-zone">
+    <div class="diseno-hz-text">
+      <span class="dl-eyebrow" style="color:var(--sgl);justify-content:flex-start">
+        <span style="flex:0 0 28px;height:1px;background:var(--sgl);opacity:.6;display:inline-block"></span>
+        01 · Diseño hidráulico
+      </span>
+      <h2 class="diseno-hz-title">Diseñamos tu riego<br><em>a medida.</em></h2>
+      <p class="diseno-hz-desc">Antes de abrir la primera zanja, relevamos el terreno y calculamos presiones, caudales y zonas. El plano es la base de cada obra que realizamos.</p>
+      <div class="diseno-badges">
+        <span>Relevamiento</span>
+        <span>Plano hidráulico</span>
+        <span>Zonificación</span>
+        <span>Instalación</span>
+        <span>Programación</span>
+      </div>
+    </div>
+    <div class="diseno-hz-plan">
+      <div class="diseno-plan-frame">
+        <img src="plano_color.png" alt="Plano hidráulico real AquaPlan"
+             onerror="this.src='plano_croquis.jpg'">
+        <div class="diseno-plan-stamp">Plano real · AquaPlan</div>
+        <div class="diseno-plan-callout right" style="top:18%;right:-112px">Zona A · Aspersores</div>
+        <div class="diseno-plan-callout right" style="top:48%;right:-96px">Zona B · Goteo</div>
+        <div class="diseno-plan-callout right" style="bottom:22%;right:-82px">Controlador</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESO: 4 pasos horizontal -->
+  <div class="diseno-process">
+    <div class="diseno-process-inner">
+      <div class="diseno-step">
+        <div class="diseno-step-num">01</div>
+        <h4>Relevamiento</h4>
+        <p>Medición del terreno, análisis de pendientes y puntos de conexión disponibles en la propiedad.</p>
+      </div>
+      <div class="diseno-step">
+        <div class="diseno-step-num">02</div>
+        <h4>Diseño</h4>
+        <p>Plano hidráulico con ubicación exacta de emisores, tuberías, válvulas y controladores.</p>
+      </div>
+      <div class="diseno-step">
+        <div class="diseno-step-num">03</div>
+        <h4>Instalación</h4>
+        <p>Montaje profesional respetando el plano al pie de la letra. Zanjas, cableado y conexiones.</p>
+      </div>
+      <div class="diseno-step">
+        <div class="diseno-step-num">04</div>
+        <h4>Programación</h4>
+        <p>Configuración del controlador y prueba de cada zona antes de la entrega final.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETALLE: feature cards + banner plano real -->
+  <div class="detail-body">
+    <div class="dl-section">
+      <h2 class="dl-section-title">¿Qué incluye el <em>proyecto?</em></h2>
+      <p class="dl-section-sub">Adaptamos el diseño a la morfología del terreno, las especies presentes y las necesidades de caudal de la red.</p>
+      <div class="dl-grid-3">
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
+          <h4>Relevamiento del terreno</h4>
+          <p>Medición y análisis de superficies, pendientes y puntos de conexión disponibles.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>
+          </div>
+          <h4>Plano hidráulico</h4>
+          <p>Documento técnico con ubicación exacta de emisores, tuberías, válvulas y controladores.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h4>Cálculo de zonas</h4>
+          <p>División en sectores independientes para optimizar presiones y evitar déficits de caudal.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          </div>
+          <h4>Jardines residenciales</h4>
+          <p>Canteros, céspedes, árboles y arbustos. Cada especie con su emisor y caudal específico.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <h4>Espacios públicos</h4>
+          <p>Plazas, parques y áreas verdes con alta demanda de cobertura uniforme.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h4>Huertas y proyectos agrícolas</h4>
+          <p>Diseño orientado al rendimiento, el ahorro hídrico y la compatibilidad con fertirrigación.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER: croquis real a full ancho -->
+    <div class="diseno-plan-banner">
+      <img src="plano_croquis.jpg" alt="Croquis sistema de riego sectorizado"
+           onerror="this.src='plano_color.png'">
+      <div class="diseno-plan-banner-overlay">
+        <span>Plano técnico real · Obra Aztoul · AquaPlan</span>
+      </div>
+    </div>
+
+    <div class="dl-cta">
+      <h3>¿Querés saber el costo <em>de tu diseño?</em></h3>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener">Consultá por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── OVERLAY: ASPERSORES ── -->
+<div id="overlay-aspersores" class="detail-overlay" role="dialog" aria-modal="true">
+  <button class="detail-back" onclick="closeOverlay()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+  <div class="dl-hero">
+    <img src="istockphoto-1892740709-612x612.jpg" alt="Aspersor Hunter en funcionamiento" style="object-position:center 60%">
+    <div class="dl-hero-overlay"></div>
+    <div class="dl-hero-text">
+      <span class="dl-eyebrow">02 · Riego por aspersión</span>
+      <h2>Cobertura perfecta, <em>gota a gota.</em></h2>
+    </div>
+  </div>
+  <div class="detail-body">
+    <p class="dl-lead">Instalamos aspersores Hunter para céspedes, jardines y espacios abiertos. Cobertura uniforme, ajuste de radio y arco, y bajo consumo energético. El sistema trabaja mientras vos no estás.</p>
+
+    <div class="dl-section">
+      <h2 class="dl-section-title">Productos <em>Hunter</em></h2>
+      <p class="dl-section-sub">Trabajamos exclusivamente con la línea Hunter — el estándar internacional para riego residencial y profesional. Cada modelo tiene su aplicación específica según la superficie y el caudal disponible.</p>
+
+      <div class="asp-products-grid">
+
+        <!-- PGP Ultra -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP Ultra"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor largo alcance</span>
+            <div class="asp-prod-name">PGP Ultra</div>
+            <p class="asp-prod-desc">El rotor más vendido del mundo. Para grandes superficies de césped residencial y comercial. Tapa de acero inoxidable opcional.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>4,6 – 14 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+              <div class="asp-spec"><span>Presión</span><strong>1,7 – 4,8 bar</strong></div>
+              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PGP -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor largo alcance</span>
+            <div class="asp-prod-name">PGP</div>
+            <p class="asp-prod-desc">Rotor clásico de largo alcance con amplia trayectoria probada. Robusto y confiable para jardines con alta demanda de cobertura.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>4,6 – 13 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+              <div class="asp-spec"><span>Presión</span><strong>1,7 – 4,8 bar</strong></div>
+              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PGJ -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="Hunter PGJ"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor medio alcance</span>
+            <div class="asp-prod-name">PGJ</div>
+            <p class="asp-prod-desc">Rotor compacto para espacios medianos. Caudal eficiente y fácil ajuste de arco. Ideal para jardines residenciales estándar.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>2,4 – 8,2 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+              <div class="asp-spec"><span>Presión</span><strong>1,4 – 3,5 bar</strong></div>
+              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tobera 10A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Hunter Tobera 10A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">Tobera 10A</div>
+            <p class="asp-prod-desc">Tobera de largo alcance para difusores Pro-Spray y PS Ultra. Distribución uniforme en radio amplio con bajo consumo de agua.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>~ 3,0 m</strong></div>
+              <div class="asp-spec"><span>Caudal</span><strong>0,35 m³/h</strong></div>
+              <div class="asp-spec"><span>Compatible</span><strong>Pro-Spray / PS Ultra</strong></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="dl-section">
+      <h2 class="dl-section-title">¿Por qué <em>aspersores?</em></h2>
+      <div class="dl-grid-4">
+        <div class="dl-card">
+          <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>Riego nocturno</h4>
+          <p>Se programa para activarse de madrugada cuando la evaporación es mínima.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
+          <h4>Cobertura total</h4>
+          <p>Diseño de traslape entre aspersores para cobertura uniforme sin zonas secas.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h4>Fácil mantenimiento</h4>
+          <p>Boquillas reemplazables sin herramientas. Partes estándar disponibles en todo el país.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><path d="M12 2v4"/><path d="M12 2C8 2 5 6 5 10h14c0-4-3-8-7-8z"/></svg></div>
+          <h4>Invisible en reposo</h4>
+          <p>El cuerpo emergente se retrae al nivel del suelo cuando no está regando.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-cta">
+      <h3>¿Cuántos aspersores <em>necesita tu jardín?</em></h3>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener">Calculamos juntos →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── OVERLAY: GOTEO ── -->
+<div id="overlay-goteo" class="detail-overlay" role="dialog" aria-modal="true">
+  <button class="detail-back" onclick="closeOverlay()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+  <div class="dl-hero">
+    <img src="Riego-por-goteo-en-agricultura.jpg" alt="Sistema de riego por goteo en jardín" style="object-position:center 40%">
+    <div class="dl-hero-overlay"></div>
+    <div class="dl-hero-text">
+      <span class="dl-eyebrow">03 · Riego por goteo</span>
+      <h2>Agua directamente <em>donde importa.</em></h2>
+    </div>
+  </div>
+  <div class="detail-body">
+
+    <div class="goteo-tabs">
+      <button class="gtab" onclick="switchGoteoTab('residencial', this)">Residencial</button>
+      <button class="gtab active" onclick="switchGoteoTab('agricola', this)">Agrícola</button>
+    </div>
+
+    <!-- PANEL: RESIDENCIAL -->
+    <div id="gpanel-residencial" class="gpanel">
+      <p class="dl-lead">Para canteros, arriates, huertas domésticas y árboles. El goteo lleva el agua directo a la raíz sin derrochar ni mojar lo que no corresponde.</p>
+
+      <div class="dl-gallery">
+        <div class="dl-gimg"><img src="goteo_residencial_huerta.webp" alt="Huerta con cintas de goteo y almácigos"></div>
+        <div class="dl-gimg"><img src="istockphoto-1408040779-612x612.jpg" alt="Emisor de goteo disparando en cantero"></div>
+      </div>
+
+      <div class="dl-section" style="margin-top:2.5rem">
+        <h2 class="dl-section-title">Beneficios <em>clave</em></h2>
+        <div class="dl-grid-4">
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+            <h4>Hasta 50% menos agua</h4>
+            <p>Sin evaporación ni escurrimiento. El agua llega exclusivamente a la zona radicular.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4.97 0 9-3.58 9-8 0-3-1.5-5.5-4-7L12 2l-5 5c-2.5 1.5-4 4-4 7 0 4.42 4.03 8 9 8z"/></svg></div>
+            <h4>Raíces más fuertes</h4>
+            <p>El riego localizado estimula el desarrollo radicular en profundidad.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <h4>Sin malezas</h4>
+            <p>Al no humedecer la superficie, se frena la germinación de malezas entre las plantas.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+            <h4>Compatible con automatización</h4>
+            <p>Se integra con el controlador Hunter X-Core para riego programado sin intervención.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-section">
+        <h2 class="dl-section-title">Aplicaciones <em>residenciales</em></h2>
+        <div class="dl-grid-3">
+          <div class="dl-card">
+            <h4>Canteros y arriates</h4>
+            <p>Emisores de goteo ajustables por planta. Caudal diferenciado según especie.</p>
+          </div>
+          <div class="dl-card">
+            <h4>Huerta doméstica</h4>
+            <p>Cintas y tuberías de goteo integrado para hileras de cultivos en el hogar.</p>
+          </div>
+          <div class="dl-card">
+            <h4>Árboles y arbustos</h4>
+            <p>Anillos o emisores multipunto para plantas de mayor porte y demanda hídrica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: AGRÍCOLA -->
+    <div id="gpanel-agricola" class="gpanel active">
+
+      <p class="dl-lead">Para productores que necesitan maximizar el rendimiento con el mínimo consumo de agua. El riego por goteo agrícola reduce hasta un 50% el gasto hídrico respecto al riego por inundación o aspersión convencional.</p>
+
+      <div class="dl-gallery">
+        <div class="dl-gimg"><img src="istockphoto-2084466380-612x612.jpg" alt="Cultivo de pimientos con riego por goteo"></div>
+        <div class="dl-gimg"><img src="goteo_agro_invernadero.jpg" alt="Invernadero de frutillas con riego por goteo" style="object-position:center 40%"></div>
+      </div>
+
+      <div class="dl-section" style="margin-top:2.5rem">
+        <h2 class="dl-section-title">Ventajas para <em>la producción</em></h2>
+        <div class="dl-grid-4">
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <h4>Mayor rendimiento</h4>
+            <p>El suministro constante y preciso de agua y nutrientes mejora la calidad y volumen de cosecha.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+            <h4>Fertirrigación</h4>
+            <p>Posibilidad de inyectar fertilizantes directamente en la línea de goteo. Absorción máxima y sin desperdicio.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4.97 0 9-3.58 9-8 0-3-1.5-5.5-4-7L12 2l-5 5c-2.5 1.5-4 4-4 7 0 4.42 4.03 8 9 8z"/></svg></div>
+            <h4>Menos enfermedades</h4>
+            <p>El follaje permanece seco. Se reducen drásticamente las condiciones para hongos y plagas.</p>
+          </div>
+          <div class="dl-card">
+            <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h4>Ahorro hasta 50%</h4>
+            <p>El agua se entrega únicamente en la zona radicular. Sin evaporación, sin escurrimiento superficial.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-section">
+        <h2 class="dl-section-title">Cultivos <em>compatibles</em></h2>
+        <p class="dl-section-sub">El sistema se adapta a la topografía, el tipo de suelo y las necesidades de cada cultivo.</p>
+        <div class="dl-grid-3">
+          <div class="dl-card">
+            <h4>Cultivos en hilera</h4>
+            <p>Tomate, pimiento, pepino, zapallo, frutilla. Cintas de goteo integrado entre las hileras.</p>
+          </div>
+          <div class="dl-card">
+            <h4>Frutales y viñedos</h4>
+            <p>Emisores de alta precisión por planta. Ideal para vid, citrus, duraznero y olivo.</p>
+          </div>
+          <div class="dl-card">
+            <h4>Invernaderos</h4>
+            <p>Control total del riego en ambientes cerrados. Compatible con sensores de humedad de suelo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-cta">
+      <h3>¿Qué cultivo o jardín <em>querés regar?</em></h3>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener">Hablemos del proyecto →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── OVERLAY: AUTOMATIZACIÓN ── -->
+<div id="overlay-auto" class="detail-overlay" role="dialog" aria-modal="true">
+  <button class="detail-back" onclick="closeOverlay()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+  <div class="dl-hero">
+    <img src="IMG_5008.jpg" alt="Controlador Hunter X-Core instalado">
+    <div class="dl-hero-overlay"></div>
+    <div class="dl-hero-text">
+      <span class="dl-eyebrow">04 · Automatización</span>
+      <h2>Tu jardín riega solo. <em>Siempre.</em></h2>
+    </div>
+  </div>
+  <div class="detail-body">
+    <p class="dl-lead">Instalamos controladores Hunter X-Core que gestionan hasta 8 zonas de riego con 3 programas independientes. Se programan una vez y trabajan solos, con sensor de lluvia para no regar cuando no hace falta.</p>
+
+    <div class="dl-section">
+      <h2 class="dl-section-title">Hunter <em>X-Core</em></h2>
+      <p class="dl-section-sub">El controlador de entrada profesional más vendido del mundo. Robusto, simple de programar y compatible con la línea completa de accesorios Hunter.</p>
+
+      <div class="dl-split">
+        <div class="dl-split-img">
+          <img src="IMG_4918.jpg" alt="Instalación Hunter X-Core con cableado" style="object-position:38% 8%">
+        </div>
+        <div class="dl-split-text">
+          <h3>Características principales</h3>
+          <ul class="dl-split-list">
+            <li>3 programas de riego independientes (A, B, C)</li>
+            <li>4 horarios de inicio por programa</li>
+            <li>Tiempo de riego por zona: hasta 4 horas</li>
+            <li>Puerto para sensor de lluvia (Solar-Sync)</li>
+            <li>Ajuste estacional: 10% a 150% del caudal programado</li>
+            <li>Retardo por lluvia configurable: 1 a 7 días</li>
+            <li>Memoria no volátil — no pierde programas ante cortes de luz</li>
+            <li>Carcasa exterior con cerradura incluida</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-section">
+      <h2 class="dl-section-title">Modelos <em>disponibles</em></h2>
+      <p class="dl-section-sub">Todos los modelos comparten las mismas funciones. La diferencia es la cantidad de estaciones (zonas de riego) y el tipo de montaje.</p>
+      <div class="dl-table-wrap">
+        <table class="dl-table">
+          <thead>
+            <tr>
+              <th>Modelo</th>
+              <th>Estaciones</th>
+              <th>Montaje</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="dl-model">X-Core 2</td><td>2 zonas</td><td>Exterior / Interior</td><td>Para jardines pequeños con hasta 2 sectores de riego independientes</td></tr>
+            <tr><td class="dl-model">XC-400</td><td>4 zonas</td><td>Exterior</td><td>Armario plástico con puerta, para montaje en pared exterior</td></tr>
+            <tr><td class="dl-model">XC-600</td><td>6 zonas</td><td>Exterior</td><td>El modelo más utilizado en residencias con jardín completo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="dl-section">
+      <h2 class="dl-section-title">¿Cómo <em>funciona?</em></h2>
+      <div class="dl-grid-4">
+        <div class="dl-card">
+          <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">1</div>
+          <h4>Zonas independientes</h4>
+          <p>Cada sector del jardín tiene su válvula solenoide y su tiempo de riego específico.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</div>
+          <h4>Horarios programados</h4>
+          <p>Se configuran días, horarios y duración una única vez desde el controlador.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">3</div>
+          <h4>Sensor de lluvia</h4>
+          <p>El Mini-Clik o Solar-Sync suspende el riego automáticamente cuando llueve o hay humedad suficiente.</p>
+        </div>
+        <div class="dl-card">
+          <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">4</div>
+          <h4>Riego sin intervención</h4>
+          <p>El sistema opera solo. Podés irte de vacaciones y el jardín sigue regado correctamente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-cta">
+      <h3>¿Cuántas zonas tiene <em>tu jardín?</em></h3>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener">Consultá tu proyecto →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="#" class="nav-logo" aria-label="AquaPlan inicio">
+    <svg class="logo-svg" viewBox="0 0 130 32" xmlns="http://www.w3.org/2000/svg">
+      <text y="25" font-family="'Playfair Display',Georgia,serif" font-size="24" font-weight="500" letter-spacing="-0.2">
+        <tspan class="logo-aqua">Aqua</tspan><tspan class="logo-plan">Plan</tspan>
+      </text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="#productos">Servicios</a>
+    <a href="#accesorios">Accesorios</a>
+    <button id="cart-btn" onclick="openCart()" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span id="cart-badge">0</span>
+    </button>
+    <a href="#contacto" class="nav-cta">Contacto</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <video class="hero-video" src="hero.mov" autoplay muted loop playsinline></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tag">GBA · Argentina</p>
+    <h1 class="hero-h1">
+      El riego exacto<br>
+      que cada raíz necesita.
+    </h1>
+    <p class="hero-sub">Aspersores &nbsp;·&nbsp; Goteo &nbsp;·&nbsp; Automatización &nbsp;·&nbsp; Diseño</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-primary">Ver servicios</a>
+      <a href="#accesorios" class="btn-ghost">Accesorios</a>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-ghost">Consultar →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS GRID ═══ -->
+<section id="productos">
+  <div class="prod-intro reveal">
+    <p class="section-eyebrow">Nuestras soluciones</p>
+    <h2>Sistemas de riego <em>a medida.</em></h2>
+  </div>
+
+  <div class="prod-row">
+
+    <!-- 01 · DISEÑO -->
+    <div class="prod-item reveal" data-detail="diseno" onclick="openOverlay('diseno')">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle">
+          <img src="img_diseno.png" alt="Diseño hidráulico"/>
+        </div>
+      </div>
+      <span class="prod-num">01</span>
+      <h3 class="prod-name">Diseño</h3>
+      <p class="prod-desc">Plano hidráulico antes de abrir la primera zanja. Cálculo de presiones y zonas.</p>
+      <span class="prod-cta">Ver más →</span>
+    </div>
+
+    <!-- 02 · ASPERSORES -->
+    <div class="prod-item reveal rd1" data-detail="aspersores" onclick="openOverlay('aspersores')">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle">
+          <img src="img_aspersor.jpg" alt="Aspersores"/>
+        </div>
+      </div>
+      <span class="prod-num">02</span>
+      <h3 class="prod-name">Aspersores</h3>
+      <p class="prod-desc">Rotores Hunter PGP Ultra. Cobertura uniforme hasta 14 m. Radio y arco ajustables.</p>
+      <span class="prod-cta">Ver más →</span>
+    </div>
+
+    <!-- 03 · GOTEO -->
+    <div class="prod-item reveal rd2" data-detail="goteo" onclick="openOverlay('goteo')">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle">
+          <img src="img_goteo.webp" alt="Goteo"/>
+        </div>
+      </div>
+      <span class="prod-num">03</span>
+      <h3 class="prod-name">Goteo</h3>
+      <p class="prod-desc">Agua directo a la raíz, sin evaporación. Hasta 50% más eficiente que el aspersor.</p>
+      <span class="prod-cta">Ver más →</span>
+    </div>
+
+    <!-- 04 · AUTOMATIZACIÓN -->
+    <div class="prod-item reveal rd3" data-detail="auto" onclick="openOverlay('auto')">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle">
+          <img src="img_auto.jpg" alt="Automatización"/>
+        </div>
+      </div>
+      <span class="prod-num">04</span>
+      <h3 class="prod-name">Automatización</h3>
+      <p class="prod-desc">Hunter X-Core hasta 6 zonas. Horarios, sensor de lluvia. Riego sin intervención.</p>
+      <span class="prod-cta">Ver más →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div id="marquee">
+  <div class="mq-track">
+    <div class="mq-set">
+      <span class="mq-item">Riego Automático</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Gran Buenos Aires</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Aspersores Hunter</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Riego por Goteo</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Automatización</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Diseño Hidráulico</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Hunter X-Core</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Planificación</span><span class="mq-item mq-dot">·</span>
+    </div>
+    <div class="mq-set" aria-hidden="true">
+      <span class="mq-item">Riego Automático</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Gran Buenos Aires</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Aspersores Hunter</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Riego por Goteo</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Automatización</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Diseño Hidráulico</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Hunter X-Core</span><span class="mq-item mq-dot">·</span>
+      <span class="mq-item">Planificación</span><span class="mq-item mq-dot">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-val" data-target="6"><span class="count">0</span><em>+</em></div>
+      <p class="stat-label">Zonas independientes</p>
+    </div>
+    <div class="stat-item reveal rd1">
+      <div class="stat-val" data-target="50"><span class="count">0</span><em>%</em></div>
+      <p class="stat-label">Ahorro de agua</p>
+    </div>
+    <div class="stat-item reveal rd2">
+      <div class="stat-val" data-target="14"><span class="count">0</span><em>m</em></div>
+      <p class="stat-label">Radio máx. aspersor</p>
+    </div>
+    <div class="stat-item reveal rd3">
+      <div class="stat-val" data-target="48"><span class="count">0</span><em>hs</em></div>
+      <p class="stat-label">Cotización en menos de</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACCESORIOS ═══ -->
+<section id="accesorios">
+  <div class="acc-header reveal">
+    <p class="section-eyebrow">Catálogo de productos</p>
+    <h2>Accesorios <em>&amp; materiales</em></h2>
+    <p class="acc-sub">Todos los componentes para tu sistema de riego, con precio de venta al público.</p>
+  </div>
+
+  <div class="acc-tabs">
+    <button class="acc-tab active" onclick="switchAccTab('controladores',this)">Controladores &amp; Sensores</button>
+    <button class="acc-tab" onclick="switchAccTab('valvulas',this)">Válvulas</button>
+    <button class="acc-tab" onclick="switchAccTab('cajas',this)">Cajas de válvulas</button>
+    <button class="acc-tab" onclick="switchAccTab('rotores',this)">Rotores &amp; Toberas</button>
+    <button class="acc-tab" onclick="switchAccTab('canos',this)">Caños</button>
+  </div>
+
+  <!-- CONTROLADORES & SENSORES -->
+  <div id="apanel-controladores" class="acc-panel active">
+    <div class="acc-grid">
+
+      <div class="acc-card" data-id="xcore-2" data-name="Controlador Hunter X-Core 2 est." data-price="171690" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 2"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Controlador Hunter X-Core 2 estaciones</p>
+          <div class="acc-card-specs"><ul><li>2 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
+          <div class="acc-card-price">$171.690</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="xcore-4" data-name="Controlador Hunter X-Core 4 est." data-price="187000" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 4"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Controlador Hunter X-Core 4 estaciones</p>
+          <div class="acc-card-specs"><ul><li>4 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
+          <div class="acc-card-price">$187.000</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="xcore-6" data-name="Controlador Hunter X-Core 6 est." data-price="226000" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 6"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Controlador Hunter X-Core 6 estaciones</p>
+          <div class="acc-card-specs"><ul><li>6 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
+          <div class="acc-card-price">$226.000</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="btt101" data-name="Controlador Canilla Hunter BTT101" data-price="167900" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg" alt="BTT101"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Controlador Canilla Hunter BTT101</p>
+          <div class="acc-card-specs"><ul><li>Bluetooth 4.0 · 1 salida</li><li>Presión: 0,5–8,0 bar</li><li>Caudal: 1,9–3407 LPH</li><li>iOS/Android · 2 pilas AA</li></ul></div>
+          <div class="acc-card-price">$167.900</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rc2-4" data-name="Programador Rain Bird RC2 4 est. Wi-Fi" data-price="222300" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="RC2 4"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Programador Rain Bird RC2 4 est. Wi-Fi</p>
+          <div class="acc-card-specs"><ul><li>Wi-Fi integrado · App Rain Bird 2.0</li><li>4 estaciones independientes</li><li>Detección de cortocircuito</li><li>Modo sin internet disponible</li></ul></div>
+          <div class="acc-card-price">$222.300</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rc2-6" data-name="Programador Rain Bird RC2 6 est. Wi-Fi" data-price="246473" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp" alt="RC2 6"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Programador Rain Bird RC2 6 est. Wi-Fi</p>
+          <div class="acc-card-specs"><ul><li>Wi-Fi integrado · App Rain Bird 2.0</li><li>6 estaciones independientes</li><li>Detección de cortocircuito</li><li>Modo sin internet disponible</li></ul></div>
+          <div class="acc-card-price">$246.473</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rb-canilla" data-name="Programador Canilla Rain Bird" data-price="146503" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp" alt="Prog canilla"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Programador de Canilla Rain Bird</p>
+          <div class="acc-card-specs"><ul><li>Montaje directo en canilla</li><li>Programación sencilla</li><li>Sin instalación eléctrica</li></ul></div>
+          <div class="acc-card-price">$146.503</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="sensor-lluvia" data-name="Sensor de Lluvia Rain Bird" data-price="84304" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp" alt="Sensor lluvia"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Sensor de Lluvia Automático Rain Bird</p>
+          <div class="acc-card-specs"><ul><li>Ajuste 3,2–20 mm por dial</li><li>Cable UV 7,6 m · 24V CA</li><li>Hasta 10 válvulas solenoides</li><li>Certificado cULus / CE</li></ul></div>
+          <div class="acc-card-price">$84.304</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rele-24v" data-name="Relé de Contacto 24V" data-price="21875" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Relé de Contacto 24V</p>
+          <div class="acc-card-specs"><ul><li>Tensión: 24V CA</li><li>Compatible con controladores Hunter y Rain Bird</li></ul></div>
+          <div class="acc-card-price">$21.875</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VÁLVULAS -->
+  <div id="apanel-valvulas" class="acc-panel">
+    <div class="acc-grid">
+
+      <div class="acc-card" data-id="pgv-100g" data-name="Válvula Hunter 1'' PGV-100G" data-price="49888" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp" alt="PGV-100G"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Válvula Solenoide Hunter 1'' PGV-100G</p>
+          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Normal cerrada</li><li>Presión: 1,5–10 bar</li><li>Caudal: 0,7–150 l/min</li><li>Temp. máx. 66°C · Garantía 2 años</li></ul></div>
+          <div class="acc-card-price">$49.888</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rb-100hv" data-name="Válvula Rain Bird 1'' 100-HV" data-price="47015" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp" alt="100-HV"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Válvula Solenoide Rain Bird 1'' 100-HV</p>
+          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Caudal inverso</li><li>Presión: 1,0–10,3 bar</li><li>Caudal: 0,05–6,82 m³/h</li><li>Diafragma Buna-N · Filtro 200 micrones</li></ul></div>
+          <div class="acc-card-price">$47.015</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="pgv-101" data-name="Válvula Hunter PGV-101 c/Regulador 1''" data-price="50105" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg" alt="PGV-101"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Válvula Hunter PGV-101 con Regulador 1''</p>
+          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Con regulador caudal</li><li>Presión: 1,5–10 bar</li><li>Caudal: 0,05–9 m³/h</li><li>Purga manual interna y externa</li></ul></div>
+          <div class="acc-card-price">$50.105</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="bermad-1" data-name="Válvula Bermad 1'' Normal Abierta" data-price="150000" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Válvula Solenoide Bermad 1'' Normal Abierta</p>
+          <div class="acc-card-specs"><ul><li>Rosca 1" · Normal abierta</li><li>Cierre por solenoide</li><li>Uso en sistemas de riego presurizado</li></ul></div>
+          <div class="acc-card-price">$150.000</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="alivio-34" data-name="Válvula de Alivio 3/4''" data-price="122331" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Válvula de Alivio 3/4''</p>
+          <div class="acc-card-specs"><ul><li>Rosca 3/4"</li><li>Protección contra sobrepresión</li><li>Apta para instalación enterrada</li></ul></div>
+          <div class="acc-card-price">$122.331</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CAJAS DE VÁLVULAS -->
+  <div id="apanel-cajas" class="acc-panel">
+    <div class="acc-grid">
+
+      <div class="acc-card" data-id="caja-jumbo" data-name="Caja Rectangular Jumbo 50×64 H30" data-price="58900" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp" alt="Caja Jumbo"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caja Rectangular Jumbo 50×64 H30</p>
+          <div class="acc-card-specs"><ul><li>Ext: 500×640×310 mm</li><li>Capacidad: hasta 6 válvulas</li><li>Plástico UV/impacto resistente</li><li>Enterrable o intemperie</li></ul></div>
+          <div class="acc-card-price">$58.900</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="caja-std" data-name="Caja Rectangular Estándar 40×50 H30" data-price="41420" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp" alt="Caja Estándar"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caja Rectangular Estándar 40×50 H30</p>
+          <div class="acc-card-specs"><ul><li>Ext: 400×500×300 mm</li><li>Capacidad: hasta 3 válvulas</li><li>Plástico UV/impacto resistente</li><li>Zonas premarcadas para caños</li></ul></div>
+          <div class="acc-card-price">$41.420</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="caja-large" data-name="Caja Cilíndrica Large Ø23 H25" data-price="15464" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp" alt="Caja Large"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caja Cilíndrica Large Ø23 H25</p>
+          <div class="acc-card-specs"><ul><li>Diámetro: 23 cm · Altura: 25 cm</li><li>Para 1–2 válvulas</li><li>Material resistente a UV</li></ul></div>
+          <div class="acc-card-price">$15.464</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="caja-mini" data-name="Caja Cilíndrica Mini Ø20 H23" data-price="6973" data-img="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp">
+        <div class="acc-card-img"><img src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp" alt="Caja Mini"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caja Cilíndrica Mini Ø20 H23</p>
+          <div class="acc-card-specs"><ul><li>Diámetro: 20 cm · Altura: 23 cm</li><li>Para 1 válvula</li><li>Material resistente a UV</li></ul></div>
+          <div class="acc-card-price">$6.973</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROTORES & TOBERAS -->
+  <div id="apanel-rotores" class="acc-panel">
+    <div class="acc-grid">
+
+      <div class="acc-card" data-id="pgp-ultra" data-name="Rotor Hunter PGP Ultra" data-price="28083" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="PGP Ultra"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Rotor Hunter PGP Ultra</p>
+          <div class="acc-card-specs"><ul><li>Emergencia: 10 cm · Rosca 3/4"</li><li>Medio alcance</li><li>12 boquillas intercambiables incluidas</li></ul></div>
+          <div class="acc-card-price">$28.083</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="pgj" data-name="Rotor Hunter PGJ" data-price="26725" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="PGJ"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Rotor Hunter PGJ</p>
+          <div class="acc-card-specs"><ul><li>Emergencia: 10 cm · Rosca 1/2"</li><li>Alcance: 11,6 m a 2,75 bar</li><li>8 boquillas intercambiables incluidas</li></ul></div>
+          <div class="acc-card-price">$26.725</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-largo" data-name="Tobera Hunter Largo 10A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera Largo"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter Largo 10A</p>
+          <div class="acc-card-specs"><ul><li>Modelo PSU-04-10A · Elevación 4"</li><li>Arco regulable 0°–360°</li><li>Alcance: 3 m a 2,10 bar</li><li>Incluye filtro de tobera</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CAÑOS -->
+  <div id="apanel-canos" class="acc-panel">
+    <div class="acc-grid">
+
+      <div class="acc-card" data-id="cano-1p" data-name="Caño Polietileno 1'' K-4" data-price="600" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h20M2 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2M22 7h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caño Polietileno 1'' K-4</p>
+          <div class="acc-card-specs"><ul><li>Diámetro: 1'' · Clase K-4</li><li>Polietileno de alta densidad</li><li>Apto para sistemas de riego enterrados</li></ul></div>
+          <div class="acc-card-price">$600 <span style="font-size:.7rem;font-weight:400;color:var(--muted)">/metro</span></div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="cano-12p" data-name="Caño Polietileno 1/2'' K-4" data-price="206" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h20M2 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2M22 7h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caño Polietileno 1/2'' K-4</p>
+          <div class="acc-card-specs"><ul><li>Diámetro: 1/2'' · Clase K-4</li><li>Polietileno de alta densidad</li><li>Ideal para ramales y goteo</li></ul></div>
+          <div class="acc-card-price">$206 <span style="font-size:.7rem;font-weight:400;color:var(--muted)">/metro</span></div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ CONTACTO ═══ -->
+<section id="contacto">
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <p class="section-eyebrow">Hablemos</p>
+      <h2>¿Tenés un jardín que necesita <em>riego?</em></h2>
+      <p>Cotizamos sin cargo. Contanos las dimensiones y armamos una propuesta técnica en menos de 48 hs.</p>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WHATSAPP · +54 9 11 3592-3006
+      </a>
+      <p class="contact-schedule">Lun–Sáb · 8 a 19 hs · GBA</p>
+    </div>
+    <div class="contact-right reveal rd1">
+      <div class="cinfo">
+        <p class="cinfo-label">Zona de trabajo</p>
+        <p class="cinfo-val">Gran Buenos Aires</p>
+        <p class="cinfo-sub">Norte, Oeste y Sur · Consultá tu zona</p>
+      </div>
+      <div class="cinfo">
+        <p class="cinfo-label">Instagram</p>
+        <p class="cinfo-val">@AquaplanBV</p>
+        <p class="cinfo-sub">Obras realizadas · Proceso de instalación</p>
+      </div>
+      <div class="cinfo">
+        <p class="cinfo-label">Respuesta</p>
+        <p class="cinfo-val">Menos de 48 hs</p>
+        <p class="cinfo-sub">Cotización técnica sin cargo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">Aqua<span>Plan</span></div>
+  <small>© 2025 AquaPlan · Sistemas de Riego Automático · GBA</small>
+  <small>@AQUAPLANBV ↗</small>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+// ── Lenis smooth scroll ──
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+// ── Custom cursor ──
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.opacity = '1';
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.prod-card,.stat-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '44px';
+    cursor.style.height = '44px';
+    cursor.style.mixBlendMode = 'difference';
+    cursor.style.background = '#fff';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '8px';
+    cursor.style.height = '8px';
+    cursor.style.mixBlendMode = '';
+    cursor.style.background = 'var(--sgl)';
+  });
+});
+
+// ── Nav solid on scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 50);
+}, { passive: true });
+
+// ── Scroll reveal ──
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+// ── Animated counters ──
+const countIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    const span = el.querySelector('.count');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now - start) / dur);
+      const ease = 1 - Math.pow(1 - p, 3);
+      span.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    countIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => countIO.observe(el));
+
+// ── Product overlay system ──
+function openOverlay(id) {
+  const el = document.getElementById('overlay-' + id);
+  if (!el) return;
+  document.querySelectorAll('.detail-overlay.is-open').forEach(o => o.classList.remove('is-open'));
+  el.scrollTop = 0;
+  el.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  // Pause Lenis so it doesn't intercept wheel events inside the overlay
+  if (typeof lenis !== 'undefined') lenis.stop();
+  history.pushState({ overlay: id }, '');
+}
+function closeOverlay() {
+  document.querySelectorAll('.detail-overlay.is-open').forEach(o => o.classList.remove('is-open'));
+  document.body.style.overflow = '';
+  // Resume Lenis for the main page
+  if (typeof lenis !== 'undefined') lenis.start();
+  if (history.state && history.state.overlay) history.back();
+}
+window.addEventListener('popstate', () => {
+  document.querySelectorAll('.detail-overlay.is-open').forEach(o => o.classList.remove('is-open'));
+  document.body.style.overflow = '';
+  if (typeof lenis !== 'undefined') lenis.start();
+});
+// Prevent Lenis from intercepting wheel/touch events inside overlays
+document.querySelectorAll('.detail-overlay').forEach(ov => {
+  ov.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
+  ov.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
+});
+
+// Goteo tabs
+function switchAccTab(tab, btn) {
+  document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.acc-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('apanel-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+function switchGoteoTab(tab, btn) {
+  document.querySelectorAll('#overlay-goteo .gpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#overlay-goteo .gtab').forEach(b => b.classList.remove('active'));
+  document.getElementById('gpanel-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── CART ──
+let cart = []; // [{id, name, price, img, qty}]
+
+function addToCart(btn) {
+  const card = btn.closest('.acc-card');
+  const id   = card.dataset.id;
+  const name = card.dataset.name;
+  const price= parseInt(card.dataset.price, 10);
+  const img  = card.dataset.img || '';
+
+  const existing = cart.find(i => i.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ id, name, price, img, qty: 1 });
+  }
+
+  // feedback on button
+  btn.textContent = '✓ Agregado';
+  btn.classList.add('added');
+  setTimeout(() => {
+    btn.textContent = '+ Agregar al carrito';
+    btn.classList.remove('added');
+  }, 1600);
+
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const badge = document.getElementById('cart-badge');
+  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+  badge.textContent = totalItems;
+  badge.classList.toggle('visible', totalItems > 0);
+
+  const itemsEl = document.getElementById('cart-items');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>';
+    document.getElementById('cart-total-val').textContent = '$0';
+    document.getElementById('cart-checkout').disabled = true;
+    return;
+  }
+
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item" data-id="${item.id}">
+      <div class="cart-item-img">
+        ${item.img ? `<img src="${item.img}" alt="${item.name}" loading="lazy">` : '<div style="width:100%;height:100%;background:var(--cr)"></div>'}
+      </div>
+      <div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">$${(item.price).toLocaleString('es-AR')}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Eliminar">✕</button>
+    </div>
+  `).join('');
+
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cart-total-val').textContent = '$' + total.toLocaleString('es-AR');
+  document.getElementById('cart-checkout').disabled = false;
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  updateCartUI();
+}
+
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartUI();
+}
+
+function openCart() {
+  document.getElementById('cart-overlay').classList.add('open');
+  document.getElementById('cart-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (typeof lenis !== 'undefined') lenis.stop();
+}
+
+function closeCart() {
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.getElementById('cart-panel').classList.remove('open');
+  document.body.style.overflow = '';
+  if (typeof lenis !== 'undefined') lenis.start();
+}
+
+function checkoutWA() {
+  if (cart.length === 0) return;
+  const lines = cart.map(i => `• ${i.name} x${i.qty} = $${(i.price * i.qty).toLocaleString('es-AR')}`).join('%0A');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const msg = `Hola! Quiero consultar por los siguientes accesorios:%0A%0A${lines}%0A%0A*Total estimado: $${total.toLocaleString('es-AR')}*%0A%0A¿Tienen disponibilidad?`;
+  window.open(`https://wa.me/5491135923006?text=${msg}`, '_blank');
+}
+
+// ── Hero text clip reveal ──
+(function(){
+  const lines = document.querySelectorAll('.hero-h1 br');
+  // wrap each text node around BR in .cr > .cr-inner
+  const h1 = document.querySelector('.hero-h1');
+  if (!h1) return;
+  const rawHTML = h1.innerHTML;
+  const parts = rawHTML.split(/<br\s*\/?>/i);
+  h1.innerHTML = parts.map(p => `<span class="cr" style="display:block;overflow:visible"><span class="cr-inner" style="display:block;opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)">${p}</span></span>`).join('');
+  // trigger after short delay
+  setTimeout(() => {
+    document.querySelectorAll('.cr-inner').forEach((el, i) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, i * 130);
+    });
+  }, 300);
+})();
+</script>
+
+<!-- ── CARRITO PANEL ── -->
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-panel" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+  <div id="cart-head">
+    <h3>Tu carrito</h3>
+    <button id="cart-close" onclick="closeCart()" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div id="cart-items">
+    <p class="cart-empty">Tu carrito está vacío.</p>
+  </div>
+  <div id="cart-foot">
+    <div id="cart-total-row">
+      <span id="cart-total-label">Total</span>
+      <span id="cart-total-val">$0</span>
+    </div>
+    <button id="cart-checkout" onclick="checkoutWA()" disabled>Finalizar por WhatsApp</button>
+  </div>
+</div>
+
+<!-- ── WHATSAPP FLOAT ── -->
+<style>
+#wa-float{
+  position:fixed;bottom:2rem;right:2rem;
+  width:58px;height:58px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(37,211,102,.45),0 1px 4px rgba(0,0,0,.15);
+  z-index:500;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
+  text-decoration:none;
+}
+#wa-float:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.55),0 2px 8px rgba(0,0,0,.12)}
+#wa-float svg{width:32px;height:32px;fill:#fff;flex-shrink:0}
+</style>
+<a id="wa-float" href="https://wa.me/5491135923006" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.65 4.83 1.785 6.858L2 30l7.338-1.758A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.54 11.54 0 0 1-5.88-1.606l-.42-.25-4.352 1.043 1.072-4.228-.274-.434A11.56 11.56 0 0 1 4.4 16C4.4 9.59 9.59 4.4 16 4.4S27.6 9.59 27.6 16 22.41 27.6 16 27.6zm6.34-8.67c-.347-.174-2.054-1.014-2.373-1.13-.32-.115-.552-.173-.784.174-.232.347-.899 1.13-1.102 1.362-.203.232-.405.26-.752.087-.347-.174-1.464-.54-2.788-1.72-1.03-.92-1.726-2.056-1.928-2.403-.203-.347-.022-.535.152-.707.156-.155.347-.405.52-.608.174-.203.232-.347.347-.578.116-.232.058-.434-.029-.608-.087-.174-.784-1.89-1.073-2.59-.283-.68-.57-.587-.784-.598l-.667-.012c-.232 0-.608.087-.926.434-.318.347-1.217 1.19-1.217 2.9s1.246 3.364 1.42 3.597c.174.232 2.454 3.747 5.946 5.254.831.359 1.48.573 1.985.733.834.265 1.594.228 2.194.138.669-.1 2.054-.84 2.344-1.651.29-.811.29-1.507.203-1.651-.086-.144-.318-.23-.666-.405z"/>
+  </svg>
+</a>
+</body>
+</html>
