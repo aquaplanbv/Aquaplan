@@ -721,6 +721,23 @@ footer small{font-size:.7rem;letter-spacing:.08em}
 .asp-spec strong{color:var(--dk);font-weight:600}
 @media(max-width:900px){.asp-products-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.asp-products-grid{grid-template-columns:1fr 1fr}}
+
+/* ══ AUTOMATIZACIÓN — brand grid ══ */
+.auto-brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.auto-brand-card{background:var(--wh);border:1px solid var(--bd);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .35s,transform .35s}
+.auto-brand-card:hover{box-shadow:0 8px 32px rgba(26,43,30,.1);transform:translateY(-2px)}
+.auto-brand-img{height:220px;overflow:hidden}
+.auto-brand-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s}
+.auto-brand-card:hover .auto-brand-img img{transform:scale(1.04)}
+.auto-brand-body{padding:1.75rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.auto-brand-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.2rem}
+.auto-brand-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.26rem .8rem;border-radius:100px;background:rgba(74,140,92,.1);color:var(--sg)}
+.auto-brand-tag--rb{background:rgba(200,20,20,.07);color:#b81c1c}
+.auto-brand-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--dk)}
+.auto-wifi-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ce);background:rgba(165,196,216,.15);border:1px solid rgba(165,196,216,.3);border-radius:100px;padding:.28rem .9rem;align-self:flex-start}
+.auto-wifi-badge svg{width:12px;height:12px}
+.auto-brand-desc{font-size:.82rem;color:var(--muted);line-height:1.72}
+@media(max-width:768px){.auto-brand-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -962,7 +979,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     </div>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">¿Por qué <em>aspersores?</em></h2>
+      <h2 class="dl-section-title">Ventajas del riego por aspersión</h2>
       <div class="dl-grid-4">
         <div class="dl-card">
           <div class="dl-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 6v6l4 2"/></svg></div>
@@ -1143,86 +1160,123 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <div class="dl-hero-overlay"></div>
     <div class="dl-hero-text">
       <span class="dl-eyebrow">04 · Automatización</span>
-      <h2>Tu jardín riega solo. <em>Siempre.</em></h2>
+      <h2>Tu jardín riega solo. Siempre.</h2>
     </div>
   </div>
   <div class="detail-body">
-    <p class="dl-lead">Instalamos controladores Hunter X-Core que gestionan hasta 8 zonas de riego con 3 programas independientes. Se programan una vez y trabajan solos, con sensor de lluvia para no regar cuando no hace falta.</p>
+    <p class="dl-lead">Trabajamos con los controladores de primera línea del mercado global: Hunter y Rain Bird. Cada instalación recibe el equipo adecuado según la cantidad de zonas, el presupuesto y los requerimientos de conectividad del cliente.</p>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">Hunter <em>X-Core</em></h2>
-      <p class="dl-section-sub">El controlador de entrada profesional más vendido del mundo. Robusto, simple de programar y compatible con la línea completa de accesorios Hunter.</p>
+      <h2 class="dl-section-title">Líneas de controladores</h2>
+      <p class="dl-section-sub">Ambas marcas representan el estándar internacional de la industria. Seleccionamos el modelo más adecuado para cada proyecto.</p>
 
-      <div class="dl-split">
-        <div class="dl-split-img">
-          <img src="IMG_4918.jpg" alt="Instalación Hunter X-Core con cableado" style="object-position:38% 8%">
+      <div class="auto-brand-grid">
+
+        <!-- Hunter -->
+        <div class="auto-brand-card">
+          <div class="auto-brand-img">
+            <img src="IMG_4918.jpg" alt="Controlador Hunter X-Core instalado" style="object-position:38% 8%">
+          </div>
+          <div class="auto-brand-body">
+            <div class="auto-brand-header">
+              <span class="auto-brand-tag">Hunter</span>
+              <h3 class="auto-brand-title">X-Core</h3>
+            </div>
+            <p class="auto-brand-desc">El controlador profesional más vendido del mundo. Programación robusta y confiable sin dependencia de conectividad. Ideal para instalaciones residenciales y comerciales que requieren fiabilidad ante todo.</p>
+            <ul class="dl-split-list">
+              <li>2, 4 y 6 estaciones disponibles</li>
+              <li>3 programas independientes (A, B, C)</li>
+              <li>4 horarios de inicio por programa</li>
+              <li>Puerto para sensor de lluvia Solar-Sync</li>
+              <li>Memoria no volátil ante cortes de energía</li>
+              <li>Carcasa con cerradura · Apto exterior</li>
+            </ul>
+          </div>
         </div>
-        <div class="dl-split-text">
-          <h3>Características principales</h3>
-          <ul class="dl-split-list">
-            <li>3 programas de riego independientes (A, B, C)</li>
-            <li>4 horarios de inicio por programa</li>
-            <li>Tiempo de riego por zona: hasta 4 horas</li>
-            <li>Puerto para sensor de lluvia (Solar-Sync)</li>
-            <li>Ajuste estacional: 10% a 150% del caudal programado</li>
-            <li>Retardo por lluvia configurable: 1 a 7 días</li>
-            <li>Memoria no volátil — no pierde programas ante cortes de luz</li>
-            <li>Carcasa exterior con cerradura incluida</li>
-          </ul>
+
+        <!-- Rain Bird -->
+        <div class="auto-brand-card">
+          <div class="auto-brand-img">
+            <img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="Controlador Rain Bird RC2 Wi-Fi">
+          </div>
+          <div class="auto-brand-body">
+            <div class="auto-brand-header">
+              <span class="auto-brand-tag auto-brand-tag--rb">Rain Bird</span>
+              <h3 class="auto-brand-title">RC2 Wi-Fi</h3>
+            </div>
+            <div class="auto-wifi-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              Wi-Fi · App iOS y Android · Control remoto
+            </div>
+            <p class="auto-brand-desc">Controlador inteligente con Wi-Fi integrado. Gestioná el riego desde cualquier lugar con la app Rain Bird 2.0. Sin hubs externos, sin costos adicionales de conectividad.</p>
+            <ul class="dl-split-list">
+              <li>4 y 6 estaciones disponibles</li>
+              <li>Control total desde el celular en tiempo real</li>
+              <li>Detección automática de cortocircuito por zona</li>
+              <li>Modo local disponible sin conexión a internet</li>
+              <li>Compatible con sensor de lluvia Rain Bird</li>
+            </ul>
+          </div>
         </div>
+
       </div>
     </div>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">Modelos <em>disponibles</em></h2>
-      <p class="dl-section-sub">Todos los modelos comparten las mismas funciones. La diferencia es la cantidad de estaciones (zonas de riego) y el tipo de montaje.</p>
+      <h2 class="dl-section-title">Modelos disponibles</h2>
+      <p class="dl-section-sub">Todos los modelos están disponibles con instalación incluida. Consultá disponibilidad y combinaciones.</p>
       <div class="dl-table-wrap">
         <table class="dl-table">
           <thead>
             <tr>
+              <th>Marca</th>
               <th>Modelo</th>
               <th>Estaciones</th>
-              <th>Montaje</th>
-              <th>Descripción</th>
+              <th>Conectividad</th>
+              <th>Precio</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="dl-model">X-Core 2</td><td>2 zonas</td><td>Exterior / Interior</td><td>Para jardines pequeños con hasta 2 sectores de riego independientes</td></tr>
-            <tr><td class="dl-model">XC-400</td><td>4 zonas</td><td>Exterior</td><td>Armario plástico con puerta, para montaje en pared exterior</td></tr>
-            <tr><td class="dl-model">XC-600</td><td>6 zonas</td><td>Exterior</td><td>El modelo más utilizado en residencias con jardín completo</td></tr>
+            <tr><td class="dl-model">Hunter</td><td>X-Core 2 est.</td><td>2 zonas</td><td>Manual</td><td>$171.690</td></tr>
+            <tr><td class="dl-model">Hunter</td><td>X-Core 4 est.</td><td>4 zonas</td><td>Manual</td><td>$187.000</td></tr>
+            <tr><td class="dl-model">Hunter</td><td>X-Core 6 est.</td><td>6 zonas</td><td>Manual</td><td>$226.000</td></tr>
+            <tr><td class="dl-model">Hunter</td><td>BTT101 Canilla</td><td>1 zona</td><td>Bluetooth · App</td><td>$167.900</td></tr>
+            <tr><td class="dl-model" style="color:#b81c1c">Rain Bird</td><td>RC2 4 est. Wi-Fi</td><td>4 zonas</td><td>Wi-Fi · App</td><td>$222.300</td></tr>
+            <tr><td class="dl-model" style="color:#b81c1c">Rain Bird</td><td>RC2 6 est. Wi-Fi</td><td>6 zonas</td><td>Wi-Fi · App</td><td>$246.473</td></tr>
+            <tr><td class="dl-model" style="color:#b81c1c">Rain Bird</td><td>Prog. Canilla</td><td>1 zona</td><td>Manual</td><td>$146.503</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">¿Cómo <em>funciona?</em></h2>
+      <h2 class="dl-section-title">Cómo funciona el sistema</h2>
       <div class="dl-grid-4">
         <div class="dl-card">
           <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">1</div>
           <h4>Zonas independientes</h4>
-          <p>Cada sector del jardín tiene su válvula solenoide y su tiempo de riego específico.</p>
+          <p>Cada sector tiene su válvula solenoide y tiempos de riego diferenciados por especie o superficie.</p>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</div>
-          <h4>Horarios programados</h4>
-          <p>Se configuran días, horarios y duración una única vez desde el controlador.</p>
+          <h4>Programación precisa</h4>
+          <p>Se configuran días, horarios y duración. El controlador opera de forma completamente autónoma.</p>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">3</div>
           <h4>Sensor de lluvia</h4>
-          <p>El Mini-Clik o Solar-Sync suspende el riego automáticamente cuando llueve o hay humedad suficiente.</p>
+          <p>Suspende el riego automáticamente ante precipitaciones. Ahorro real sin intervención del usuario.</p>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon" style="font-size:.85rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--sg);background:rgba(74,140,92,.1);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">4</div>
           <h4>Riego sin intervención</h4>
-          <p>El sistema opera solo. Podés irte de vacaciones y el jardín sigue regado correctamente.</p>
+          <p>El sistema opera de forma autónoma. El jardín permanece regado con o sin presencia del propietario.</p>
         </div>
       </div>
     </div>
 
     <div class="dl-cta">
-      <h3>¿Cuántas zonas tiene <em>tu jardín?</em></h3>
+      <h3>¿Cuántas zonas tiene tu jardín?</h3>
       <a href="https://wa.me/5491135923006" target="_blank" rel="noopener">Consultá tu proyecto →</a>
     </div>
   </div>
@@ -1258,7 +1312,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       El riego exacto<br>
       que cada raíz necesita.
     </h1>
-    <p class="hero-sub">Aspersores &nbsp;·&nbsp; Goteo &nbsp;·&nbsp; Automatización &nbsp;·&nbsp; Diseño</p>
+    <p class="hero-sub">Aspersores · Goteo · Automatización · Diseño</p>
     <div class="hero-btns">
       <a href="#productos" class="btn-primary">Ver servicios</a>
       <a href="#accesorios" class="btn-ghost">Accesorios</a>
@@ -1292,7 +1346,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
       <span class="prod-num">01</span>
       <h3 class="prod-name">Diseño</h3>
-      <p class="prod-desc">Plano hidráulico antes de abrir la primera zanja. Cálculo de presiones y zonas.</p>
       <span class="prod-cta">Ver más →</span>
     </div>
 
@@ -1306,7 +1359,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
       <span class="prod-num">02</span>
       <h3 class="prod-name">Aspersores</h3>
-      <p class="prod-desc">Rotores Hunter PGP Ultra. Cobertura uniforme hasta 14 m. Radio y arco ajustables.</p>
       <span class="prod-cta">Ver más →</span>
     </div>
 
@@ -1320,7 +1372,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
       <span class="prod-num">03</span>
       <h3 class="prod-name">Goteo</h3>
-      <p class="prod-desc">Agua directo a la raíz, sin evaporación. Hasta 50% más eficiente que el aspersor.</p>
       <span class="prod-cta">Ver más →</span>
     </div>
 
@@ -1334,26 +1385,12 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
       <span class="prod-num">04</span>
       <h3 class="prod-name">Automatización</h3>
-      <p class="prod-desc">Hunter X-Core hasta 6 zonas. Horarios, sensor de lluvia. Riego sin intervención.</p>
       <span class="prod-cta">Ver más →</span>
     </div>
 
   </div>
 </section>
 
-<!-- ═══ MARQUEE ═══ -->
-<div id="marquee">
-  <div class="mq-track">
-    <div class="mq-set">
-      <span class="mq-item">Riego Automático</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Gran Buenos Aires</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Aspersores Hunter</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Riego por Goteo</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Automatización</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Diseño Hidráulico</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Hunter X-Core</span><span class="mq-item mq-dot">·</span>
-      <span class="mq-item">Planificación</span><span class="mq-item mq-dot">·</span>
-    </div>
     <div class="mq-set" aria-hidden="true">
       <span class="mq-item">Riego Automático</span><span class="mq-item mq-dot">·</span>
       <span class="mq-item">Gran Buenos Aires</span><span class="mq-item mq-dot">·</span>
@@ -1367,41 +1404,20 @@ footer small{font-size:.7rem;letter-spacing:.08em}
   </div>
 </div>
 
-<!-- ═══ STATS ═══ -->
-<section id="stats">
-  <div class="stats-inner">
-    <div class="stat-item reveal">
-      <div class="stat-val" data-target="6"><span class="count">0</span><em>+</em></div>
-      <p class="stat-label">Zonas independientes</p>
-    </div>
-    <div class="stat-item reveal rd1">
-      <div class="stat-val" data-target="50"><span class="count">0</span><em>%</em></div>
-      <p class="stat-label">Ahorro de agua</p>
-    </div>
-    <div class="stat-item reveal rd2">
-      <div class="stat-val" data-target="14"><span class="count">0</span><em>m</em></div>
-      <p class="stat-label">Radio máx. aspersor</p>
-    </div>
-    <div class="stat-item reveal rd3">
-      <div class="stat-val" data-target="48"><span class="count">0</span><em>hs</em></div>
-      <p class="stat-label">Cotización en menos de</p>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ ACCESORIOS ═══ -->
 <section id="accesorios">
   <div class="acc-header reveal">
     <p class="section-eyebrow">Catálogo de productos</p>
-    <h2>Accesorios <em>&amp; materiales</em></h2>
+    <h2>Accesorios y materiales</h2>
     <p class="acc-sub">Todos los componentes para tu sistema de riego, con precio de venta al público.</p>
   </div>
 
   <div class="acc-tabs">
-    <button class="acc-tab active" onclick="switchAccTab('controladores',this)">Controladores &amp; Sensores</button>
+    <button class="acc-tab active" onclick="switchAccTab('controladores',this)">Controladores y Sensores</button>
     <button class="acc-tab" onclick="switchAccTab('valvulas',this)">Válvulas</button>
     <button class="acc-tab" onclick="switchAccTab('cajas',this)">Cajas de válvulas</button>
-    <button class="acc-tab" onclick="switchAccTab('rotores',this)">Rotores &amp; Toberas</button>
+    <button class="acc-tab" onclick="switchAccTab('rotores',this)">Rotores y Toberas</button>
     <button class="acc-tab" onclick="switchAccTab('canos',this)">Caños</button>
   </div>
 
@@ -1413,7 +1429,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 2"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 2 estaciones</p>
-          <div class="acc-card-specs"><ul><li>2 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
           <div class="acc-card-price">$171.690</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1423,7 +1438,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 4"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 4 estaciones</p>
-          <div class="acc-card-specs"><ul><li>4 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
           <div class="acc-card-price">$187.000</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1433,7 +1447,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 6"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 6 estaciones</p>
-          <div class="acc-card-specs"><ul><li>6 estaciones · 3 programas</li><li>4 arranques diarios</li><li>Memoria no volátil · 24 VAC</li><li>Compatible Solar Sync</li></ul></div>
           <div class="acc-card-price">$226.000</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1443,7 +1456,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg" alt="BTT101"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Canilla Hunter BTT101</p>
-          <div class="acc-card-specs"><ul><li>Bluetooth 4.0 · 1 salida</li><li>Presión: 0,5–8,0 bar</li><li>Caudal: 1,9–3407 LPH</li><li>iOS/Android · 2 pilas AA</li></ul></div>
           <div class="acc-card-price">$167.900</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1453,7 +1465,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="RC2 4"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador Rain Bird RC2 4 est. Wi-Fi</p>
-          <div class="acc-card-specs"><ul><li>Wi-Fi integrado · App Rain Bird 2.0</li><li>4 estaciones independientes</li><li>Detección de cortocircuito</li><li>Modo sin internet disponible</li></ul></div>
           <div class="acc-card-price">$222.300</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1463,7 +1474,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp" alt="RC2 6"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador Rain Bird RC2 6 est. Wi-Fi</p>
-          <div class="acc-card-specs"><ul><li>Wi-Fi integrado · App Rain Bird 2.0</li><li>6 estaciones independientes</li><li>Detección de cortocircuito</li><li>Modo sin internet disponible</li></ul></div>
           <div class="acc-card-price">$246.473</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1473,7 +1483,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp" alt="Prog canilla"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador de Canilla Rain Bird</p>
-          <div class="acc-card-specs"><ul><li>Montaje directo en canilla</li><li>Programación sencilla</li><li>Sin instalación eléctrica</li></ul></div>
           <div class="acc-card-price">$146.503</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1483,7 +1492,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp" alt="Sensor lluvia"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Sensor de Lluvia Automático Rain Bird</p>
-          <div class="acc-card-specs"><ul><li>Ajuste 3,2–20 mm por dial</li><li>Cable UV 7,6 m · 24V CA</li><li>Hasta 10 válvulas solenoides</li><li>Certificado cULus / CE</li></ul></div>
           <div class="acc-card-price">$84.304</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1493,7 +1501,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Relé de Contacto 24V</p>
-          <div class="acc-card-specs"><ul><li>Tensión: 24V CA</li><li>Compatible con controladores Hunter y Rain Bird</li></ul></div>
           <div class="acc-card-price">$21.875</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1510,7 +1517,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp" alt="PGV-100G"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Solenoide Hunter 1'' PGV-100G</p>
-          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Normal cerrada</li><li>Presión: 1,5–10 bar</li><li>Caudal: 0,7–150 l/min</li><li>Temp. máx. 66°C · Garantía 2 años</li></ul></div>
           <div class="acc-card-price">$49.888</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1520,7 +1526,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp" alt="100-HV"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Solenoide Rain Bird 1'' 100-HV</p>
-          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Caudal inverso</li><li>Presión: 1,0–10,3 bar</li><li>Caudal: 0,05–6,82 m³/h</li><li>Diafragma Buna-N · Filtro 200 micrones</li></ul></div>
           <div class="acc-card-price">$47.015</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1530,7 +1535,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg" alt="PGV-101"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Hunter PGV-101 con Regulador 1''</p>
-          <div class="acc-card-specs"><ul><li>Rosca 1" · 24V CA · Con regulador caudal</li><li>Presión: 1,5–10 bar</li><li>Caudal: 0,05–9 m³/h</li><li>Purga manual interna y externa</li></ul></div>
           <div class="acc-card-price">$50.105</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1540,7 +1544,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Solenoide Bermad 1'' Normal Abierta</p>
-          <div class="acc-card-specs"><ul><li>Rosca 1" · Normal abierta</li><li>Cierre por solenoide</li><li>Uso en sistemas de riego presurizado</li></ul></div>
           <div class="acc-card-price">$150.000</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1550,7 +1553,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v4l3 3"/></svg></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula de Alivio 3/4''</p>
-          <div class="acc-card-specs"><ul><li>Rosca 3/4"</li><li>Protección contra sobrepresión</li><li>Apta para instalación enterrada</li></ul></div>
           <div class="acc-card-price">$122.331</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1567,7 +1569,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp" alt="Caja Jumbo"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Rectangular Jumbo 50×64 H30</p>
-          <div class="acc-card-specs"><ul><li>Ext: 500×640×310 mm</li><li>Capacidad: hasta 6 válvulas</li><li>Plástico UV/impacto resistente</li><li>Enterrable o intemperie</li></ul></div>
           <div class="acc-card-price">$58.900</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1577,7 +1578,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp" alt="Caja Estándar"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Rectangular Estándar 40×50 H30</p>
-          <div class="acc-card-specs"><ul><li>Ext: 400×500×300 mm</li><li>Capacidad: hasta 3 válvulas</li><li>Plástico UV/impacto resistente</li><li>Zonas premarcadas para caños</li></ul></div>
           <div class="acc-card-price">$41.420</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1587,7 +1587,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp" alt="Caja Large"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Cilíndrica Large Ø23 H25</p>
-          <div class="acc-card-specs"><ul><li>Diámetro: 23 cm · Altura: 25 cm</li><li>Para 1–2 válvulas</li><li>Material resistente a UV</li></ul></div>
           <div class="acc-card-price">$15.464</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1597,7 +1596,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp" alt="Caja Mini"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Cilíndrica Mini Ø20 H23</p>
-          <div class="acc-card-specs"><ul><li>Diámetro: 20 cm · Altura: 23 cm</li><li>Para 1 válvula</li><li>Material resistente a UV</li></ul></div>
           <div class="acc-card-price">$6.973</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1614,7 +1612,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="PGP Ultra"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Rotor Hunter PGP Ultra</p>
-          <div class="acc-card-specs"><ul><li>Emergencia: 10 cm · Rosca 3/4"</li><li>Medio alcance</li><li>12 boquillas intercambiables incluidas</li></ul></div>
           <div class="acc-card-price">$28.083</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1624,17 +1621,84 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="PGJ"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Rotor Hunter PGJ</p>
-          <div class="acc-card-specs"><ul><li>Emergencia: 10 cm · Rosca 1/2"</li><li>Alcance: 11,6 m a 2,75 bar</li><li>8 boquillas intercambiables incluidas</li></ul></div>
           <div class="acc-card-price">$26.725</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
       </div>
 
-      <div class="acc-card" data-id="tobera-largo" data-name="Tobera Hunter Largo 10A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera Largo"></div>
+      <div class="acc-card" data-id="i25" data-name="Aspersor Hunter I-25-04 Plástico" data-price="92214" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter I-25-04"></div>
         <div class="acc-card-body">
-          <p class="acc-card-name">Tobera Hunter Largo 10A</p>
-          <div class="acc-card-specs"><ul><li>Modelo PSU-04-10A · Elevación 4"</li><li>Arco regulable 0°–360°</li><li>Alcance: 3 m a 2,10 bar</li><li>Incluye filtro de tobera</li></ul></div>
+          <p class="acc-card-name">Aspersor Hunter I-25-04 Plástico</p>
+          <div class="acc-card-price">$92.214</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="rb-8005" data-name="Aspersor Rain Bird 8005 RH 1''" data-price="161153" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp">
+        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="Rain Bird 8005"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Aspersor Rain Bird 8005 RH 1''</p>
+          <div class="acc-card-price">$161.153</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-4a" data-name="Tobera Hunter PSU-04-4A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 4A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-4A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~1,2 m · Arco: 0°–360°</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-6a" data-name="Tobera Hunter PSU-04-6A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 6A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-6A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~1,5 m · Arco: 0°–360°</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-8a" data-name="Tobera Hunter PSU-04-8A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 8A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-8A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~2,0 m · Arco: 0°–360°</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-10a" data-name="Tobera Hunter PSU-04-10A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 10A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-10A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~3,0 m · Arco: 0°–360°</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-12a" data-name="Tobera Hunter PSU-04-12A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 12A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-12A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~3,5 m · Arco: 0°–360°</li></ul></div>
+          <div class="acc-card-price">$5.342</div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="tobera-15a" data-name="Tobera Hunter PSU-04-15A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
+        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 15A"></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Tobera Hunter PSU-04-15A</p>
+          <div class="acc-card-specs"><ul><li>Radio: ~4,0 m · Arco: 0°–360°</li></ul></div>
           <div class="acc-card-price">$5.342</div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1651,7 +1715,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h20M2 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2M22 7h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4"/></svg></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caño Polietileno 1'' K-4</p>
-          <div class="acc-card-specs"><ul><li>Diámetro: 1'' · Clase K-4</li><li>Polietileno de alta densidad</li><li>Apto para sistemas de riego enterrados</li></ul></div>
           <div class="acc-card-price">$600 <span style="font-size:.7rem;font-weight:400;color:var(--muted)">/metro</span></div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
@@ -1661,8 +1724,16 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h20M2 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2M22 7h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4"/></svg></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caño Polietileno 1/2'' K-4</p>
-          <div class="acc-card-specs"><ul><li>Diámetro: 1/2'' · Clase K-4</li><li>Polietileno de alta densidad</li><li>Ideal para ramales y goteo</li></ul></div>
           <div class="acc-card-price">$206 <span style="font-size:.7rem;font-weight:400;color:var(--muted)">/metro</span></div>
+          <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="acc-card" data-id="cano-34p" data-name="Caño Polietileno 3/4'' K-4" data-price="475" data-img="">
+        <div class="acc-card-img acc-card-img-placeholder"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h20M2 7h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2M22 7h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4"/></svg></div>
+        <div class="acc-card-body">
+          <p class="acc-card-name">Caño Polietileno 3/4'' K-4</p>
+          <div class="acc-card-price">$475 <span style="font-size:.7rem;font-weight:400;color:var(--muted)">/metro</span></div>
           <button class="acc-card-add" onclick="addToCart(this)">+ Agregar al carrito</button>
         </div>
       </div>
@@ -1677,7 +1748,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
   <div class="contact-wrap">
     <div class="contact-left reveal">
       <p class="section-eyebrow">Hablemos</p>
-      <h2>¿Tenés un jardín que necesita <em>riego?</em></h2>
+      <h2>Tu jardín necesita riego, contactanos.</h2>
       <p>Cotizamos sin cargo. Contanos las dimensiones y armamos una propuesta técnica en menos de 48 hs.</p>
       <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-wa">
         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1692,6 +1763,11 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <p class="cinfo-label">Zona de trabajo</p>
         <p class="cinfo-val">Gran Buenos Aires</p>
         <p class="cinfo-sub">Norte, Oeste y Sur · Consultá tu zona</p>
+      </div>
+      <div class="cinfo">
+        <p class="cinfo-label">Teléfono</p>
+        <p class="cinfo-val">+54 9 11 2466-1052</p>
+        <p class="cinfo-sub">WhatsApp · Llamadas · Lun–Sáb</p>
       </div>
       <div class="cinfo">
         <p class="cinfo-label">Instagram</p>
