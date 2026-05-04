@@ -713,6 +713,10 @@ footer small{font-size:.7rem;letter-spacing:.08em}
   margin-bottom:.6rem;align-self:flex-start;
 }
 .asp-prod-badge--alt{color:var(--ce);background:rgba(165,196,216,.15)}
+.asp-prod-badge--rb{color:#b81c1c;background:rgba(200,20,20,.08)}
+.asp-sub-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--dk);margin:2rem 0 .8rem;padding-bottom:.5rem;border-bottom:1px solid var(--bd)}
+.asp-products-grid--toberas{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.asp-products-grid--toberas{grid-template-columns:repeat(2,1fr)}}
 .asp-prod-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--dk);margin-bottom:.45rem}
 .asp-prod-desc{font-size:.77rem;color:var(--muted);line-height:1.65;margin-bottom:.9rem;flex:1}
 .asp-prod-specs{display:flex;flex-direction:column;gap:.35rem;border-top:1px solid var(--bd);padding-top:.75rem}
@@ -895,9 +899,11 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <p class="dl-lead">Instalamos aspersores Hunter para céspedes, jardines y espacios abiertos. Cobertura uniforme, ajuste de radio y arco, y bajo consumo energético. El sistema trabaja mientras vos no estás.</p>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">Productos <em>Hunter</em></h2>
-      <p class="dl-section-sub">Trabajamos exclusivamente con la línea Hunter — el estándar internacional para riego residencial y profesional. Cada modelo tiene su aplicación específica según la superficie y el caudal disponible.</p>
+      <h2 class="dl-section-title">Nuestros <em>productos</em></h2>
+      <p class="dl-section-sub">Trabajamos con Hunter y Rain Bird — los dos estándares internacionales para riego residencial y profesional. Cada modelo tiene su aplicación específica según la superficie y el caudal disponible.</p>
 
+      <!-- ── ROTORES ── -->
+      <h3 class="asp-sub-title">Rotores</h3>
       <div class="asp-products-grid">
 
         <!-- PGP Ultra -->
@@ -914,7 +920,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
               <div class="asp-spec"><span>Radio</span><strong>4,6 – 14 m</strong></div>
               <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
               <div class="asp-spec"><span>Presión</span><strong>1,7 – 4,8 bar</strong></div>
-              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
             </div>
           </div>
         </div>
@@ -933,7 +938,6 @@ footer small{font-size:.7rem;letter-spacing:.08em}
               <div class="asp-spec"><span>Radio</span><strong>4,6 – 13 m</strong></div>
               <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
               <div class="asp-spec"><span>Presión</span><strong>1,7 – 4,8 bar</strong></div>
-              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
             </div>
           </div>
         </div>
@@ -952,25 +956,167 @@ footer small{font-size:.7rem;letter-spacing:.08em}
               <div class="asp-spec"><span>Radio</span><strong>2,4 – 8,2 m</strong></div>
               <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
               <div class="asp-spec"><span>Presión</span><strong>1,4 – 3,5 bar</strong></div>
-              <div class="asp-spec"><span>Cuerpo</span><strong>10 cm</strong></div>
             </div>
           </div>
         </div>
 
-        <!-- Tobera 10A -->
+        <!-- I-25-04 -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Hunter Tobera 10A"
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2026/04/i-25-pl.png" alt="Hunter I-25"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor profesional</span>
+            <div class="asp-prod-name">I-25</div>
+            <p class="asp-prod-desc">Rotor de alta resistencia para instalaciones profesionales y campos deportivos. Alcance superior y construcción robusta.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>7 – 15 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+              <div class="asp-spec"><span>Presión</span><strong>2,1 – 5,5 bar</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rain Bird 8005 RH -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_915313-mla80196071403_102024-b-0467bdc4b2e33fb7d417538169428127-480-0.webp" alt="Rain Bird 8005 RH"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--rb">Rotor Rain Bird</span>
+            <div class="asp-prod-name">8005 RH</div>
+            <p class="asp-prod-desc">Rotor de alto caudal con tapa de acero inoxidable y boquilla de doble arco. Diseñado para superficies amplias con gran uniformidad de distribución.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>5,5 – 12,5 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+              <div class="asp-spec"><span>Presión</span><strong>1,7 – 4,1 bar</strong></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── TOBERAS ── -->
+      <h3 class="asp-sub-title" style="margin-top:2.5rem">Toberas Hunter PSU</h3>
+      <div class="asp-products-grid asp-products-grid--toberas">
+
+        <!-- 4A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-4A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
             <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
-            <div class="asp-prod-name">Tobera 10A</div>
-            <p class="asp-prod-desc">Tobera de largo alcance para difusores Pro-Spray y PS Ultra. Distribución uniforme en radio amplio con bajo consumo de agua.</p>
+            <div class="asp-prod-name">PSU-04-4A</div>
+            <p class="asp-prod-desc">Tobera de corto alcance ideal para canteros angostos y bordes. Distribución uniforme con bajo caudal.</p>
             <div class="asp-prod-specs">
-              <div class="asp-spec"><span>Radio</span><strong>~ 3,0 m</strong></div>
-              <div class="asp-spec"><span>Caudal</span><strong>0,35 m³/h</strong></div>
-              <div class="asp-spec"><span>Compatible</span><strong>Pro-Spray / PS Ultra</strong></div>
+              <div class="asp-spec"><span>Radio</span><strong>1,2 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-6A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-6A</div>
+            <p class="asp-prod-desc">Tobera de alcance medio-bajo para difusores estándar. Eficiente en espacios reducidos con cobertura circular completa.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>1,8 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-8A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-8A</div>
+            <p class="asp-prod-desc">Tobera versátil para jardines medianos. Balance ideal entre radio de cobertura y consumo de agua.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>2,4 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-10A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-10A</div>
+            <p class="asp-prod-desc">La tobera más utilizada en instalaciones residenciales. Distribución uniforme en radio amplio con bajo consumo de agua.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>3,0 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-12A.jpg" alt="Tobera PSU-04-12A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-12A</div>
+            <p class="asp-prod-desc">Tobera de largo alcance para jardines amplios. Mayor radio sin sacrificar la uniformidad de distribución.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>3,6 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-15A.jpg" alt="Tobera PSU-04-15A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-15A</div>
+            <p class="asp-prod-desc">Alta cobertura para sectores amplios. Compatible con difusores Pro-Spray y PS Ultra. Patrón de lluvia fino y uniforme.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>4,5 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17A -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-17A.jpg" alt="Tobera PSU-04-17A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-17A</div>
+            <p class="asp-prod-desc">La tobera de mayor alcance de la serie PSU. Para superficies grandes con un solo punto de distribución.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>5,2 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>360°</strong></div>
             </div>
           </div>
         </div>
