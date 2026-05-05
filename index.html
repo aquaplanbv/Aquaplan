@@ -458,12 +458,52 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
   .nav-links a:not(.nav-cta):not(#cart-btn){display:none}
   .nav-links .nav-cta{display:none}
   #nav-hamburger{display:flex;flex-direction:column;justify-content:center}
+  /* Accesorios tabs: scroll horizontal en lugar de wrap */
+  .acc-tabs{
+    flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    justify-content:flex-start!important;padding:0 1.5rem!important;
+    scrollbar-width:none;gap:.4rem!important;margin-bottom:2rem!important;
+  }
+  .acc-tabs::-webkit-scrollbar{display:none}
+  .acc-tab{flex-shrink:0;font-size:.65rem;padding:.5rem 1rem;letter-spacing:.06em;white-space:nowrap}
 }
 @media(max-width:640px){
-  .prod-intro{padding:4rem 1.5rem 2.5rem}
-  #stats{padding:4rem 1.5rem}
+  /* ── Hero: limpio y despejado ── */
+  .hero-h1{font-size:clamp(2rem,8.5vw,2.8rem);margin-bottom:1.2rem;line-height:1.08}
+  .hero-tag{display:none}
+  .hero-sub{display:none}
+  .hero-btns{
+    flex-direction:column;align-items:center;
+    gap:.55rem;padding:0 2rem;
+  }
+  .hero-btns .btn-primary,
+  .hero-btns .btn-ghost{
+    width:100%;max-width:260px;
+    padding:.72rem 1.2rem;font-size:.72rem;
+    letter-spacing:.1em;text-align:center;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-scroll{bottom:1.5rem}
+
+  /* ── Productos: círculos simétricos ── */
+  .prod-intro{padding:3rem 1.25rem 1.75rem}
+  .prod-row{padding:0 0 3.5rem}
+  .prod-item{padding:1.5rem .6rem 1.25rem}
+  .prod-circle-wrap{max-width:130px;margin-bottom:1rem}
+  .prod-name{font-size:1rem;margin-bottom:.25rem}
+  .prod-num{font-size:.52rem;margin-bottom:.25rem}
+  .prod-desc{display:none}
+  .prod-cta{display:none}
+
+  /* ── General spacing ── */
+  #stats{padding:3.5rem 1.25rem}
+  #contacto{padding:4rem 1.25rem}
+  .contact-wrap{gap:2.5rem}
+  .btn-wa-group{width:100%}
+  .btn-wa{width:100%;justify-content:center}
+
+  /* ── Footer ── */
   footer{flex-direction:column;gap:.75rem;text-align:center;padding:2rem 1.5rem}
-  .hero-h1{font-size:clamp(2.2rem,9vw,3rem)}
 }
 
 /* ═══ PRODUCT DETAIL OVERLAYS ═══ */
