@@ -368,17 +368,71 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .cinfo-sub{font-size:.875rem;color:var(--muted)}
 
 /* ─── FOOTER ─── */
-footer{
-  background:var(--dk);color:rgba(255,255,255,.45);
-  padding:2rem 3.5rem;
-  display:flex;align-items:center;justify-content:space-between;
+/* ── FOOTER ── */
+footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
+.footer-top{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;
+  padding:4.5rem 3.5rem 3.5rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
-.footer-logo{
-  font-family:'Playfair Display',serif;
-  font-size:1rem;font-weight:600;color:var(--wh);
+.footer-brand{}
+.footer-brand-logo{
+  font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;
+  color:var(--wh);letter-spacing:-.01em;margin-bottom:.9rem;display:block;
+  text-decoration:none;
 }
-.footer-logo span{color:var(--sgl)}
-footer small{font-size:.7rem;letter-spacing:.08em}
+.footer-brand-logo span{color:var(--sgl)}
+.footer-brand-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:28ch}
+.footer-col-title{
+  font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sgl);margin-bottom:1.2rem;display:block;
+}
+.footer-links{list-style:none;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{
+  font-size:.82rem;color:rgba(255,255,255,.5);text-decoration:none;
+  transition:color .2s;display:inline-flex;align-items:center;gap:.4rem;
+}
+.footer-links a:hover{color:var(--sgl)}
+.footer-links a::before{
+  content:'';width:0;height:1px;background:var(--sgl);
+  transition:width .2s;
+}
+.footer-links a:hover::before{width:10px}
+.footer-social{display:flex;flex-direction:column;gap:.75rem}
+.footer-social-link{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-size:.82rem;color:rgba(255,255,255,.5);
+  text-decoration:none;transition:color .2s;
+}
+.footer-social-link:hover{color:var(--sgl)}
+.footer-social-link svg{width:16px;height:16px;flex-shrink:0;opacity:.7}
+.footer-social-link:hover svg{opacity:1}
+.footer-wa-pill{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:rgba(37,211,102,.12);color:#4ade80;
+  padding:.45rem .9rem;border-radius:100px;
+  font-size:.72rem;font-weight:600;text-decoration:none;
+  border:1px solid rgba(37,211,102,.2);transition:all .22s;
+  margin-top:.35rem;
+}
+.footer-wa-pill:hover{background:rgba(37,211,102,.22);color:#6ee7a0}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:1.4rem 3.5rem;
+  font-size:.72rem;color:rgba(255,255,255,.28);
+  flex-wrap:wrap;
+}
+.footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.footer-bottom a:hover{color:rgba(255,255,255,.7)}
+@media(max-width:960px){
+  .footer-top{grid-template-columns:1fr 1fr;gap:2.5rem;padding:3rem 2rem 2.5rem}
+}
+@media(max-width:560px){
+  .footer-top{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem 2rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.2rem 1.5rem}
+}
 
 /* ─── REVEAL ─── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
@@ -877,7 +931,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     </div>
     <div class="diseno-hz-plan">
       <div class="diseno-plan-frame">
-        <img src="plano_color.png" alt="Plano hidráulico real AquaPlan"
+        <img loading="lazy" src="plano_color.png" alt="Plano hidráulico real AquaPlan"
              onerror="this.src='plano_croquis.jpg'">
         <div class="diseno-plan-stamp">Plano real · AquaPlan</div>
         <div class="diseno-plan-callout right" style="top:18%;right:-112px">Zona A · Aspersores</div>
@@ -966,7 +1020,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
 
     <!-- BANNER: croquis real a full ancho -->
     <div class="diseno-plan-banner">
-      <img src="plano_croquis.jpg" alt="Croquis sistema de riego sectorizado"
+      <img loading="lazy" src="plano_croquis.jpg" alt="Croquis sistema de riego sectorizado"
            onerror="this.src='plano_color.png'">
       <div class="diseno-plan-banner-overlay">
         <span>Plano técnico real · Obra Aztoul · AquaPlan</span>
@@ -992,7 +1046,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     Volver
   </button>
   <div class="dl-hero">
-    <img src="istockphoto-1892740709-612x612.jpg" alt="Aspersor Hunter en funcionamiento" style="object-position:center 60%">
+    <img loading="lazy" src="istockphoto-1892740709-612x612.jpg" alt="Aspersor Hunter en funcionamiento" style="object-position:center 60%">
     <div class="dl-hero-overlay"></div>
     <div class="dl-hero-text">
       <span class="dl-eyebrow">02 · Riego por aspersión</span>
@@ -1013,7 +1067,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- PGP Ultra -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP Ultra"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP Ultra"
                  onerror="this.src='pexels-qhung999-25283561.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1031,7 +1085,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- PGP -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP"
                  onerror="this.src='pexels-qhung999-25283561.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1049,7 +1103,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- PGJ -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="Hunter PGJ"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="Hunter PGJ"
                  onerror="this.src='pexels-qhung999-25283561.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1067,7 +1121,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- I-25-04 -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2026/04/i-25-pl.png" alt="Hunter I-25"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2026/04/i-25-pl.png" alt="Hunter I-25"
                  onerror="this.src='pexels-qhung999-25283561.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1085,7 +1139,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- Rain Bird 8005 RH -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_915313-mla80196071403_102024-b-0467bdc4b2e33fb7d417538169428127-480-0.webp" alt="Rain Bird 8005 RH"
+            <img loading="lazy" src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_915313-mla80196071403_102024-b-0467bdc4b2e33fb7d417538169428127-480-0.webp" alt="Rain Bird 8005 RH"
                  onerror="this.src='pexels-qhung999-25283561.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1109,7 +1163,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 4A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-4A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-4A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1126,7 +1180,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 6A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-6A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-6A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1143,7 +1197,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 8A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-8A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-8A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1160,7 +1214,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 10A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-10A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-10A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1177,7 +1231,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 12A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-12A.jpg" alt="Tobera PSU-04-12A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-12A.jpg" alt="Tobera PSU-04-12A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1194,7 +1248,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 15A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-15A.jpg" alt="Tobera PSU-04-15A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-15A.jpg" alt="Tobera PSU-04-15A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1211,7 +1265,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
         <!-- 17A -->
         <div class="asp-prod-card">
           <div class="asp-prod-img">
-            <img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-17A.jpg" alt="Tobera PSU-04-17A"
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-17A.jpg" alt="Tobera PSU-04-17A"
                  onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
           </div>
           <div class="asp-prod-body">
@@ -1268,7 +1322,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     Volver
   </button>
   <div class="dl-hero">
-    <img src="Riego-por-goteo-en-agricultura.jpg" alt="Sistema de riego por goteo en jardín" style="object-position:center 40%">
+    <img loading="lazy" src="Riego-por-goteo-en-agricultura.jpg" alt="Sistema de riego por goteo en jardín" style="object-position:center 40%">
     <div class="dl-hero-overlay"></div>
     <div class="dl-hero-text">
       <span class="dl-eyebrow">03 · Riego por goteo</span>
@@ -1287,8 +1341,8 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <p class="dl-lead">Para canteros, arriates, huertas domésticas y árboles. El goteo lleva el agua directo a la raíz sin derrochar ni mojar lo que no corresponde.</p>
 
       <div class="dl-gallery">
-        <div class="dl-gimg"><img src="goteo_residencial_huerta.webp" alt="Huerta con cintas de goteo y almácigos"></div>
-        <div class="dl-gimg"><img src="istockphoto-1408040779-612x612.jpg" alt="Emisor de goteo disparando en cantero"></div>
+        <div class="dl-gimg"><img loading="lazy" src="goteo_residencial_huerta.webp" alt="Huerta con cintas de goteo y almácigos"></div>
+        <div class="dl-gimg"><img loading="lazy" src="istockphoto-1408040779-612x612.jpg" alt="Emisor de goteo disparando en cantero"></div>
       </div>
 
       <div class="dl-section" style="margin-top:2.5rem">
@@ -1342,8 +1396,8 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <p class="dl-lead">Para productores que necesitan maximizar el rendimiento con el mínimo consumo de agua. El riego por goteo agrícola reduce hasta un 50% el gasto hídrico respecto al riego por inundación o aspersión convencional.</p>
 
       <div class="dl-gallery">
-        <div class="dl-gimg"><img src="istockphoto-2084466380-612x612.jpg" alt="Cultivo de pimientos con riego por goteo"></div>
-        <div class="dl-gimg"><img src="goteo_agro_invernadero.jpg" alt="Invernadero de frutillas con riego por goteo" style="object-position:center 40%"></div>
+        <div class="dl-gimg"><img loading="lazy" src="istockphoto-2084466380-612x612.jpg" alt="Cultivo de pimientos con riego por goteo"></div>
+        <div class="dl-gimg"><img loading="lazy" src="goteo_agro_invernadero.jpg" alt="Invernadero de frutillas con riego por goteo" style="object-position:center 40%"></div>
       </div>
 
       <div class="dl-section" style="margin-top:2.5rem">
@@ -1406,7 +1460,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     Volver
   </button>
   <div class="dl-hero">
-    <img src="IMG_5008.jpg" alt="Controlador Hunter X-Core instalado">
+    <img loading="lazy" src="IMG_5008.jpg" alt="Controlador Hunter X-Core instalado">
     <div class="dl-hero-overlay"></div>
     <div class="dl-hero-text">
       <span class="dl-eyebrow">04 · Automatización</span>
@@ -1601,7 +1655,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <div class="prod-circle-wrap">
         <div class="prod-circle-ring"></div>
         <div class="prod-circle">
-          <img src="img_diseno.png" alt="Diseño hidráulico"/>
+          <img loading="lazy" src="img_diseno.png" alt="Diseño hidráulico"/>
         </div>
       </div>
       <span class="prod-num">01</span>
@@ -1614,7 +1668,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <div class="prod-circle-wrap">
         <div class="prod-circle-ring"></div>
         <div class="prod-circle">
-          <img src="img_aspersor.jpg" alt="Aspersores"/>
+          <img loading="lazy" src="img_aspersor.jpg" alt="Aspersores"/>
         </div>
       </div>
       <span class="prod-num">02</span>
@@ -1627,7 +1681,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <div class="prod-circle-wrap">
         <div class="prod-circle-ring"></div>
         <div class="prod-circle">
-          <img src="img_goteo.webp" alt="Goteo"/>
+          <img loading="lazy" src="img_goteo.webp" alt="Goteo"/>
         </div>
       </div>
       <span class="prod-num">03</span>
@@ -1640,7 +1694,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       <div class="prod-circle-wrap">
         <div class="prod-circle-ring"></div>
         <div class="prod-circle">
-          <img src="img_auto.jpg" alt="Automatización"/>
+          <img loading="lazy" src="img_auto.jpg" alt="Automatización"/>
         </div>
       </div>
       <span class="prod-num">04</span>
@@ -1700,7 +1754,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <div class="acc-grid">
 
       <div class="acc-card" data-id="xcore-2" data-name="Controlador Hunter X-Core 2 est." data-price="171690" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 2"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 2"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 2 estaciones</p>
           <div class="acc-card-price">$171.690</div>
@@ -1709,7 +1763,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="xcore-4" data-name="Controlador Hunter X-Core 4 est." data-price="187000" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 4"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 4"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 4 estaciones</p>
           <div class="acc-card-price">$187.000</div>
@@ -1718,7 +1772,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="xcore-6" data-name="Controlador Hunter X-Core 6 est." data-price="226000" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 6"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg" alt="X-Core 6"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Hunter X-Core 6 estaciones</p>
           <div class="acc-card-price">$226.000</div>
@@ -1727,7 +1781,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="btt101" data-name="Controlador Canilla Hunter BTT101" data-price="167900" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg" alt="BTT101"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/btt-100.jpg" alt="BTT101"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Controlador Canilla Hunter BTT101</p>
           <div class="acc-card-price">$167.900</div>
@@ -1736,7 +1790,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="rc2-4" data-name="Programador Rain Bird RC2 4 est. Wi-Fi" data-price="222300" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="RC2 4"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="RC2 4"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador Rain Bird RC2 4 est. Wi-Fi</p>
           <div class="acc-card-price">$222.300</div>
@@ -1745,7 +1799,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="rc2-6" data-name="Programador Rain Bird RC2 6 est. Wi-Fi" data-price="246473" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp" alt="RC2 6"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-88ac591abe5aa241c717736856048940-640-0.webp" alt="RC2 6"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador Rain Bird RC2 6 est. Wi-Fi</p>
           <div class="acc-card-price">$246.473</div>
@@ -1754,7 +1808,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="rb-canilla" data-name="Programador Canilla Rain Bird" data-price="146503" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp" alt="Prog canilla"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_662971-mla32580800750_102019-b-5d92d73603ba0d50e417538156998810-640-0.webp" alt="Prog canilla"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Programador de Canilla Rain Bird</p>
           <div class="acc-card-price">$146.503</div>
@@ -1763,7 +1817,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="sensor-lluvia" data-name="Sensor de Lluvia Rain Bird" data-price="84304" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp" alt="Sensor lluvia"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_813564-mla40492222610_012020-b-5c395f8e3b5a11636e17538239742254-640-0.webp" alt="Sensor lluvia"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Sensor de Lluvia Automático Rain Bird</p>
           <div class="acc-card-price">$84.304</div>
@@ -1788,7 +1842,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <div class="acc-grid">
 
       <div class="acc-card" data-id="pgv-100g" data-name="Válvula Hunter 1'' PGV-100G" data-price="49888" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp" alt="PGV-100G"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_923669-mla79036542403_092024-b-f4165b4cdecc0a275017538156543960-640-0.webp" alt="PGV-100G"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Solenoide Hunter 1'' PGV-100G</p>
           <div class="acc-card-price">$49.888</div>
@@ -1797,7 +1851,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="rb-100hv" data-name="Válvula Rain Bird 1'' 100-HV" data-price="47015" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp" alt="100-HV"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_997913-mla78583187366_082024-b-73efdc3379ba4c087a17538158082479-640-0.webp" alt="100-HV"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Solenoide Rain Bird 1'' 100-HV</p>
           <div class="acc-card-price">$47.015</div>
@@ -1806,7 +1860,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="pgv-101" data-name="Válvula Hunter PGV-101 c/Regulador 1''" data-price="50105" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg" alt="PGV-101"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/valvula-hunter-1.jpg" alt="PGV-101"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Válvula Hunter PGV-101 con Regulador 1''</p>
           <div class="acc-card-price">$50.105</div>
@@ -1840,7 +1894,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <div class="acc-grid">
 
       <div class="acc-card" data-id="caja-jumbo" data-name="Caja Rectangular Jumbo 50×64 H30" data-price="58900" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp" alt="Caja Jumbo"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_710120-mla87640706567_072025-b-b655e3055b7cb359e917538235806957-640-0.webp" alt="Caja Jumbo"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Rectangular Jumbo 50×64 H30</p>
           <div class="acc-card-price">$58.900</div>
@@ -1849,7 +1903,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="caja-std" data-name="Caja Rectangular Estándar 40×50 H30" data-price="41420" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp" alt="Caja Estándar"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_970008-mla87311417216_072025-b-f90398b1ec2fca913017538172009379-640-0.webp" alt="Caja Estándar"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Rectangular Estándar 40×50 H30</p>
           <div class="acc-card-price">$41.420</div>
@@ -1858,7 +1912,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="caja-large" data-name="Caja Cilíndrica Large Ø23 H25" data-price="15464" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp" alt="Caja Large"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/d_606601-mla51753327464_092022-b-34ff17e3a712c1143317538242710051-480-0.webp" alt="Caja Large"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Cilíndrica Large Ø23 H25</p>
           <div class="acc-card-price">$15.464</div>
@@ -1867,7 +1921,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="caja-mini" data-name="Caja Cilíndrica Mini Ø20 H23" data-price="6973" data-img="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp">
-        <div class="acc-card-img"><img src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp" alt="Caja Mini"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://acdn-us.mitiendanube.com/stores/006/515/086/products/d_920353-mla43970248163_112020-b-7004e53eac0bd861e717538167373175-480-0.webp" alt="Caja Mini"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Caja Cilíndrica Mini Ø20 H23</p>
           <div class="acc-card-price">$6.973</div>
@@ -1883,7 +1937,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <div class="acc-grid">
 
       <div class="acc-card" data-id="pgp-ultra" data-name="Rotor Hunter PGP Ultra" data-price="28083" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="PGP Ultra"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="PGP Ultra"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Rotor Hunter PGP Ultra</p>
           <div class="acc-card-price">$28.083</div>
@@ -1892,7 +1946,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="pgj" data-name="Rotor Hunter PGJ" data-price="26725" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="PGJ"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="PGJ"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Rotor Hunter PGJ</p>
           <div class="acc-card-price">$26.725</div>
@@ -1901,7 +1955,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="i25" data-name="Aspersor Hunter I-25-04 Plástico" data-price="92214" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter I-25-04"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter I-25-04"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Aspersor Hunter I-25-04 Plástico</p>
           <div class="acc-card-price">$92.214</div>
@@ -1910,7 +1964,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="rb-8005" data-name="Aspersor Rain Bird 8005 RH 1''" data-price="161153" data-img="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp">
-        <div class="acc-card-img"><img src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="Rain Bird 8005"></div>
+        <div class="acc-card-img"><img loading="lazy" src="http://acdn-us.mitiendanube.com/stores/006/515/086/products/1-9cdc4867c9039f7b1817736828044883-640-0.webp" alt="Rain Bird 8005"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Aspersor Rain Bird 8005 RH 1''</p>
           <div class="acc-card-price">$161.153</div>
@@ -1919,7 +1973,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-4a" data-name="Tobera Hunter PSU-04-4A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 4A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 4A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-4A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~1,2 m · Arco: 0°–360°</li></ul></div>
@@ -1929,7 +1983,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-6a" data-name="Tobera Hunter PSU-04-6A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 6A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 6A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-6A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~1,5 m · Arco: 0°–360°</li></ul></div>
@@ -1939,7 +1993,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-8a" data-name="Tobera Hunter PSU-04-8A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 8A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 8A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-8A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~2,0 m · Arco: 0°–360°</li></ul></div>
@@ -1949,7 +2003,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-10a" data-name="Tobera Hunter PSU-04-10A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 10A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 10A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-10A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~3,0 m · Arco: 0°–360°</li></ul></div>
@@ -1959,7 +2013,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-12a" data-name="Tobera Hunter PSU-04-12A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 12A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 12A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-12A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~3,5 m · Arco: 0°–360°</li></ul></div>
@@ -1969,7 +2023,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
       </div>
 
       <div class="acc-card" data-id="tobera-15a" data-name="Tobera Hunter PSU-04-15A" data-price="5342" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg">
-        <div class="acc-card-img"><img src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 15A"></div>
+        <div class="acc-card-img"><img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera 15A"></div>
         <div class="acc-card-body">
           <p class="acc-card-name">Tobera Hunter PSU-04-15A</p>
           <div class="acc-card-specs"><ul><li>Radio: ~4,0 m · Arco: 0°–360°</li></ul></div>
@@ -2067,9 +2121,59 @@ footer small{font-size:.7rem;letter-spacing:.08em}
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="footer-logo">Aqua<span>Plan</span></div>
-  <small>© 2025 AquaPlan · Sistemas de Riego Automático · GBA</small>
-  <small>@AQUAPLANBV ↗</small>
+  <div class="footer-top">
+
+    <!-- Marca -->
+    <div class="footer-brand">
+      <a href="#" class="footer-brand-logo">Aqua<span>Plan</span></a>
+      <p class="footer-brand-desc">Diseño e instalación de sistemas de riego automático en el Gran Buenos Aires. Cada obra, un plano.</p>
+    </div>
+
+    <!-- Servicios -->
+    <div>
+      <span class="footer-col-title">Servicios</span>
+      <ul class="footer-links">
+        <li><a href="#productos">Diseño hidráulico</a></li>
+        <li><a href="#productos">Riego por aspersión</a></li>
+        <li><a href="#productos">Riego por goteo</a></li>
+        <li><a href="#productos">Automatización</a></li>
+      </ul>
+    </div>
+
+    <!-- Accesos -->
+    <div>
+      <span class="footer-col-title">Accesos</span>
+      <ul class="footer-links">
+        <li><a href="#accesorios">Accesorios</a></li>
+        <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Redes -->
+    <div>
+      <span class="footer-col-title">Redes y contacto</span>
+      <div class="footer-social">
+        <a href="https://instagram.com/aquaplanbv" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          @AquaplanBV
+        </a>
+        <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="footer-social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          +54 9 11 3592-3006
+        </a>
+        <a href="https://wa.me/5491124661052" target="_blank" rel="noopener" class="footer-wa-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          +54 9 11 2466-1052
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AquaPlan · Sistemas de Riego Automático · Gran Buenos Aires</span>
+    <span>Diseño web por <a href="#">AquaPlan</a> · Todos los derechos reservados</span>
+  </div>
 </footer>
 
 <!-- ═══ SCRIPTS ═══ -->
