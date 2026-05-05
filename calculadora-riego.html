@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Riego — AquaPlan</title>
+  <meta name="description" content="Calculá el tiempo y frecuencia de riego para cada sector de tu jardín. Herramienta profesional gratuita de AquaPlan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dk:   #1A2B1E;
+      --sg:   #4A8C5C;
+      --sgl:  #6FAF7F;
+      --ce:   #A5C4D8;
+      --wh:   #FFFFFF;
+      --cr:   #F4F7F5;
+      --bd:   #E2EAE4;
+      --muted:#6B7E72;
+    }
+
+    body { font-family:'Inter',sans-serif; background:var(--cr); color:var(--dk); min-height:100vh; }
+
+    /* ── NAV ── */
+    .c-nav {
+      background:var(--dk);
+      padding:.9rem 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      z-index:100;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .c-nav-logo {
+      display:flex; align-items:center;
+      text-decoration:none;
+    }
+    .c-nav-logo svg { height:36px; width:auto; overflow:visible; }
+    .logo-aqua-c { fill:#ffffff; }
+    .logo-plan-c { fill:#A5C4D8; }
+    .c-nav-back {
+      color:rgba(255,255,255,.55);
+      font-size:.8rem;
+      text-decoration:none;
+      display:flex; align-items:center; gap:.4rem;
+      transition:color .2s;
+      font-weight:500;
+    }
+    .c-nav-back:hover { color:var(--sgl); }
+
+    /* ── HEADER ── */
+    .c-header {
+      background:var(--dk);
+      padding:4rem 2rem 3.5rem;
+      text-align:center;
+    }
+    .c-eyebrow {
+      font-size:.68rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--sgl);
+      margin-bottom:.9rem;
+      display:block;
+    }
+    .c-header h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.9rem,4.5vw,3rem);
+      color:var(--wh);
+      line-height:1.12;
+      margin-bottom:1rem;
+    }
+    .c-header h1 em { font-style:italic; color:inherit; }
+    .c-header p {
+      font-size:.88rem;
+      color:rgba(255,255,255,.45);
+      max-width:52ch;
+      margin:0 auto;
+      line-height:1.75;
+    }
+
+    /* ── MAIN ── */
+    .c-main {
+      max-width:860px;
+      margin:0 auto;
+      padding:2.5rem 1.5rem 6rem;
+    }
+
+    /* ── TOOLBAR ── */
+    .c-toolbar {
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      margin-bottom:1.5rem;
+      flex-wrap:wrap;
+    }
+    .c-toolbar .spacer { flex:1; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.7rem 1.4rem;
+      border-radius:100px;
+      font-size:.82rem;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      transition:all .18s;
+      font-family:'Inter',sans-serif;
+      white-space:nowrap;
+    }
+    .btn-primary { background:var(--sg); color:var(--wh); }
+    .btn-primary:hover { background:#3a7048; transform:translateY(-1px); }
+    .btn-primary:active { transform:translateY(0); }
+    .btn-ghost { background:transparent; color:var(--sg); border:1.5px solid var(--bd); }
+    .btn-ghost:hover { border-color:var(--sg); background:rgba(74,140,92,.06); }
+    .btn-sm { padding:.45rem .9rem; font-size:.75rem; }
+    .btn-danger { background:transparent; color:#c0392b; border:1.5px solid rgba(192,57,43,.2); }
+    .btn-danger:hover { background:rgba(192,57,43,.06); border-color:rgba(192,57,43,.4); }
+    .btn-calc {
+      background:var(--sg); color:var(--wh);
+      width:100%; justify-content:center;
+      padding:1rem 1.5rem; font-size:.95rem;
+      border-radius:14px; margin-top:1.4rem;
+    }
+    .btn-calc:hover { background:#3a7048; }
+    .btn-calc:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* ── ADD SECTOR BTN ── */
+    .add-btn {
+      width:100%;
+      padding:1.1rem;
+      border:2px dashed var(--bd);
+      border-radius:16px;
+      background:transparent;
+      color:var(--muted);
+      font-size:.86rem;
+      font-weight:500;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      transition:all .2s;
+      font-family:'Inter',sans-serif;
+      margin-bottom:2rem;
+    }
+    .add-btn:hover { border-color:var(--sg); color:var(--sg); background:rgba(74,140,92,.04); }
+
+    /* ── SECTOR CARD (form state) ── */
+    .sector-card {
+      background:var(--wh);
+      border:1.5px solid var(--bd);
+      border-radius:20px;
+      margin-bottom:1rem;
+      overflow:hidden;
+      transition:border-color .2s;
+    }
+    .sector-card.editing { border-color:var(--sg); }
+    .sector-card-head {
+      display:flex; align-items:center; gap:.9rem;
+      padding:1rem 1.4rem;
+      cursor:pointer;
+      user-select:none;
+    }
+    .sector-card-head:hover { background:rgba(0,0,0,.02); }
+    .sector-dot {
+      width:9px; height:9px; border-radius:50%;
+      background:var(--sg); flex-shrink:0;
+    }
+    .sector-card.collapsed .sector-dot { background:var(--bd); }
+    .sector-head-name { font-weight:600; font-size:.9rem; flex:1; }
+    .sector-head-meta { font-size:.72rem; color:var(--muted); }
+    .sector-head-actions { display:flex; gap:.4rem; }
+    .sector-chevron {
+      transition:transform .25s;
+      color:var(--muted);
+    }
+    .sector-card.collapsed .sector-chevron { transform:rotate(-90deg); }
+
+    .sector-form { padding:0 1.4rem 1.4rem; border-top:1px solid var(--bd); }
+    .sector-card.collapsed .sector-form { display:none; }
+
+    .form-row {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.9rem;
+      margin-top:.9rem;
+    }
+    .form-row.cols-3 { grid-template-columns:1fr 1fr 1fr; }
+    .form-row.full { grid-template-columns:1fr; }
+
+    .form-group { display:flex; flex-direction:column; gap:.35rem; }
+    .form-group label {
+      font-size:.68rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+      color:var(--muted);
+    }
+    .form-group input,
+    .form-group select {
+      border:1.5px solid var(--bd);
+      border-radius:10px;
+      padding:.72rem .95rem;
+      font-size:.88rem;
+      font-family:'Inter',sans-serif;
+      color:var(--dk);
+      background:var(--cr);
+      transition:border-color .18s, background .18s;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    .form-group select {
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%236B7E72' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right .9rem center;
+      padding-right:2.4rem;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline:none;
+      border-color:var(--sg);
+      background:var(--wh);
+    }
+    .form-group input.err { border-color:#d93025; }
+    .field-err { font-size:.7rem; color:#d93025; display:none; margin-top:.15rem; }
+    .field-err.show { display:block; }
+
+    /* ── HINT ── */
+    .hint-bar {
+      background:rgba(165,196,216,.12);
+      border:1px solid rgba(165,196,216,.3);
+      border-radius:10px;
+      padding:.65rem 1rem;
+      font-size:.75rem;
+      color:var(--muted);
+      display:flex; align-items:flex-start; gap:.5rem;
+      margin-top:.9rem;
+    }
+    .hint-bar svg { flex-shrink:0; margin-top:.05rem; }
+
+    /* ── GLOBAL CALC ── */
+    .calc-bar {
+      background:var(--dk);
+      border-radius:16px;
+      padding:1.25rem 1.5rem;
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:2.5rem;
+    }
+    .calc-bar p { color:rgba(255,255,255,.6); font-size:.82rem; flex:1; line-height:1.5; }
+    .calc-bar .btn-primary { background:var(--sgl); color:var(--dk); flex-shrink:0; }
+    .calc-bar .btn-primary:hover { background:#8fcf9f; }
+
+    /* ── RESULTS ── */
+    .results-wrap { margin-top:2rem; }
+    .results-title {
+      font-family:'Playfair Display',serif;
+      font-size:1.3rem;
+      margin-bottom:1.2rem;
+      display:flex; align-items:center; gap:.75rem;
+    }
+    .results-title::after {
+      content:'';
+      flex:1;
+      height:1px;
+      background:var(--bd);
+    }
+
+    .result-card {
+      background:var(--wh);
+      border:1px solid var(--bd);
+      border-radius:20px;
+      overflow:hidden;
+      margin-bottom:1rem;
+    }
+    .result-card-head {
+      background:var(--dk);
+      padding:1rem 1.4rem;
+      display:flex; align-items:center; gap:.75rem;
+    }
+    .result-card-head h3 {
+      font-family:'Playfair Display',serif;
+      font-size:1rem;
+      color:var(--wh);
+      flex:1;
+    }
+    .r-badge {
+      font-size:.65rem;
+      font-weight:700;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      background:rgba(111,175,127,.18);
+      color:var(--sgl);
+      padding:.22rem .65rem;
+      border-radius:100px;
+    }
+    .r-time-chip {
+      font-size:.78rem;
+      font-weight:700;
+      background:rgba(165,196,216,.18);
+      color:var(--ce);
+      padding:.22rem .7rem;
+      border-radius:100px;
+      letter-spacing:.03em;
+    }
+
+    .result-rows { padding:.2rem 0; }
+    .result-row {
+      display:grid;
+      grid-template-columns:110px 1fr 64px;
+      align-items:center;
+      padding:.8rem 1.4rem;
+      border-bottom:1px solid var(--bd);
+      gap:.75rem;
+    }
+    .result-row:last-child { border-bottom:none; }
+
+    .r-season {
+      display:flex; align-items:center; gap:.5rem;
+      font-size:.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .r-season-dot {
+      width:7px; height:7px;
+      border-radius:50%;
+      flex-shrink:0;
+    }
+    .dot-verano   { background:#e67e22; }
+    .dot-otono    { background:#d4812c; }
+    .dot-invierno { background:#3498db; }
+    .dot-primavera{ background:var(--sg); }
+
+    .r-desc { font-size:.86rem; color:var(--dk); }
+    .r-desc strong { color:var(--sg); font-weight:600; }
+
+    .r-pct {
+      font-size:.76rem;
+      font-weight:700;
+      padding:.22rem .5rem;
+      border-radius:100px;
+      text-align:center;
+    }
+    .pct-summer { background:rgba(230,126,34,.12); color:#c0662a; }
+    .pct-autumn  { background:rgba(212,129,44,.1);  color:#a06020; }
+    .pct-winter  { background:rgba(52,152,219,.12); color:#2980b9; }
+    .pct-spring  { background:rgba(74,140,92,.12);  color:var(--sg); }
+
+    /* ── EMPTY ── */
+    .empty {
+      text-align:center;
+      padding:3.5rem 1rem;
+      color:var(--muted);
+    }
+    .empty svg { opacity:.25; margin-bottom:1rem; display:block; margin-left:auto; margin-right:auto; }
+    .empty p { font-size:.85rem; line-height:1.7; }
+
+    /* ── COPY BUTTON ── */
+    .copy-wrap { padding:.75rem 1.4rem; background:var(--cr); display:flex; gap:.6rem; align-items:center; border-top:1px solid var(--bd); }
+    .copy-wrap p { font-size:.72rem; color:var(--muted); flex:1; }
+    .copy-btn { background:transparent; border:1.5px solid var(--bd); color:var(--muted); border-radius:100px; padding:.35rem .85rem; font-size:.72rem; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; transition:all .18s; }
+    .copy-btn:hover { border-color:var(--sg); color:var(--sg); }
+    .copy-btn.copied { border-color:var(--sg); color:var(--sg); }
+
+    /* ── FOOTER ── */
+    .c-footer {
+      text-align:center;
+      padding:2rem;
+      font-size:.72rem;
+      color:var(--muted);
+      border-top:1px solid var(--bd);
+      margin-top:2rem;
+    }
+    .c-footer a { color:var(--sg); text-decoration:none; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:640px) {
+      .c-main { padding:1.5rem 1rem 5rem; }
+      .form-row { grid-template-columns:1fr; }
+      .form-row.cols-3 { grid-template-columns:1fr; }
+      .result-row { grid-template-columns:90px 1fr 54px; padding:.7rem 1rem; }
+      .result-card-head { padding:.85rem 1rem; }
+      .calc-bar { flex-direction:column; text-align:center; }
+      .calc-bar .btn-primary { width:100%; justify-content:center; }
+      .c-nav { padding:.8rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="c-nav">
+  <a href="index.html" class="c-nav-logo" aria-label="AquaPlan inicio">
+    <svg viewBox="0 0 130 32" xmlns="http://www.w3.org/2000/svg">
+      <text y="25" font-family="'Playfair Display',Georgia,serif" font-size="24" font-weight="500" letter-spacing="-0.2">
+        <tspan class="logo-aqua-c">Aqua</tspan><tspan class="logo-plan-c">Plan</tspan>
+      </text>
+    </svg>
+  </a>
+  <a href="index.html" class="c-nav-back">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver al sitio
+  </a>
+</nav>
+
+<!-- ── HEADER ── -->
+<header class="c-header">
+  <span class="c-eyebrow">Herramienta profesional · AquaPlan</span>
+  <h1>Calculadora de <em>riego</em></h1>
+  <p>Ingresá los datos de cada sector y obtenés el tiempo de riego y la frecuencia por estación, calibrados para Bella Vista / AMBA.</p>
+</header>
+
+<!-- ── MAIN ── -->
+<main class="c-main">
+
+  <!-- Sectores -->
+  <div class="c-toolbar">
+    <span style="font-size:.8rem;color:var(--muted);font-weight:500">Sectores del proyecto</span>
+    <span class="spacer"></span>
+  </div>
+
+  <div id="sectors-list"></div>
+
+  <button class="add-btn" onclick="addSector()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    Agregar sector
+  </button>
+
+  <!-- Calcular -->
+  <div class="calc-bar" id="calc-bar" style="display:none">
+    <p>Revisá los datos de cada sector y calculá el plan de riego completo.</p>
+    <button class="btn btn-primary" onclick="calcularTodo()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Calcular
+    </button>
+  </div>
+
+  <!-- Resultados -->
+  <div class="results-wrap" id="results-wrap" style="display:none">
+    <div class="results-title">Resultados</div>
+    <div id="results-list"></div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="c-footer">
+  Herramienta calibrada para Bella Vista / AMBA · <a href="index.html">AquaPlan</a> · Riego automático GBA
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   CONSTANTES — fácil de editar
+═══════════════════════════════════════════════════ */
+const MM_TABLE = {
+  cesped:    { verano:35, primavera:25, otono:15, invierno:8 },
+  plantas:   { verano:20, primavera:15, otono:10, invierno:5 },
+  baja:      { verano:12, primavera:8,  otono:5,  invierno:2 },
+  arboles:   { verano:18, primavera:12, otono:8,  invierno:4 }
+};
+
+const FREQ_TABLE = {
+  cesped:    { verano:2, primavera:3, otono:4,  invierno:10 },
+  plantas:   { verano:3, primavera:4, otono:6,  invierno:14 },
+  baja:      { verano:5, primavera:7, otono:10, invierno:21 },
+  arboles:   { verano:6, primavera:9, otono:14, invierno:25 }
+};
+
+const SOIL_FACTORS = {
+  arenoso:  { mm_factor:1.10, freq_delta:-1 },
+  franco:   { mm_factor:1.00, freq_delta:0  },
+  arcilloso:{ mm_factor:0.90, freq_delta:+1 }
+};
+
+const EFICIENCIA = {
+  aspersor: 0.80,
+  goteo:    1.00
+};
+
+const ESTACIONES = ['verano','otono','invierno','primavera'];
+const SEASON_LABELS = {
+  verano:'Verano', otono:'Otoño', invierno:'Invierno', primavera:'Primavera'
+};
+const SEASON_DOT = {
+  verano:'dot-verano', otono:'dot-otono', invierno:'dot-invierno', primavera:'dot-primavera'
+};
+const SEASON_PCT_CLS = {
+  verano:'pct-summer', otono:'pct-autumn', invierno:'pct-winter', primavera:'pct-spring'
+};
+
+/* ═══════════════════════════════════════════════════
+   ESTADO
+═══════════════════════════════════════════════════ */
+let sectors = [];
+let nextId  = 1;
+
+/* ═══════════════════════════════════════════════════
+   SECTOR MANAGEMENT
+═══════════════════════════════════════════════════ */
+function addSector() {
+  const id = nextId++;
+  sectors.push({ id, collapsed:false });
+  renderSectors();
+  // scroll to new card
+  setTimeout(() => {
+    const el = document.getElementById('sc-' + id);
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }, 50);
+}
+
+function removeSector(id) {
+  sectors = sectors.filter(s => s.id !== id);
+  renderSectors();
+  updateCalcBar();
+  document.getElementById('results-wrap').style.display = 'none';
+}
+
+function toggleCollapse(id) {
+  const s = sectors.find(s => s.id === id);
+  if (s) { s.collapsed = !s.collapsed; renderSectors(); }
+}
+
+function renderSectors() {
+  const list = document.getElementById('sectors-list');
+  if (!sectors.length) {
+    list.innerHTML = `<div class="empty">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/>
+        <path d="M12 8v4M12 16h.01"/>
+      </svg>
+      <p>Todavía no hay sectores.<br>Agregá uno para empezar.</p>
+    </div>`;
+    updateCalcBar();
+    return;
+  }
+
+  list.innerHTML = sectors.map(s => renderSectorCard(s)).join('');
+  updateCalcBar();
+}
+
+function renderSectorCard(s) {
+  const col = s.collapsed ? 'collapsed' : 'editing';
+  const nameVal    = s.nombre    || '';
+  const precipVal  = s.precip    || '';
+  const supVal     = s.superficie || 'cesped';
+  const riegoVal   = s.riego     || 'aspersor';
+  const sueloVal   = s.suelo     || 'franco';
+  const metaText   = nameVal ? `${supVal} · ${riegoVal}` : 'Sin configurar';
+
+  return `
+<div class="sector-card ${col}" id="sc-${s.id}">
+  <div class="sector-card-head" onclick="toggleCollapse(${s.id})">
+    <span class="sector-dot"></span>
+    <span class="sector-head-name">${nameVal || 'Sector sin nombre'}</span>
+    <span class="sector-head-meta">${metaText}</span>
+    <div class="sector-head-actions" onclick="event.stopPropagation()">
+      <button class="btn btn-danger btn-sm" onclick="removeSector(${s.id})">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+        Eliminar
+      </button>
+    </div>
+    <svg class="sector-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="sector-form">
+    <div class="form-row full">
+      <div class="form-group">
+        <label>Nombre del sector</label>
+        <input type="text" id="f-nombre-${s.id}" value="${nameVal}" placeholder="Ej: Jardín frontal, Cantero lateral..." oninput="syncField(${s.id},'nombre',this.value)">
+        <span class="field-err" id="err-nombre-${s.id}">Ingresá un nombre.</span>
+      </div>
+    </div>
+    <div class="form-row cols-3">
+      <div class="form-group">
+        <label>Precipitación (mm/h)</label>
+        <input type="number" id="f-precip-${s.id}" value="${precipVal}" placeholder="Ej: 15" min="0.1" step="0.1" oninput="syncField(${s.id},'precip',this.value)">
+        <span class="field-err" id="err-precip-${s.id}">Debe ser mayor a 0.</span>
+      </div>
+      <div class="form-group">
+        <label>Tipo de superficie</label>
+        <select id="f-sup-${s.id}" onchange="syncField(${s.id},'superficie',this.value)">
+          <option value="cesped"  ${supVal==='cesped'   ?'selected':''}>Césped</option>
+          <option value="plantas" ${supVal==='plantas'  ?'selected':''}>Plantas / canteros</option>
+          <option value="baja"    ${supVal==='baja'     ?'selected':''}>Baja demanda (poca agua)</option>
+          <option value="arboles" ${supVal==='arboles'  ?'selected':''}>Árboles</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tipo de suelo</label>
+        <select id="f-suelo-${s.id}" onchange="syncField(${s.id},'suelo',this.value)">
+          <option value="franco"   ${sueloVal==='franco'   ?'selected':''}>Franco</option>
+          <option value="arenoso"  ${sueloVal==='arenoso'  ?'selected':''}>Arenoso</option>
+          <option value="arcilloso"${sueloVal==='arcilloso'?'selected':''}>Arcilloso</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row full">
+      <div class="form-group">
+        <label>Tipo de riego</label>
+        <select id="f-riego-${s.id}" onchange="syncField(${s.id},'riego',this.value)">
+          <option value="aspersor" ${riegoVal==='aspersor'?'selected':''}>Aspersor / Tobera (eficiencia 80%)</option>
+          <option value="goteo"    ${riegoVal==='goteo'   ?'selected':''}>Goteo (eficiencia 100%)</option>
+        </select>
+      </div>
+    </div>
+    <div class="hint-bar">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      La precipitación (mm/h) es el caudal real que emite el sistema dividido la superficie cubierta. Para aspersores Hunter PSU suele estar entre 10–20 mm/h.
+    </div>
+  </div>
+</div>`;
+}
+
+function syncField(id, field, value) {
+  const s = sectors.find(s => s.id === id);
+  if (s) {
+    s[field] = value;
+    // update head display without full re-render
+    const head = document.querySelector(`#sc-${id} .sector-head-name`);
+    const meta = document.querySelector(`#sc-${id} .sector-head-meta`);
+    if (head && field === 'nombre') head.textContent = value || 'Sector sin nombre';
+    if (meta && (field === 'superficie' || field === 'riego')) {
+      meta.textContent = `${s.superficie||'cesped'} · ${s.riego||'aspersor'}`;
+    }
+  }
+}
+
+function updateCalcBar() {
+  const bar = document.getElementById('calc-bar');
+  bar.style.display = sectors.length > 0 ? 'flex' : 'none';
+}
+
+/* ═══════════════════════════════════════════════════
+   VALIDACIÓN
+═══════════════════════════════════════════════════ */
+function validateSectors() {
+  let ok = true;
+  sectors.forEach(s => {
+    const nombre  = document.getElementById(`f-nombre-${s.id}`);
+    const precip  = document.getElementById(`f-precip-${s.id}`);
+    const errN    = document.getElementById(`err-nombre-${s.id}`);
+    const errP    = document.getElementById(`err-precip-${s.id}`);
+
+    if (!s.nombre || !s.nombre.trim()) {
+      nombre.classList.add('err'); errN.classList.add('show');
+      // expand card
+      const sec = sectors.find(x => x.id === s.id);
+      if (sec) sec.collapsed = false;
+      ok = false;
+    } else { nombre.classList.remove('err'); errN.classList.remove('show'); }
+
+    const p = parseFloat(s.precip);
+    if (!p || p <= 0) {
+      precip.classList.add('err'); errP.classList.add('show');
+      const sec = sectors.find(x => x.id === s.id);
+      if (sec) sec.collapsed = false;
+      ok = false;
+    } else { precip.classList.remove('err'); errP.classList.remove('show'); }
+  });
+
+  if (!ok) renderSectors(); // re-render to expand invalid cards
+  return ok;
+}
+
+/* ═══════════════════════════════════════════════════
+   LÓGICA DE CÁLCULO
+═══════════════════════════════════════════════════ */
+function clamp(val, min, max) {
+  return Math.max(min, max !== undefined ? Math.min(max, val) : val);
+}
+
+function roundToNearest5(n) {
+  return Math.round(n / 5) * 5;
+}
+
+function minToHHMM(min) {
+  const totalMin = Math.round(min);
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  return h > 0
+    ? `${h}:${m.toString().padStart(2,'0')} hs`
+    : `${m.toString().padStart(2,'0')} min`;
+}
+
+function calcularSector(s) {
+  const precip    = parseFloat(s.precip);
+  const sup       = s.superficie || 'cesped';
+  const rigoType  = s.riego      || 'aspersor';
+  const sueloType = s.suelo      || 'franco';
+
+  const efic      = EFICIENCIA[rigoType];
+  const { mm_factor, freq_delta } = SOIL_FACTORS[sueloType];
+
+  // mm/semana ajustado por estación
+  const mmAj = {};
+  ESTACIONES.forEach(est => {
+    const base   = MM_TABLE[sup][est];
+    mmAj[est]    = (base * mm_factor) / efic;
+  });
+
+  // Tiempo fijo calculado desde Primavera
+  const intervaloPrim  = clamp(FREQ_TABLE[sup]['primavera'] + freq_delta, 1);
+  const riegosSemPrim  = 7 / intervaloPrim;
+  const minSemPrim     = (mmAj['primavera'] / precip) * 60;
+  const minEventoFijo  = minSemPrim / riegosSemPrim;
+
+  // Para cada estación: intervalo + porcentaje
+  const result = {};
+  ESTACIONES.forEach(est => {
+    const intervalo = clamp(FREQ_TABLE[sup][est] + freq_delta, 1);
+    let pct;
+    if (est === 'primavera') {
+      pct = 100;
+    } else {
+      const raw = 100 * (mmAj[est] / mmAj['primavera']) * (intervalo / intervaloPrim);
+      pct = clamp(roundToNearest5(raw), 0, 200);
+    }
+    result[est] = { intervalo, pct };
+  });
+
+  return { minEventoFijo, result };
+}
+
+/* ═══════════════════════════════════════════════════
+   RENDER RESULTADOS
+═══════════════════════════════════════════════════ */
+function calcularTodo() {
+  if (!validateSectors()) return;
+
+  const wrap = document.getElementById('results-wrap');
+  const list = document.getElementById('results-list');
+
+  list.innerHTML = sectors.map(s => {
+    const { minEventoFijo, result } = calcularSector(s);
+    const hhmm = minToHHMM(minEventoFijo);
+    const nombre = (s.nombre || 'Sector').trim();
+
+    const rows = ESTACIONES.map(est => {
+      const { intervalo, pct } = result[est];
+      const diasText = intervalo === 1 ? 'cada 1 día' : `cada ${intervalo} días`;
+      return `
+<div class="result-row">
+  <span class="r-season">
+    <span class="r-season-dot ${SEASON_DOT[est]}"></span>
+    ${SEASON_LABELS[est]}
+  </span>
+  <span class="r-desc">
+    <strong>${hhmm}</strong> ${diasText}, ajuste estacional <strong>${pct}%</strong>
+  </span>
+  <span class="r-pct ${SEASON_PCT_CLS[est]}">${pct}%</span>
+</div>`;
+    }).join('');
+
+    // texto para copiar
+    const copyText = `${nombre}\n` + ESTACIONES.map(est => {
+      const { intervalo, pct } = result[est];
+      return `${SEASON_LABELS[est]}: ${hhmm} ${intervalo===1?'cada 1 día':'cada '+intervalo+' días'}, ajuste estacional ${pct}%`;
+    }).join('\n');
+
+    return `
+<div class="result-card" id="res-${s.id}">
+  <div class="result-card-head">
+    <h3>${nombre}</h3>
+    <span class="r-time-chip">${hhmm} por evento</span>
+    <span class="r-badge">${s.superficie==='cesped'?'Césped':s.superficie==='plantas'?'Plantas':s.superficie==='baja'?'Baja demanda':'Árboles'}</span>
+  </div>
+  <div class="result-rows">${rows}</div>
+  <div class="copy-wrap">
+    <p>Tiempo fijo por evento: <strong>${hhmm}</strong> · Presión: ${parseFloat(s.precip)} mm/h · ${s.riego==='goteo'?'Goteo':'Aspersor'} · Suelo ${s.suelo}</p>
+    <button class="copy-btn" onclick="copiarResultado(this, \`${copyText.replace(/`/g,'\\`')}\`)">Copiar</button>
+  </div>
+</div>`;
+  }).join('');
+
+  wrap.style.display = 'block';
+  setTimeout(() => wrap.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
+}
+
+function copiarResultado(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '¡Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+/* ── INIT ── */
+renderSectors();
+</script>
+</body>
+</html>
