@@ -162,6 +162,18 @@
     .copy-btn:hover { border-color:var(--sg); color:var(--sg); }
     .copy-btn.copied { border-color:var(--sg); color:var(--sg); }
 
+    .schedule-tip {
+      background:rgba(74,140,92,.06); border:1px solid rgba(74,140,92,.2);
+      border-radius:14px; padding:1.4rem 1.5rem; margin-top:1.5rem;
+      font-size:.88rem; line-height:1.72; color:var(--dk);
+    }
+    .schedule-tip h4 {
+      font-family:'Playfair Display',serif; font-size:.95rem;
+      color:var(--sg); margin-bottom:.9rem; font-weight:600;
+    }
+    .schedule-tip p { margin:0 0 .7rem 0; }
+    .schedule-tip p:last-child { margin-bottom:0; }
+
     /* ── WA CTA ── */
     .wa-cta {
       background:var(--dk); padding:3rem 1.5rem;
@@ -332,7 +344,7 @@ const SUE_LABEL  = { franco:'Franco', arenoso:'Arenoso', arcilloso:'Arcilloso' }
    HELPERS
 ═══════════════════════════════════════════ */
 function clampFreq(v)  { return Math.max(1, Math.min(7, v)); }
-function clampPct(v)   { return Math.max(50, Math.min(150, v)); }
+function clampPct(v)   { return Math.max(10, Math.min(150, v)); }
 function roundTo10(v)  { return Math.round(v / 10) * 10; }
 
 function minToHHMM(min) {
@@ -443,6 +455,13 @@ function renderResults({ sup, suelo, riego, precip, minFijo, result }) {
         <p>Tiempo fijo por evento: <strong>${hhmm}</strong> — igual en todas las estaciones.</p>
         <button class="copy-btn" onclick="copiar(this, \`${copyText.replace(/`/g,'\\`')}\`)">Copiar</button>
       </div>
+    </div>
+
+    <div class="schedule-tip">
+      <h4>Horario recomendado de riego</h4>
+      <p>Lo ideal es regar entre la <strong>madrugada y la mañana temprana (aprox. 04:00 a 09:00)</strong>, para reducir evaporación y viento.</p>
+      <p>Evitar <strong>mediodía/tarde</strong> (más evaporación) y evitar <strong>noche muy tarde</strong> si el césped queda mojado muchas horas.</p>
+      <p>En <strong>verano</strong>, conviene arrancar más temprano (ej. 04:00–07:00). En <strong>invierno</strong>, se puede correr un poco más tarde (ej. 06:00–09:00).</p>
     </div>`;
 
   document.getElementById('results-wrap').style.display = 'block';
