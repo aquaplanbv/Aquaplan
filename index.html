@@ -19,10 +19,10 @@
   --cr:#F4F7F5;
   --bd:#E2EAE4;
   --txt:#1A2B1E;
-  --muted:#6B7E72;
+  --muted:#4A5A52;
 }
 html{scroll-behavior:auto}
-body{font-family:'Inter',sans-serif;background:var(--wh);color:var(--txt);overflow-x:hidden;cursor:none}
+body{font-family:'Inter',sans-serif;font-size:16px;background:var(--wh);color:var(--txt);overflow-x:hidden;cursor:none}
 a{text-decoration:none;color:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover}
 
@@ -339,7 +339,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 }
 .contact-left h2 em{font-style:italic;color:inherit}
 .contact-left p{
-  font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:38ch;
+  font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:38ch;
 }
 .btn-wa-group{display:flex;flex-direction:column;gap:.75rem;align-items:flex-start;margin-bottom:1.25rem}
 .btn-wa{
@@ -365,7 +365,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
   color:var(--sg);margin-bottom:.4rem;
 }
 .cinfo-val{font-size:1.08rem;font-weight:600;color:var(--dk);margin-bottom:.2rem}
-.cinfo-sub{font-size:.8rem;color:var(--muted)}
+.cinfo-sub{font-size:.875rem;color:var(--muted)}
 
 /* ─── FOOTER ─── */
 footer{
@@ -448,7 +448,7 @@ footer small{font-size:.7rem;letter-spacing:.08em}
 .dl-hero-text h2 em{color:inherit;font-style:italic}
 
 /* Text blocks */
-.dl-lead{font-size:1.05rem;color:var(--dk);line-height:1.8;max-width:68ch;margin-bottom:3rem}
+.dl-lead{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:68ch;margin-bottom:3rem}
 .dl-section{margin-bottom:3.5rem}
 .dl-section-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:600;color:var(--dk);letter-spacing:-.015em;margin-bottom:.5rem}
 .dl-section-title em{color:inherit;font-style:italic}
@@ -618,6 +618,34 @@ footer small{font-size:.7rem;letter-spacing:.08em}
 @media(max-width:1024px){.acc-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:768px){.acc-grid{grid-template-columns:repeat(2,1fr)}.acc-panel{padding:0 1.5rem}}
 @media(max-width:480px){.acc-grid{grid-template-columns:1fr 1fr}}
+
+/* ─── SKELETON SCREEN ─── */
+@keyframes shimmer{
+  0%{background-position:-600px 0}
+  100%{background-position:600px 0}
+}
+.skeleton-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;padding:0 3.5rem 0}
+.skeleton-card{background:var(--wh);border-radius:12px;overflow:hidden;border:1px solid var(--bd)}
+.skeleton-img{height:180px;background:linear-gradient(90deg,#e8ede9 25%,#d4ddd6 50%,#e8ede9 75%);background-size:600px 100%;animation:shimmer 1.4s infinite linear}
+.skeleton-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.65rem}
+.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#e8ede9 25%,#d4ddd6 50%,#e8ede9 75%);background-size:600px 100%;animation:shimmer 1.4s infinite linear}
+.skeleton-line--title{width:75%;height:14px}
+.skeleton-line--sub{width:50%}
+.skeleton-line--price{width:35%;height:18px;margin-top:.3rem}
+.skeleton-line--btn{width:100%;height:32px;border-radius:6px;margin-top:.5rem}
+@media(max-width:1024px){.skeleton-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.skeleton-grid{grid-template-columns:repeat(2,1fr);padding:0 1.5rem}}
+@media(max-width:480px){.skeleton-grid{grid-template-columns:1fr 1fr}}
+
+/* ─── EMPTY STATE ─── */
+.acc-empty{
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:4rem 2rem;text-align:center;
+}
+.acc-empty.show{display:flex}
+.acc-empty-emoji{font-size:3rem;line-height:1;margin-bottom:1rem;filter:grayscale(.2)}
+.acc-empty-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--dk);margin-bottom:.5rem}
+.acc-empty-sub{font-size:.9rem;color:var(--muted);max-width:30ch;line-height:1.6}
 
 /* ─── SPECS en card ─── */
 .acc-card-specs{margin:.4rem 0 .3rem;padding:.5rem .6rem;background:var(--cr);border-radius:6px}
@@ -1645,6 +1673,20 @@ footer small{font-size:.7rem;letter-spacing:.08em}
     <p class="acc-sub">Todos los componentes para tu sistema de riego, con precio de venta al público.</p>
   </div>
 
+  <!-- Skeleton (visible briefly on first paint) -->
+  <div id="acc-skeleton" class="skeleton-grid" aria-hidden="true">
+    <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--sub"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+    <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--sub"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+    <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--sub"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+    <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--sub"></div><div class="skeleton-line skeleton-line--price"></div><div class="skeleton-line skeleton-line--btn"></div></div></div>
+  </div>
+  <!-- Empty state -->
+  <div class="acc-empty" id="acc-empty" role="status" aria-live="polite">
+    <span class="acc-empty-emoji">🌿</span>
+    <p class="acc-empty-title">¡Ups! No encontramos productos</p>
+    <p class="acc-empty-sub">Esta categoría no tiene productos disponibles por el momento.</p>
+  </div>
+
   <div class="acc-tabs">
     <button class="acc-tab active" onclick="switchAccTab('controladores',this)">Controladores y Sensores</button>
     <button class="acc-tab" onclick="switchAccTab('valvulas',this)">Válvulas</button>
@@ -2050,6 +2092,12 @@ document.addEventListener('mousemove', e => {
 });
 // cursor siempre verde pequeño — sin cambios en hover
 
+// ── Hide skeleton after initial load ──
+window.addEventListener('load', () => {
+  const sk = document.getElementById('acc-skeleton');
+  if (sk) { sk.style.transition = 'opacity .3s'; sk.style.opacity = '0'; setTimeout(() => { sk.style.display = 'none'; }, 320); }
+});
+
 // ── Nav solid on scroll ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -2166,12 +2214,24 @@ document.querySelectorAll('.detail-overlay').forEach(ov => {
   ov.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
 });
 
-// Goteo tabs
+// Accesorios tabs
 function switchAccTab(tab, btn) {
+  // Show skeleton briefly
+  const skeleton = document.getElementById('acc-skeleton');
+  const empty    = document.getElementById('acc-empty');
+  skeleton.style.display = 'grid';
   document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.acc-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('apanel-' + tab).classList.add('active');
   btn.classList.add('active');
+
+  setTimeout(() => {
+    skeleton.style.display = 'none';
+    const panel = document.getElementById('apanel-' + tab);
+    panel.classList.add('active');
+    // Show empty state if panel has no cards
+    const hasCards = panel.querySelectorAll('.acc-card').length > 0;
+    empty.classList.toggle('show', !hasCards);
+  }, 480);
 }
 function switchGoteoTab(tab, btn) {
   document.querySelectorAll('#overlay-goteo .gpanel').forEach(p => p.classList.remove('active'));
