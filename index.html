@@ -974,6 +974,59 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
 .auto-wifi-badge svg{width:12px;height:12px}
 .auto-brand-desc{font-size:.82rem;color:var(--muted);line-height:1.72}
 @media(max-width:768px){.auto-brand-grid{grid-template-columns:1fr}}
+
+/* ─── CALCULADORA ─── */
+.form-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;padding:2rem;margin-bottom:1.75rem;max-width:680px;margin-left:auto;margin-right:auto}
+.form-card-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dk);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--bd)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-full{grid-column:1/-1}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.form-group input,.form-group select{border:1.5px solid var(--bd);border-radius:10px;padding:.75rem 1rem;font-size:.95rem;font-family:'Inter',sans-serif;color:var(--dk);background:var(--cr);transition:border-color .18s,background .18s;-webkit-appearance:none;appearance:none}
+.form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%234A5A52' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.4rem}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--sg);background:var(--wh)}
+.form-group input.err{border-color:#d93025}
+.field-err{font-size:.7rem;color:#d93025;display:none;margin-top:.15rem}
+.field-err.show{display:block}
+.hint-bar{background:rgba(165,196,216,.1);border:1px solid rgba(165,196,216,.25);border-radius:10px;padding:.65rem 1rem;font-size:.78rem;color:var(--muted);display:flex;align-items:flex-start;gap:.5rem;margin-top:1rem}
+.hint-bar svg{flex-shrink:0;margin-top:.1rem}
+.btn-calc{width:100%;padding:1rem 1.5rem;font-size:.95rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--sg);color:var(--wh);border:none;border-radius:12px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.5rem}
+.btn-calc:hover{background:#3a7048;transform:translateY(-1px)}
+.btn-calc:active{transform:translateY(0)}
+.results-card{background:var(--wh);border:1px solid var(--bd);border-radius:20px;overflow:hidden;animation:fadeUp .4s cubic-bezier(.22,1,.36,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.results-head{background:var(--dk);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.results-head-info{flex:1}
+.results-head h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--wh);margin-bottom:.2rem}
+.results-head-meta{font-size:.72rem;color:rgba(255,255,255,.4)}
+.results-time-chip{font-size:.8rem;font-weight:700;background:rgba(111,175,127,.2);color:var(--sgl);padding:.28rem .8rem;border-radius:100px;letter-spacing:.03em;white-space:nowrap}
+.result-rows{padding:.25rem 0}
+.result-row{display:grid;grid-template-columns:100px 1fr;align-items:center;padding:.9rem 1.5rem;border-bottom:1px solid var(--bd);gap:1rem}
+.result-row:last-child{border-bottom:none}
+.r-season{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.r-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-verano{background:#e67e22}
+.dot-otono{background:#d4812c}
+.dot-invierno{background:#3498db}
+.dot-primavera{background:var(--sg)}
+.r-desc{font-size:.9rem;color:var(--dk)}
+.r-desc strong{color:var(--sg);font-weight:600}
+.results-copy{padding:.75rem 1.5rem;background:var(--cr);display:flex;gap:.75rem;align-items:center;border-top:1px solid var(--bd)}
+.results-copy p{font-size:.73rem;color:var(--muted);flex:1}
+.copy-btn{background:transparent;border:1.5px solid var(--bd);color:var(--muted);border-radius:100px;padding:.35rem .9rem;font-size:.72rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s}
+.copy-btn:hover{border-color:var(--sg);color:var(--sg)}
+.copy-btn.copied{border-color:var(--sg);color:var(--sg)}
+.schedule-tip{background:rgba(74,140,92,.06);border:1px solid rgba(74,140,92,.2);border-radius:14px;padding:1.4rem 1.5rem;margin-top:1.5rem;font-size:.88rem;line-height:1.72;color:var(--dk);max-width:680px;margin-left:auto;margin-right:auto}
+.schedule-tip h4{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--sg);margin-bottom:.9rem;font-weight:600}
+.schedule-tip p{margin:0 0 .7rem 0}
+.schedule-tip p:last-child{margin-bottom:0}
+@media(max-width:560px){
+  .form-grid{grid-template-columns:1fr}
+  .form-card{padding:1.5rem}
+  .result-row{grid-template-columns:85px 1fr;padding:.8rem 1rem}
+  .results-head{padding:.9rem 1rem}
+  .results-copy{padding:.65rem 1rem}
+}
 </style>
 </head>
 <body>
@@ -1792,60 +1845,13 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
   </div>
 </div>
 
-<!-- ═══ HERRAMIENTAS ═══ -->
-<section style="background:var(--wh);padding:4rem 3rem">
-  <div class="prod-intro reveal">
-    <p class="section-eyebrow">Herramientas profesionales</p>
-    <h2>Calcula y compra <em>componentes.</em></h2>
-  </div>
-
-  <div class="prod-row" style="grid-template-columns:repeat(2,1fr)">
-
-    <!-- CALCULADORA -->
-    <div class="prod-item reveal" onclick="openOverlay('calculadora')" style="cursor:pointer;padding:2rem">
-      <div class="prod-circle-wrap">
-        <div class="prod-circle-ring"></div>
-        <div class="prod-circle" style="background:rgba(74,140,92,.08);display:flex;align-items:center;justify-content:center;color:var(--sg)">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10M15 7v10M7 9h10M7 15h10"/></svg>
-        </div>
-      </div>
-      <h3 class="prod-name">Calculadora de riego</h3>
-      <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 0;line-height:1.5">Calcula tiempo y frecuencia de riego óptimas según tu sector.</p>
-      <span class="prod-cta" style="margin-top:.75rem">Abrir →</span>
-    </div>
-
-    <!-- CATÁLOGO / ACCESORIOS -->
-    <div class="prod-item reveal rd1" onclick="openOverlay('accesorios')" style="cursor:pointer;padding:2rem">
-      <div class="prod-circle-wrap">
-        <div class="prod-circle-ring"></div>
-        <div class="prod-circle" style="background:rgba(165,196,216,.08);display:flex;align-items:center;justify-content:center;color:var(--ce)">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
-        </div>
-      </div>
-      <h3 class="prod-name">Catálogo de componentes</h3>
-      <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 0;line-height:1.5">Acceso a controladores, válvulas, rotores y todos los materiales.</p>
-      <span class="prod-cta" style="margin-top:.75rem">Explorar →</span>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══ CALCULADORA ═══ -->
-<div id="overlay-calculadora" class="detail-overlay" role="dialog" aria-modal="true">
-  <button class="detail-back" onclick="closeOverlay()">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Volver
-  </button>
-  <iframe id="calc-iframe" src="calculadora-riego.html" style="width:100%;border:none;display:block;min-height:100vh" allow="clipboard-write"></iframe>
-</div>
 
 <!-- ═══ ACCESORIOS ═══ -->
-<div id="overlay-accesorios" class="detail-overlay" role="dialog" aria-modal="true">
-  <button class="detail-back" onclick="closeOverlay()">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Volver
-  </button>
-  <div class="acc-header reveal">
+<!-- ═══ CATÁLOGO DE PRODUCTOS (COLAPSABLE) ═══ -->
+<section id="catalogo-section" style="background:var(--wh);padding:4rem 3rem;border-top:1px solid var(--bd)">
+  <div style="max-width:1160px;margin:0 auto">
+    <button id="catalogo-toggle" onclick="toggleSection('catalogo')" style="width:100%;background:none;border:none;cursor:pointer;padding:0;margin-bottom:2rem;text-align:center">
+      <div class="acc-header reveal">
     <p class="section-eyebrow">Catálogo de productos</p>
     <h2>Accesorios y materiales</h2>
     <p class="acc-sub">Todos los componentes para tu sistema de riego, con precio de venta al público.</p>
@@ -2197,9 +2203,68 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
       </div>
 
     </div>
+    </div>
+    </button>
+    <div id="catalogo-content" style="display:block">
+    </div>
   </div>
+</section>
 
-</div>
+<!-- ═══ CALCULADORA (COLAPSABLE) ═══ -->
+<section id="calc-section" style="background:var(--cr);padding:4rem 3rem;border-top:1px solid var(--bd)">
+  <div style="max-width:1160px;margin:0 auto">
+    <button id="calc-toggle" onclick="toggleSection('calc')" style="width:100%;background:none;border:none;cursor:pointer;padding:0;margin-bottom:2rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem">
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--dk);line-height:1.12;margin:0">Calculadora de <em style="font-style:italic">riego</em></div>
+      <p style="font-size:.88rem;color:var(--muted);max-width:48ch;line-height:1.75;margin:0">Completá los datos de tu sector y obtenés el plan de riego por estación, calibrado para GBA.</p>
+      <span style="font-size:.75rem;font-weight:600;color:var(--sg);letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem" id="calc-toggle-arrow">Abrir ▼</span>
+    </button>
+    <div id="calc-content" style="display:none;margin-top:2rem">
+      <div class="form-card" style="max-width:680px;margin:0 auto 1.75rem">
+        <p class="form-card-title">Datos del sector</p>
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label>Precipitación del emisor (mm/h)</label>
+            <input type="number" id="f-precip" placeholder="Ej: 15" min="0.1" step="0.1">
+            <span class="field-err" id="err-precip">Ingresá un valor mayor a 0.</span>
+          </div>
+          <div class="form-group">
+            <label>Tipo de superficie</label>
+            <select id="f-sup">
+              <option value="cesped">Césped</option>
+              <option value="plantas">Plantas / canteros</option>
+              <option value="baja">Baja demanda</option>
+              <option value="arboles">Árboles</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tipo de suelo</label>
+            <select id="f-suelo">
+              <option value="franco">Franco</option>
+              <option value="arenoso">Arenoso</option>
+              <option value="arcilloso">Arcilloso</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label>Tipo de riego</label>
+            <select id="f-riego">
+              <option value="aspersor">Aspersor / Tobera (eficiencia 80%)</option>
+              <option value="goteo">Goteo (eficiencia 100%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="hint-bar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          La precipitación (mm/h) es el caudal del sistema dividido la superficie cubierta. Aspersores Hunter PSU: típicamente 10–20 mm/h.
+        </div>
+        <button class="btn-calc" onclick="calcular()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Calcular plan de riego
+        </button>
+      </div>
+      <div id="results-wrap" style="display:none;max-width:680px;margin:0 auto"></div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ CONTACTO ═══ -->
 <section id="contacto">
@@ -2419,6 +2484,21 @@ const countIO = new IntersectionObserver(entries => {
 document.querySelectorAll('[data-target]').forEach(el => countIO.observe(el));
 
 // ── Product overlay system ──
+function toggleSection(section) {
+  const content = document.getElementById(section + '-content');
+  const toggle = document.getElementById(section + '-toggle');
+  const arrow = document.getElementById(section + '-toggle-arrow');
+
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    if (arrow) arrow.textContent = 'Cerrar ▲';
+    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    content.style.display = 'none';
+    if (arrow) arrow.textContent = 'Abrir ▼';
+  }
+}
+
 function openOverlay(id) {
   const el = document.getElementById('overlay-' + id);
   if (!el) return;
@@ -2579,6 +2659,168 @@ function checkoutWA() {
   const msg = `Hola! Quiero consultar por los siguientes accesorios:%0A%0A${lines}%0A%0A*Total estimado: $${total.toLocaleString('es-AR')}*%0A%0A¿Tienen disponibilidad?`;
   window.open(`https://wa.me/5491135923006?text=${msg}`, '_blank');
 }
+
+// ── CALCULADORA DE RIEGO ──
+/* ═══════════════════════════════════════════
+   CONSTANTES
+═══════════════════════════════════════════ */
+const MM_TABLE = {
+  cesped:  { verano:35, primavera:25, otono:15, invierno:8  },
+  plantas: { verano:20, primavera:15, otono:10, invierno:5  },
+  baja:    { verano:12, primavera:8,  otono:5,  invierno:2  },
+  arboles: { verano:18, primavera:12, otono:8,  invierno:4  }
+};
+const FREQ_TABLE = {
+  cesped:  { verano:2, primavera:3, otono:4, invierno:6 },
+  plantas: { verano:3, primavera:4, otono:6, invierno:7 },
+  baja:    { verano:6, primavera:7, otono:7, invierno:7 },
+  arboles: { verano:7, primavera:7, otono:7, invierno:7 }
+};
+const SOIL = {
+  arenoso:  { mm:1.10, dFreq:-1 },
+  franco:   { mm:1.00, dFreq: 0 },
+  arcilloso:{ mm:0.90, dFreq:+1 }
+};
+const EFIC = { aspersor:0.80, goteo:1.00 };
+const SEASONS    = ['verano','otono','invierno','primavera'];
+const SEA_LABEL  = { verano:'Verano', otono:'Otoño', invierno:'Invierno', primavera:'Primavera' };
+const SEA_DOT    = { verano:'dot-verano', otono:'dot-otono', invierno:'dot-invierno', primavera:'dot-primavera' };
+const SUP_LABEL  = { cesped:'Césped', plantas:'Plantas / canteros', baja:'Baja demanda', arboles:'Árboles' };
+const SUE_LABEL  = { franco:'Franco', arenoso:'Arenoso', arcilloso:'Arcilloso' };
+
+function clampFreq(v)  { return Math.max(1, Math.min(7, v)); }
+function clampPct(v)   { return Math.max(10, Math.min(150, v)); }
+function roundTo10(v)  { return Math.round(v / 10) * 10; }
+
+function minToHHMM(min) {
+  const m = Math.round(min);
+  const h = Math.floor(m / 60);
+  const mm = m % 60;
+  return h > 0
+    ? `${h}:${String(mm).padStart(2,'0')} hs`
+    : `${String(mm).padStart(2,'0')} min`;
+}
+
+function calcular() {
+  const precipEl = document.getElementById('f-precip');
+  const errEl    = document.getElementById('err-precip');
+  const precip   = parseFloat(precipEl.value);
+
+  if (!precip || precip <= 0) {
+    precipEl.classList.add('err');
+    errEl.classList.add('show');
+    precipEl.focus();
+    return;
+  }
+  precipEl.classList.remove('err');
+  errEl.classList.remove('show');
+
+  const sup   = document.getElementById('f-sup').value;
+  const suelo = document.getElementById('f-suelo').value;
+  const riego = document.getElementById('f-riego').value;
+
+  const efic      = EFIC[riego];
+  const mmFactor  = SOIL[suelo].mm;
+  const dFreq     = SOIL[suelo].dFreq;
+
+  const mmAj = {};
+  SEASONS.forEach(s => {
+    mmAj[s] = (MM_TABLE[sup][s] * mmFactor) / efic;
+  });
+
+  const intervaloPrim = clampFreq(FREQ_TABLE[sup].primavera + dFreq);
+  const riegosSemPrim = 7 / intervaloPrim;
+  const minSemPrim    = (mmAj.primavera / precip) * 60;
+  const minFijo       = minSemPrim / riegosSemPrim;
+
+  const result = {};
+  SEASONS.forEach(s => {
+    const intervalo = clampFreq(FREQ_TABLE[sup][s] + dFreq);
+    let pct;
+    if (s === 'primavera') {
+      pct = 100;
+    } else {
+      const raw = 100 * (mmAj[s] / mmAj.primavera) * (intervalo / intervaloPrim);
+      pct = clampPct(roundTo10(raw));
+    }
+    result[s] = { intervalo, pct };
+  });
+
+  renderResults({ sup, suelo, riego, precip, minFijo, result });
+}
+
+function renderResults({ sup, suelo, riego, precip, minFijo, result }) {
+  const hhmm = minToHHMM(minFijo);
+
+  const rows = SEASONS.map(s => {
+    const { intervalo, pct } = result[s];
+    const diasTxt = intervalo === 1 ? 'cada 1 día' : `cada ${intervalo} días`;
+    return `
+      <div class="result-row">
+        <span class="r-season">
+          <span class="r-dot ${SEA_DOT[s]}"></span>
+          ${SEA_LABEL[s]}
+        </span>
+        <span class="r-desc">
+          <strong>${hhmm}</strong> ${diasTxt}, ajuste estacional <strong>${pct}%</strong>
+        </span>
+      </div>`;
+  }).join('');
+
+  const copyText = SEASONS.map(s => {
+    const { intervalo, pct } = result[s];
+    return `${SEA_LABEL[s]}: ${hhmm} ${intervalo===1?'cada 1 día':'cada '+intervalo+' días'}, ajuste estacional ${pct}%`;
+  }).join('\n');
+
+  const riegoLabel = riego === 'goteo' ? 'Goteo' : 'Aspersor / Tobera';
+
+  document.getElementById('results-wrap').innerHTML = `
+    <div class="results-card">
+      <div class="results-head">
+        <div class="results-head-info">
+          <h3>${SUP_LABEL[sup]}</h3>
+          <p class="results-head-meta">
+            ${riegoLabel} · Suelo ${SUE_LABEL[suelo]} · ${precip} mm/h
+          </p>
+        </div>
+        <span class="results-time-chip">${hhmm} por evento</span>
+      </div>
+      <div class="result-rows">${rows}</div>
+      <div class="results-copy">
+        <p>Tiempo fijo por evento: <strong>${hhmm}</strong> — igual en todas las estaciones.</p>
+        <button class="copy-btn" onclick="copiar(this, \`${copyText.replace(/`/g,'\\`')}\`)">Copiar</button>
+      </div>
+    </div>
+
+    <div class="schedule-tip">
+      <h4>Horario recomendado de riego</h4>
+      <p>Lo ideal es regar entre la <strong>madrugada y la mañana temprana (aprox. 04:00 a 09:00)</strong>, para reducir evaporación y viento.</p>
+      <p>Evitar <strong>mediodía/tarde</strong> (más evaporación) y evitar <strong>noche muy tarde</strong> si el césped queda mojado muchas horas.</p>
+      <p>En <strong>verano</strong>, conviene arrancar más temprano (ej. 04:00–07:00). En <strong>invierno</strong>, se puede correr un poco más tarde (ej. 06:00–09:00).</p>
+    </div>`;
+
+  document.getElementById('results-wrap').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('results-wrap').scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 80);
+}
+
+function copiar(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '¡Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+['f-sup','f-suelo','f-riego'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('change', () => {
+      if (document.getElementById('results-wrap').style.display !== 'none') calcular();
+    });
+  }
+});
 
 // ── Hero text clip reveal ──
 (function(){
