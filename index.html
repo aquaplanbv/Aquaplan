@@ -217,7 +217,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 /* ─── PRODUCTS CIRCLES ─── */
 .prod-row{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   max-width:1160px;
   margin:0 auto;
   padding:0 3rem 6rem;
@@ -1776,6 +1776,32 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
       <span class="prod-cta">Ver más →</span>
     </div>
 
+    <!-- 05 · CALCULADORA -->
+    <div class="prod-item reveal rd4" onclick="openOverlay('calculadora')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle" style="background:rgba(74,140,92,.08);display:flex;align-items:center;justify-content:center;color:var(--sg)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10M15 7v10M7 9h10M7 15h10"/></svg>
+        </div>
+      </div>
+      <span class="prod-num">05</span>
+      <h3 class="prod-name">Calculadora</h3>
+      <span class="prod-cta">Calcular →</span>
+    </div>
+
+    <!-- 06 · ACCESORIOS -->
+    <div class="prod-item reveal rd5" onclick="openOverlay('accesorios')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle" style="background:rgba(165,196,216,.08);display:flex;align-items:center;justify-content:center;color:var(--ce)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
+        </div>
+      </div>
+      <span class="prod-num">06</span>
+      <h3 class="prod-name">Accesorios</h3>
+      <span class="prod-cta">Explorar →</span>
+    </div>
+
   </div>
 </section>
 
@@ -1792,32 +1818,14 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
   </div>
 </div>
 
-<!-- ─── HERRAMIENTAS EXTRAS ─── -->
-<section class="extras-section" style="background:var(--wh);padding:4rem 3rem">
-  <div class="extras-row" style="display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;max-width:760px;margin:0 auto">
-
-    <!-- Calculadora -->
-    <div class="extras-item reveal" onclick="window.location.href='/calculadora-riego.html'" style="cursor:pointer;background:var(--cr);border:1px solid var(--bd);border-radius:16px;padding:2.5rem 2rem;text-align:center;transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:1rem">
-      <div style="width:56px;height:56px;background:rgba(74,140,92,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sg)">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10M15 7v10M7 9h10M7 15h10"/></svg>
-      </div>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--dk);margin:0">Calculadora</h3>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">Calcula la frecuencia de riego óptima según tu superficie y tipo de suelo.</p>
-      <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;color:var(--sg);letter-spacing:.08em;text-transform:uppercase;margin-top:.5rem">Acceder →</span>
-    </div>
-
-    <!-- Accesorios & Carrito -->
-    <div class="extras-item reveal rd1" onclick="openOverlay('accesorios')" style="cursor:pointer;background:var(--cr);border:1px solid var(--bd);border-radius:16px;padding:2.5rem 2rem;text-align:center;transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:1rem">
-      <div style="width:56px;height:56px;background:rgba(165,196,216,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ce)">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
-      </div>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--dk);margin:0">Accesorios</h3>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.6;margin:0">Catálogo completo de componentes de riego con carrito integrado.</p>
-      <span style="display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;color:var(--ce);letter-spacing:.08em;text-transform:uppercase;margin-top:.5rem">Explorar →</span>
-    </div>
-
-  </div>
-</section>
+<!-- ═══ CALCULADORA ═══ -->
+<div id="overlay-calculadora" class="detail-overlay" role="dialog" aria-modal="true">
+  <button class="detail-back" onclick="closeOverlay()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+  <iframe id="calc-iframe" src="calculadora-riego.html" style="width:100%;border:none;display:block;min-height:100vh" allow="clipboard-write"></iframe>
+</div>
 
 <!-- ═══ ACCESORIOS ═══ -->
 <div id="overlay-accesorios" class="detail-overlay" role="dialog" aria-modal="true">
