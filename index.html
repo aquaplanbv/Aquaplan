@@ -217,7 +217,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 /* ─── PRODUCTS CIRCLES ─── */
 .prod-row{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   max-width:1160px;
   margin:0 auto;
   padding:0 3rem 6rem;
@@ -1776,32 +1776,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
       <span class="prod-cta">Ver más →</span>
     </div>
 
-    <!-- 05 · CALCULADORA -->
-    <div class="prod-item reveal rd4" onclick="openOverlay('calculadora')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem">
-      <div class="prod-circle-wrap">
-        <div class="prod-circle-ring"></div>
-        <div class="prod-circle" style="background:rgba(74,140,92,.08);display:flex;align-items:center;justify-content:center;color:var(--sg)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10M15 7v10M7 9h10M7 15h10"/></svg>
-        </div>
-      </div>
-      <span class="prod-num">05</span>
-      <h3 class="prod-name">Calculadora</h3>
-      <span class="prod-cta">Calcular →</span>
-    </div>
-
-    <!-- 06 · ACCESORIOS -->
-    <div class="prod-item reveal rd5" onclick="openOverlay('accesorios')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1rem">
-      <div class="prod-circle-wrap">
-        <div class="prod-circle-ring"></div>
-        <div class="prod-circle" style="background:rgba(165,196,216,.08);display:flex;align-items:center;justify-content:center;color:var(--ce)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
-        </div>
-      </div>
-      <span class="prod-num">06</span>
-      <h3 class="prod-name">Accesorios</h3>
-      <span class="prod-cta">Explorar →</span>
-    </div>
-
   </div>
 </section>
 
@@ -1817,6 +1791,44 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
     </div>
   </div>
 </div>
+
+<!-- ═══ HERRAMIENTAS ═══ -->
+<section style="background:var(--wh);padding:4rem 3rem">
+  <div class="prod-intro reveal">
+    <p class="section-eyebrow">Herramientas profesionales</p>
+    <h2>Calcula y compra <em>componentes.</em></h2>
+  </div>
+
+  <div class="prod-row" style="grid-template-columns:repeat(2,1fr)">
+
+    <!-- CALCULADORA -->
+    <div class="prod-item reveal" onclick="openOverlay('calculadora')" style="cursor:pointer;padding:2rem">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle" style="background:rgba(74,140,92,.08);display:flex;align-items:center;justify-content:center;color:var(--sg)">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10M15 7v10M7 9h10M7 15h10"/></svg>
+        </div>
+      </div>
+      <h3 class="prod-name">Calculadora de riego</h3>
+      <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 0;line-height:1.5">Calcula tiempo y frecuencia de riego óptimas según tu sector.</p>
+      <span class="prod-cta" style="margin-top:.75rem">Abrir →</span>
+    </div>
+
+    <!-- CATÁLOGO / ACCESORIOS -->
+    <div class="prod-item reveal rd1" onclick="openOverlay('accesorios')" style="cursor:pointer;padding:2rem">
+      <div class="prod-circle-wrap">
+        <div class="prod-circle-ring"></div>
+        <div class="prod-circle" style="background:rgba(165,196,216,.08);display:flex;align-items:center;justify-content:center;color:var(--ce)">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
+        </div>
+      </div>
+      <h3 class="prod-name">Catálogo de componentes</h3>
+      <p style="font-size:.85rem;color:var(--muted);margin:.5rem 0 0;line-height:1.5">Acceso a controladores, válvulas, rotores y todos los materiales.</p>
+      <span class="prod-cta" style="margin-top:.75rem">Explorar →</span>
+    </div>
+
+  </div>
+</section>
 
 <!-- ═══ CALCULADORA ═══ -->
 <div id="overlay-calculadora" class="detail-overlay" role="dialog" aria-modal="true">
@@ -1839,8 +1851,8 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
     <p class="acc-sub">Todos los componentes para tu sistema de riego, con precio de venta al público.</p>
   </div>
 
-  <!-- CARRITO FLOTANTE -->
-  <button id="acc-cart-btn" onclick="openCart()">
+  <!-- CARRITO FLOTANTE (oculto en versión simplificada) -->
+  <button id="acc-cart-btn" onclick="openCart()" style="display:none">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l1.35 2.1c.3.45.75.8 1.2.9H15M9 22H6c-1.1 0-2-.9-2-2V9h16v11c0 1.1-.9 2-2 2h-9"/><circle cx="10" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
     <span id="acc-cart-badge" class="badge">0</span>
   </button>
