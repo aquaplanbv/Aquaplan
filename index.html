@@ -1586,20 +1586,25 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Volver
   </button>
-  <div class="dl-hero" style="background:linear-gradient(135deg, var(--dk) 0%, #0F3B1F 100%);position:relative;overflow:hidden">
-    <div style="position:absolute;right:-80px;top:-120px;width:400px;height:400px;background:url('auto-xcore-1.jpg') center/cover;opacity:0.08;pointer-events:none;border-radius:50%"></div>
-    <div class="dl-hero-overlay" style="background:rgba(26,43,30,0.7)"></div>
+  <!-- HERO PROFESIONAL CON IMAGEN REAL -->
+  <div class="dl-hero" style="background:url('auto-xcore-1.jpg') center/cover;position:relative;min-height:480px">
+    <div class="dl-hero-overlay" style="background:linear-gradient(135deg, rgba(26,43,30,0.75) 0%, rgba(26,43,30,0.85) 100%)"></div>
     <div class="dl-hero-text">
       <span class="dl-eyebrow">04 · Automatización</span>
       <h2>Tu jardín riega solo, siempre.</h2>
     </div>
   </div>
-  <div class="detail-body" style="position:relative">
-    <!-- Imágenes decorativas flotantes -->
-    <div style="position:absolute;left:-150px;top:100px;width:280px;height:350px;background:url('auto-xcore-1.jpg') center/cover;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.15);opacity:0.65;pointer-events:none;z-index:1"></div>
-    <div style="position:absolute;right:-120px;top:400px;width:240px;height:300px;background:url('auto-xcore-2.jpg') center/cover;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.15);opacity:0.6;pointer-events:none;z-index:1"></div>
 
-    <p class="dl-lead" style="position:relative;z-index:2">Trabajamos con los controladores de primera línea del mercado global: Hunter y Rain Bird. Cada instalación recibe el equipo adecuado según la cantidad de zonas, el presupuesto y los requerimientos de conectividad del cliente.</p>
+  <div class="detail-body">
+    <!-- SECCIÓN: INTRO + IMAGEN LADO A LADO -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:5rem;padding:3rem 0">
+      <div>
+        <p class="dl-lead">Trabajamos con los controladores de primera línea del mercado global: Hunter y Rain Bird. Cada instalación recibe el equipo adecuado según la cantidad de zonas, el presupuesto y los requerimientos de conectividad del cliente.</p>
+      </div>
+      <div style="height:100%;min-height:420px;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.15)">
+        <img loading="lazy" src="auto-xcore-2.jpg" alt="Detalle de controlador Hunter X-Core" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
 
     <div class="dl-section">
       <h2 class="dl-section-title">Líneas de controladores</h2>
