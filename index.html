@@ -220,7 +220,7 @@ body, p, span, a, button, input, textarea {
 }
 .hero-content{
   position:relative;z-index:2;
-  text-align:left;padding:0 2rem 0 4rem;
+  text-align:left;padding:0 2rem 0 10rem;
   max-width:600px;display:flex;flex-direction:column;align-items:flex-start;
 }
 .hero-tag{
@@ -706,6 +706,7 @@ footer::before{
 }
 @media(max-width:640px){
   /* ── Hero: limpio y despejado ── */
+  .hero-content{padding:0 1.5rem 0 2rem}
   .hero-h1{font-size:clamp(2rem,8.5vw,2.8rem);margin-bottom:1.2rem;line-height:1.08}
   .hero-tag{display:none}
   .hero-sub{display:none}
