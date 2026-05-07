@@ -18,21 +18,21 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('./fonts/CormorantGaramond-500.ttf') format('truetype');
+  src: url('/fonts/CormorantGaramond-500.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Cormorant Garamond';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('./fonts/CormorantGaramond-600.ttf') format('truetype');
+  src: url('/fonts/CormorantGaramond-600.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Cormorant Garamond';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('./fonts/CormorantGaramond-700.ttf') format('truetype');
+  src: url('/fonts/CormorantGaramond-700.ttf') format('truetype');
 }
 
 /* ─── RESET & ROOT ─── */
@@ -60,6 +60,17 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', serif !important;
 }
+
+/* FUERZA MÁXIMA: Asegurar que Cormorant Garamond se aplique */
+* {
+  --font-serif: 'Cormorant Garamond', serif !important;
+}
+h1 { font-family: 'Cormorant Garamond', serif !important; }
+h2 { font-family: 'Cormorant Garamond', serif !important; }
+h3 { font-family: 'Cormorant Garamond', serif !important; }
+h4 { font-family: 'Cormorant Garamond', serif !important; }
+h5 { font-family: 'Cormorant Garamond', serif !important; }
+h6 { font-family: 'Cormorant Garamond', serif !important; }
 
 /* Clases de títulos y headers */
 [class*="title"],
