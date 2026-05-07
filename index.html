@@ -1031,6 +1031,25 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
   .results-head{padding:.9rem 1rem}
   .results-copy{padding:.65rem 1rem}
 }
+
+/* ─── MEJORAS VISUALES SIMPLES ─── */
+
+/* Mejorar sombras */
+.card{box-shadow:0 2px 8px rgba(0,0,0,0.08)!important}
+.card:hover{box-shadow:0 8px 16px rgba(0,0,0,0.12)!important}
+
+/* Mejorar transiciones de botones */
+button{transition:all .2s ease!important}
+button:hover{opacity:.9;transform:translateY(-1px)}
+
+/* Zoom suave en imágenes */
+img{transition:transform .3s ease}
+figure:hover img,section img:hover{transform:scale(1.02)}
+
+/* Mejor espaciado */
+section{margin:0!important}
+section h2{margin-bottom:2rem!important}
+
 </style>
 </head>
 <body>
