@@ -220,21 +220,21 @@ body, p, span, a, button, input, textarea {
 }
 .hero-content{
   position:relative;z-index:2;
-  text-align:center;padding:0 2rem;
-  max-width:860px;
+  text-align:left;padding:0 2rem 0 4rem;
+  max-width:600px;display:flex;flex-direction:column;align-items:flex-start;
 }
 .hero-tag{
   font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
   color:var(--sgl);margin-bottom:2rem;
-  display:flex;align-items:center;justify-content:center;gap:1rem;
+  display:flex;align-items:center;justify-content:flex-start;gap:1rem;
 }
 .hero-tag::before,.hero-tag::after{content:'';flex:0 0 36px;height:1px;background:var(--sgl);opacity:.6}
 .hero-h1{
   font-family:Georgia,serif !important;
-  font-size:clamp(2.2rem,4.5vw,4.2rem);
-  font-weight:600;line-height:1.05;
-  color:var(--wh);margin-bottom:1.5rem;
-  letter-spacing:-.02em;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:600;line-height:1.25;
+  color:var(--wh);margin-bottom:2.5rem;
+  letter-spacing:-.01em;font-style:italic;
 }
 .hero-h1 em{font-style:normal;color:inherit}
 .hero-sub{
@@ -243,15 +243,15 @@ body, p, span, a, button, input, textarea {
   color:rgba(255,255,255,.65);
   letter-spacing:.12em;text-transform:uppercase;margin-bottom:3rem;
 }
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.hero-btns{display:flex;gap:1rem;justify-content:flex-start;flex-wrap:wrap;margin-top:1rem}
 .btn-primary{
-  background:transparent;color:var(--wh);
-  border:1px solid rgba(255,255,255,.4);
+  background:var(--sg);color:var(--wh);
+  border:1px solid var(--sg);
   padding:.9rem 2.2rem;border-radius:2px;
   font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
-  transition:border-color .3s,background .3s;
+  transition:all .3s cubic-bezier(.22,1,.36,1);
 }
-.btn-primary:hover{border-color:rgba(255,255,255,.9);background:rgba(255,255,255,.08)}
+.btn-primary:hover{border-color:var(--sgl);background:var(--sgl);transform:translateY(-2px);box-shadow:0 8px 16px rgba(74,140,92,.3)}
 .btn-ghost{
   background:transparent;color:var(--wh);
   border:1px solid rgba(255,255,255,.4);
@@ -2011,11 +2011,9 @@ i {
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-tag">GBA · Argentina</p>
-    <p class="hero-sub">Aspersores · Goteo · Automatización · Diseño</p>
+    <h1 class="hero-h1">Diseño e instalación de riego por aspersión y goteo</h1>
     <div class="hero-btns">
-      <a href="#" class="btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'});return false;">Ver servicios</a>
-      <a href="#" class="btn-ghost" onclick="document.getElementById('catalogo-section').scrollIntoView({behavior:'smooth'});toggleSection('catalogo');return false;">Accesorios</a>
-      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-ghost">Consultar →</a>
+      <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-primary">Pedi tu presupuesto →</a>
     </div>
   </div>
   <div class="hero-scroll">
