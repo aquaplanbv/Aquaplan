@@ -42,6 +42,8 @@ h1, h2, h3, h4, h5, h6 {
 [class*="title"],
 [class*="header"],
 [class*="heading"],
+[class*="name"],
+[class*="brand"],
 .diseno-hz-title,
 .dl-hero-title,
 .dl-hero-text h2,
@@ -223,6 +225,7 @@ body, p, span, a, button, input, textarea {
 }
 .hero-h1 em{font-style:normal;color:inherit}
 .hero-sub{
+  font-family:Georgia,serif;
   font-size:clamp(.8rem,1.1vw,.95rem);
   color:rgba(255,255,255,.65);
   letter-spacing:.12em;text-transform:uppercase;margin-bottom:3rem;
@@ -461,6 +464,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
 .footer-brand-logo span{color:var(--sgl)}
 .footer-brand-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:28ch}
 .footer-col-title{
+  font-family:Georgia,serif;
   font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   color:var(--sgl);margin-bottom:1.2rem;display:block;
 }
@@ -777,7 +781,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
 .acc-card:hover .acc-card-img img{transform:scale(1.05)}
 .acc-card-img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--bd)}
 .acc-card-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
-.acc-card-name{font-size:.8rem;font-weight:600;color:var(--dk);line-height:1.4;flex:1}
+.acc-card-name{font-family:Georgia,serif;font-size:.8rem;font-weight:600;color:var(--dk);line-height:1.4;flex:1}
 .acc-card-price{font-size:1.1rem;font-weight:700;color:var(--sg);font-family:Georgia,serif}
 .acc-card-note{font-size:.65rem;color:var(--muted);letter-spacing:.05em}
 .acc-card-actions{display:flex;gap:.5rem;margin-top:.3rem}
@@ -846,7 +850,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.5);padding:0}
 .cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:.8rem;align-items:center;padding:.8rem;border:1px solid var(--bd);border-radius:10px}
 .cart-item-img{width:60px;height:60px;border-radius:6px;overflow:hidden;background:var(--cr)}
 .cart-item-img img{width:100%;height:100%;object-fit:contain;padding:4px}
-.cart-item-name{font-size:.78rem;font-weight:600;color:var(--dk);line-height:1.35}
+.cart-item-name{font-family:Georgia,serif;font-size:.78rem;font-weight:600;color:var(--dk);line-height:1.35}
 .cart-item-price{font-size:.75rem;color:var(--muted);margin-top:.2rem}
 .cart-item-qty{display:flex;align-items:center;gap:.4rem;margin-top:.4rem}
 .qty-btn{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bd);background:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--dk);transition:all .2s}
