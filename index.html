@@ -31,11 +31,18 @@ a{text-decoration:none;color:inherit}
 img{display:block;width:100%;height:100%;object-fit:cover}
 
 
-/* ─── TIPOGRAFÍA: TÍTULOS Y SUBTÍTULOS SERIF ─── */
+/* ─── TIPOGRAFÍA GLOBAL: TODOS LOS TÍTULOS SERIF ─── */
+
+/* Títulos principales */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', serif !important;
 }
 
+/* Clases de títulos y headers */
+[class*="title"],
+[class*="header"],
+[class*="heading"],
+.diseno-hz-title,
 .dl-hero-title,
 .dl-hero-text h2,
 .dl-section-title,
@@ -56,12 +63,20 @@ h1, h2, h3, h4, h5, h6 {
 .form-card-title,
 .results-head h3,
 .intro-card h3,
-.intro-card p,
 .prod-item h3,
+.prod-item h4,
+span[class*="title"],
+span[class*="header"],
+strong,
+b {
+  font-family: 'Cormorant Garamond', serif !important;
+}
+
+/* Asegurar que todos los párrafos en cards de títulos sean serif */
+.intro-card p,
 .prod-item p,
-span.subtitle,
 .subtitle,
-strong {
+span.subtitle {
   font-family: 'Cormorant Garamond', serif !important;
 }
 
