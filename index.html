@@ -126,32 +126,28 @@ body, p, span, a, button, input, textarea {
 .logo-aqua{fill:#ffffff;transition:fill .4s}
 .logo-plan{fill:#A5C4D8}
 #nav.solid .logo-aqua{fill:#1A2B1E}
-.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links{display:flex;align-items:center;gap:2.5rem;flex:1}
 .nav-links a{
   font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
   color:rgba(255,255,255,.8);transition:color .3s;
   position:relative;padding-bottom:3px;
 }
 /* Indicador de sección activa — subrayado verde */
-.nav-links a:not(.nav-cta)::after{
+.nav-links a::after{
   content:'';position:absolute;bottom:-1px;left:0;right:0;
   height:2px;background:var(--sgl);border-radius:2px;
   transform:scaleX(0);transform-origin:left center;
   transition:transform .28s cubic-bezier(.22,1,.36,1);
 }
-.nav-links a:not(.nav-cta):hover::after,
-.nav-links a:not(.nav-cta).nav-active::after{transform:scaleX(1)}
-.nav-links a:not(.nav-cta).nav-active{color:var(--sgl)!important}
+.nav-links a:hover::after,
+.nav-links a.nav-active::after{transform:scaleX(1)}
+.nav-links a.nav-active{color:var(--sgl)!important}
 #nav.solid .nav-links a{color:var(--dk)}
-#nav.solid .nav-links a:not(.nav-cta):hover{color:var(--sg)}
-.nav-cta{
-  background:var(--wh);color:var(--dk) !important;
-  padding:.55rem 1.4rem;border-radius:2px;
-  font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
-  transition:background .3s,color .3s !important;
+#nav.solid .nav-links a:hover{color:var(--sg)}
+/* Carrito posicionado a la derecha */
+#cart-btn{
+  margin-left:auto;
 }
-#nav.solid .nav-cta{background:var(--dk);color:var(--wh) !important}
-.nav-cta:hover{background:var(--sg) !important;color:var(--wh) !important}
 
 /* ── Hamburger button ── */
 #nav-hamburger{
@@ -1985,11 +1981,11 @@ i {
     <a href="#" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'});return false;">Servicios</a>
     <a href="#" onclick="document.getElementById('catalogo-section').scrollIntoView({behavior:'smooth'});toggleSection('catalogo');return false;">Accesorios</a>
     <a href="#" onclick="document.getElementById('calc-section').scrollIntoView({behavior:'smooth'});return false;">Calculadora</a>
+    <a href="#" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'});return false;">Contacto</a>
     <button id="cart-btn" onclick="openCart()" aria-label="Ver carrito">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span id="cart-badge">0</span>
     </button>
-    <a href="#contacto" class="nav-cta">Contacto</a>
   </div>
   <!-- Hamburger (mobile only) -->
   <button id="nav-hamburger" aria-label="Menú" aria-expanded="false" onclick="toggleMobileMenu()">
