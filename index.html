@@ -1230,6 +1230,21 @@ footer::before{
 .auto-brand-desc{font-size:.82rem;color:var(--muted);line-height:1.72}
 @media(max-width:768px){.auto-brand-grid{grid-template-columns:1fr}}
 
+/* ─── OBRAS REALIZADAS (CARRUSEL) ─── */
+.obras-section{background:var(--wh);padding:4rem 3rem;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.obras-header{max-width:1160px;margin:0 auto 3rem;text-align:left}
+.obras-title{font-family:Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--dk);margin-bottom:1rem}
+.obras-container{max-width:100%;overflow:hidden;position:relative}
+.obras-track{display:flex;gap:1.5rem;animation:obraScroll 40s linear infinite;padding:1rem 0}
+.obras-track:hover{animation-play-state:paused}
+@keyframes obraScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
+.obra-card{flex:0 0 280px;background:var(--cr);border:2px solid var(--bd);border-radius:8px;overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;position:relative;min-height:200px;display:flex;flex-direction:column}
+.obra-card:hover{border-color:var(--sg);box-shadow:0 16px 40px rgba(74,140,92,.18);transform:translateY(-8px)}
+.obra-image{flex:1;background:linear-gradient(135deg, var(--sgl) 0%, var(--sg) 100%);min-height:150px;display:flex;align-items:center;justify-content:center;color:var(--wh);font-size:3rem;opacity:0.8}
+.obra-desc{padding:1.2rem;background:var(--wh);border-top:1px solid var(--bd);text-align:center;opacity:0;transition:opacity .3s cubic-bezier(.22,1,.36,1)}
+.obra-card:hover .obra-desc{opacity:1}
+.obra-desc-text{font-size:.85rem;font-weight:500;color:var(--dk);text-transform:uppercase;letter-spacing:.05em}
+
 /* ─── CALCULADORA ─── */
 .form-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;padding:2rem;margin-bottom:1.75rem;max-width:680px;margin-left:auto;margin-right:auto}
 .form-card-title{font-family:Georgia,serif;font-size:1.1rem;color:var(--dk);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--bd)}
@@ -2537,6 +2552,83 @@ i {
         </button>
       </div>
       <div id="results-wrap" style="display:none;max-width:680px;margin:0 auto"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OBRAS REALIZADAS ═══ -->
+<section class="obras-section">
+  <div class="obras-header">
+    <h2 class="obras-title">Obras Realizadas</h2>
+  </div>
+  <div class="obras-container">
+    <div class="obras-track">
+      <!-- Obra 1 -->
+      <div class="obra-card">
+        <div class="obra-image">🏗️</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Instalación válvulas solenoides</p>
+        </div>
+      </div>
+      <!-- Obra 2 -->
+      <div class="obra-card">
+        <div class="obra-image">💧</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Sistema riego por aspersión</p>
+        </div>
+      </div>
+      <!-- Obra 3 -->
+      <div class="obra-card">
+        <div class="obra-image">🌱</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Instalación goteo jardín</p>
+        </div>
+      </div>
+      <!-- Obra 4 -->
+      <div class="obra-card">
+        <div class="obra-image">⚙️</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Automatización Hunter X-Core</p>
+        </div>
+      </div>
+      <!-- Obra 5 -->
+      <div class="obra-card">
+        <div class="obra-image">🔧</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Mantenimiento sistema completo</p>
+        </div>
+      </div>
+      <!-- Repetir para el carrusel continuo -->
+      <div class="obra-card">
+        <div class="obra-image">🏗️</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Instalación válvulas solenoides</p>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-image">💧</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Sistema riego por aspersión</p>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-image">🌱</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Instalación goteo jardín</p>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-image">⚙️</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Automatización Hunter X-Core</p>
+        </div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-image">🔧</div>
+        <div class="obra-desc">
+          <p class="obra-desc-text">Mantenimiento sistema completo</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
