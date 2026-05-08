@@ -1234,14 +1234,15 @@ footer::before{
 .obras-section{background:var(--wh);padding:4rem 3rem;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
 .obras-header{max-width:1160px;margin:0 auto 3rem;text-align:left}
 .obras-title{font-family:Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;color:var(--dk);margin-bottom:1rem}
-.obras-container{max-width:100%;overflow:hidden;position:relative}
-.obras-track{display:flex;gap:1.5rem;animation:obraScroll 40s linear infinite;padding:1rem 0}
+.obras-container{max-width:100%;overflow:hidden;position:relative;cursor:grab}
+.obras-container.dragging{cursor:grabbing}
+.obras-track{display:flex;gap:1.5rem;animation:obraScroll 40s linear infinite;padding:1rem 0;user-select:none}
 .obras-track:hover{animation-play-state:paused}
 @keyframes obraScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
 .obra-card{flex:0 0 280px;background:var(--cr);border:2px solid var(--bd);border-radius:8px;overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;position:relative;min-height:200px;display:flex;flex-direction:column}
 .obra-card:hover{border-color:var(--sg);box-shadow:0 16px 40px rgba(74,140,92,.18);transform:translateY(-8px)}
 .obra-image{flex:1;background:linear-gradient(135deg, var(--sgl) 0%, var(--sg) 100%);min-height:150px;display:flex;align-items:center;justify-content:center;color:var(--wh);font-size:3rem;opacity:0.8}
-.obra-desc{padding:1.2rem;background:var(--wh);border-top:1px solid var(--bd);text-align:center;opacity:0;transition:opacity .3s cubic-bezier(.22,1,.36,1)}
+.obra-desc{padding:1.2rem;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-top:1px solid rgba(226,234,228,.5);text-align:center;opacity:0;transition:opacity .3s cubic-bezier(.22,1,.36,1)}
 .obra-card:hover .obra-desc{opacity:1}
 .obra-desc-text{font-size:.85rem;font-weight:500;color:var(--dk);text-transform:uppercase;letter-spacing:.05em}
 
@@ -2565,7 +2566,7 @@ i {
     <div class="obras-track">
       <!-- Obra 1 -->
       <div class="obra-card">
-        <div class="obra-image" style="background:url('solenoides.jpg') center/cover;background-size:cover;background-position:center"></div>
+        <div class="obra-image" style="background:url('solenoides-rossi.jpg') center/cover;background-size:cover;background-position:center"></div>
         <div class="obra-desc">
           <p class="obra-desc-text">Instalación válvulas solenoides</p>
         </div>
@@ -2600,7 +2601,7 @@ i {
       </div>
       <!-- Repetir para el carrusel continuo -->
       <div class="obra-card">
-        <div class="obra-image" style="background:url('solenoides.jpg') center/cover;background-size:cover;background-position:center"></div>
+        <div class="obra-image" style="background:url('solenoides-rossi.jpg') center/cover;background-size:cover;background-position:center"></div>
         <div class="obra-desc">
           <p class="obra-desc-text">Instalación válvulas solenoides</p>
         </div>
@@ -3207,6 +3208,65 @@ function copiar(btn, text) {
       }, i * 130);
     });
   }, 300);
+})();
+
+// ── Obras carousel drag ──
+(function() {
+  const container = document.querySelector('.obras-container');
+  const track = document.querySelector('.obras-track');
+  if (!container || !track) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    container.classList.add('dragging');
+    track.style.animationPlayState = 'paused';
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    container.classList.remove('dragging');
+    track.style.animationPlayState = 'running';
+  });
+
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+    container.classList.remove('dragging');
+    track.style.animationPlayState = 'running';
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch support
+  container.addEventListener('touchstart', (e) => {
+    isDown = true;
+    startX = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    track.style.animationPlayState = 'paused';
+  });
+
+  container.addEventListener('touchend', () => {
+    isDown = false;
+    track.style.animationPlayState = 'running';
+  });
+
+  container.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
 })();
 </script>
 
