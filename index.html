@@ -130,6 +130,19 @@ body, p, span, a, button, input, textarea {
 }
 @media(pointer:coarse){#cursor{display:none}body{cursor:auto}}
 
+/* ─── MOBILE FIX: Prevent zoom-out ─── */
+@media(max-width:400px){
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  body {
+    padding: 0;
+    margin: 0;
+  }
+}
+
 /* ─── NAV ─── */
 #nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -1755,12 +1768,12 @@ i {
   <div class="detail-body">
 
     <div class="goteo-tabs">
-      <button class="gtab" onclick="switchGoteoTab('residencial', this)">Residencial</button>
-      <button class="gtab active" onclick="switchGoteoTab('agricola', this)">Agrícola</button>
+      <button class="gtab active" onclick="switchGoteoTab('residencial', this)">Residencial</button>
+      <button class="gtab" onclick="switchGoteoTab('agricola', this)">Agrícola</button>
     </div>
 
     <!-- PANEL: RESIDENCIAL -->
-    <div id="gpanel-residencial" class="gpanel">
+    <div id="gpanel-residencial" class="gpanel active">
       <p class="dl-lead">Para canteros, arriates, huertas domésticas y árboles. El goteo lleva el agua directo a la raíz sin derrochar ni mojar lo que no corresponde.</p>
 
       <div class="dl-gallery">
@@ -1814,7 +1827,7 @@ i {
     </div>
 
     <!-- PANEL: AGRÍCOLA -->
-    <div id="gpanel-agricola" class="gpanel active">
+    <div id="gpanel-agricola" class="gpanel">
 
       <p class="dl-lead">Para productores que necesitan maximizar el rendimiento con el mínimo consumo de agua. El riego por goteo agrícola reduce hasta un 50% el gasto hídrico respecto al riego por inundación o aspersión convencional.</p>
 
