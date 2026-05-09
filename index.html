@@ -1258,6 +1258,8 @@ footer::before{
 .obra-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top, rgba(26,43,30,.75) 0%, rgba(26,43,30,.4) 100%);padding:1.2rem 1rem;opacity:0;transition:opacity .3s cubic-bezier(.22,1,.36,1)}
 .obra-card:hover .obra-overlay{opacity:1}
 .obra-label{font-size:.8rem;font-weight:600;color:var(--wh);text-transform:uppercase;letter-spacing:.08em;margin:0;line-height:1.4}
+@media(max-width:768px){.obra-card{flex:0 0 200px;height:180px}.obras-track{gap:1rem;animation:obraScroll 35s linear infinite}.obras-section{padding:3rem 1.5rem}}
+@media(max-width:480px){.obra-card{flex:0 0 160px;height:160px}.obra-label{font-size:.7rem}.obras-track{gap:.8rem;animation:obraScroll 30s linear infinite}.obras-section{padding:2rem 1rem}}
 
 /* ─── CALCULADORA ─── */
 .form-card{background:var(--wh);border:1.5px solid var(--bd);border-radius:20px;padding:2rem;margin-bottom:1.75rem;max-width:680px;margin-left:auto;margin-right:auto}
@@ -2059,7 +2061,7 @@ i {
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-tag">GBA · Argentina</p>
-    <h1 class="hero-h1">Diseñamos instalamos y automatizamos los mejores sistemas de riego</h1>
+    <h1 class="hero-h1">Diseñamos, instalamos y automatizamos los mejores sistemas de riego</h1>
     <div class="hero-btns">
       <a href="https://wa.me/5491135923006" target="_blank" rel="noopener" class="btn-primary">Pedi tu presupuesto →</a>
     </div>
@@ -3319,6 +3321,14 @@ function copiar(btn, text) {
     const x = e.touches[0].pageX - container.offsetLeft;
     const walk = (x - startX) * 1.5;
     container.scrollLeft = scrollLeft - walk;
+  });
+
+  // Seamless loop para carrusel infinito
+  track.addEventListener('animationiteration', () => {
+    // Reset position seamlessly at the end of each iteration
+    track.style.animation = 'none';
+    track.offsetHeight; // Trigger reflow
+    track.style.animation = '';
   });
 })();
 </script>
