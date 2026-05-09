@@ -974,8 +974,9 @@ footer::before{
 .acc-header h2 em{color:inherit;font-style:italic}
 .acc-sub{font-size:.9rem;color:var(--muted);max-width:44ch;margin:0 auto}
 .acc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;padding:0 2rem;margin-bottom:3rem}
-.acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--wh);border:1.5px solid var(--bd);border-radius:100px;color:var(--muted);transition:all .25s}
-.acc-tab.active,.acc-tab:hover{background:var(--sg);border-color:var(--sg);color:var(--wh)}
+.acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--sg);border:1.5px solid var(--sg);border-radius:100px;color:var(--wh);transition:all .3s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 12px rgba(74,140,92,.2)}
+.acc-tab:hover{background:var(--sgl);border-color:var(--sgl);color:var(--wh);transform:translateY(-3px);box-shadow:0 8px 24px rgba(74,140,92,.35)}
+.acc-tab.active{background:var(--sg);border-color:var(--sg);color:var(--wh);box-shadow:0 6px 16px rgba(74,140,92,.3)}
 .acc-panel{display:none;padding:0 3.5rem 0}
 .acc-panel.active{display:block}
 .acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
