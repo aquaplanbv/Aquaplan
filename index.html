@@ -999,6 +999,19 @@ footer::before{
 @media(max-width:768px){.acc-grid{grid-template-columns:repeat(2,1fr);gap:1rem}.acc-panel{padding:0 1.5rem}.acc-card-img{height:120px}.acc-card-body{padding:0.75rem 0.9rem 0.9rem}}
 @media(max-width:480px){.acc-grid{grid-template-columns:1fr 1fr}}
 
+/* ─── CAROUSEL DE ROTORES ─── */
+.asp-intro-text{font-size:.95rem;color:var(--muted);max-width:60ch;line-height:1.6;margin:0 auto 2.5rem;text-align:center}
+.rotor-image-section{width:60%;max-width:500px;margin:2.5rem auto 3rem;text-align:center}
+.rotor-image-section img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.rotor-image-section img:hover{transform:scale(1.02)}
+.asp-products-grid.rotor-carousel{display:block;overflow:hidden;padding:1.5rem 0}
+.rotor-track{display:flex;gap:1.5rem;animation:rotorScroll 45s linear infinite;user-select:none;padding:.5rem 0}
+.rotor-track:hover{animation-play-state:paused}
+.rotor-carousel .asp-prod-card{flex:0 0 320px}
+@keyframes rotorScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
+@media(max-width:768px){.rotor-image-section{width:85%}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}.asp-intro-text{font-size:.9rem;margin-bottom:1.5rem}}
+@media(max-width:480px){.rotor-image-section{margin:1.5rem auto 2rem}}
+
 /* ─── SKELETON SCREEN ─── */
 @keyframes shimmer{
   0%{background-position:-600px 0}
@@ -1505,7 +1518,12 @@ i {
 
       <!-- ── ROTORES ── -->
       <h3 class="asp-sub-title">Rotores</h3>
-      <div class="asp-products-grid">
+      <p class="asp-intro-text">Los rotores se utilizan para cubrir grandes áreas con bajo caudal. Ofrecen alcances de hasta 15 metros con arcos configurables según tu necesidad.</p>
+      <div class="rotor-image-section">
+        <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
+      </div>
+      <div class="asp-products-grid rotor-carousel">
+        <div class="rotor-track">
 
         <!-- PGP Ultra -->
         <div class="asp-prod-card">
@@ -1592,6 +1610,58 @@ i {
           </div>
         </div>
 
+        <!-- Rotores duplicados para loop infinito -->
+        <!-- PGP Ultra (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP Ultra"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor largo alcance</span>
+            <div class="asp-prod-name">PGP Ultra</div>
+            <p class="asp-prod-desc">El rotor más vendido del mundo. Para grandes superficies de césped residencial y comercial. Tapa de acero inoxidable opcional.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>4,6 – 14 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PGP (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/PGP.jpg" alt="Hunter PGP"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor largo alcance</span>
+            <div class="asp-prod-name">PGP</div>
+            <p class="asp-prod-desc">Rotor clásico de largo alcance con amplia trayectoria probada. Robusto y confiable para jardines con alta demanda de cobertura.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>4,6 – 13 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PGJ (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/pgj.jpg" alt="Hunter PGJ"
+                 onerror="this.src='pexels-qhung999-25283561.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge">Rotor medio alcance</span>
+            <div class="asp-prod-name">PGJ</div>
+            <p class="asp-prod-desc">Rotor compacto para espacios medianos. Caudal eficiente y fácil ajuste de arco. Ideal para jardines residenciales estándar.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>2,4 – 8,2 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>40° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
 
       <!-- ── TOBERAS ── -->
@@ -3420,6 +3490,45 @@ function copiar(btn, text) {
     track.offsetHeight; // Trigger reflow
     track.style.animation = '';
   });
+})();
+
+// ── Rotores carousel loop ──
+(function() {
+  const track = document.querySelector('.rotor-track');
+  if (track) {
+    track.addEventListener('animationiteration', () => {
+      track.style.animation = 'none';
+      track.offsetHeight;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+    });
+
+    const carousel = document.querySelector('.rotor-carousel');
+    let isDown = false, startX, scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      track.style.animation = 'none';
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+    });
+
+    carousel.addEventListener('mouseup', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+  }
 })();
 </script>
 
