@@ -977,8 +977,8 @@ footer::before{
 .acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--sg);border:1.5px solid var(--sg);border-radius:100px;color:var(--wh);transition:all .3s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 12px rgba(74,140,92,.2)}
 .acc-tab:hover{background:var(--sgl);border-color:var(--sgl);color:var(--wh);transform:translateY(-3px);box-shadow:0 8px 24px rgba(74,140,92,.35)}
 .acc-tab.active{background:var(--sg);border-color:var(--sg);color:var(--wh);box-shadow:0 6px 16px rgba(74,140,92,.3)}
-.acc-panel{display:block;padding:0 3.5rem 0;opacity:0;visibility:hidden;transition:opacity .3s ease-in-out}
-.acc-panel.active{opacity:1;visibility:visible}
+.acc-panel{display:none;padding:0 3.5rem 0}
+.acc-panel.active{display:block}
 .acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
 .acc-card{background:var(--wh);border-radius:12px;overflow:hidden;border:1px solid var(--bd);transition:box-shadow .3s,transform .3s;display:flex;flex-direction:column}
 .acc-card:hover{box-shadow:0 8px 32px rgba(26,43,30,.1);transform:translateY(-3px)}
@@ -1004,8 +1004,7 @@ footer::before{
   0%{background-position:-600px 0}
   100%{background-position:600px 0}
 }
-.skeleton-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;padding:0 3.5rem 0;opacity:0;visibility:hidden;transition:opacity .2s ease-in-out}
-.skeleton-grid.show{opacity:1;visibility:visible}
+.skeleton-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;padding:0 3.5rem 0}
 .skeleton-card{background:var(--wh);border-radius:12px;overflow:hidden;border:1px solid var(--bd)}
 .skeleton-img{height:180px;background:linear-gradient(90deg,#e8ede9 25%,#d4ddd6 50%,#e8ede9 75%);background-size:600px 100%;animation:shimmer 1.4s infinite linear}
 .skeleton-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.65rem}
@@ -2186,7 +2185,7 @@ i {
   </div>
 
   <div class="acc-tabs">
-    <button class="acc-tab active" onclick="switchAccTab('controladores',this)">Controladores y Sensores</button>
+    <button class="acc-tab" onclick="switchAccTab('controladores',this)">Controladores y Sensores</button>
     <button class="acc-tab" onclick="switchAccTab('valvulas',this)">Válvulas</button>
     <button class="acc-tab" onclick="switchAccTab('cajas',this)">Cajas de válvulas</button>
     <button class="acc-tab" onclick="switchAccTab('rotores',this)">Rotores y Toberas</button>
@@ -2194,7 +2193,7 @@ i {
   </div>
 
   <!-- CONTROLADORES & SENSORES -->
-  <div id="apanel-controladores" class="acc-panel active">
+  <div id="apanel-controladores" class="acc-panel">
     <div class="acc-grid">
 
       <div class="acc-card" data-id="xcore-2" data-name="Controlador Hunter X-Core 2 est." data-price="172000" data-img="https://hidronorte.com.ar/wp-content/uploads/2025/02/xc.jpg">
@@ -2909,7 +2908,7 @@ document.addEventListener('mousemove', e => {
 // ── Hide skeleton after initial load ──
 window.addEventListener('load', () => {
   const sk = document.getElementById('acc-skeleton');
-  if (sk) { sk.classList.remove('show'); }
+  if (sk) { sk.style.transition = 'opacity .3s'; sk.style.opacity = '0'; setTimeout(() => { sk.style.display = 'none'; }, 320); }
 });
 
 // ── Nav solid on scroll ──
@@ -3048,13 +3047,13 @@ function switchAccTab(tab, btn) {
   // Show skeleton briefly
   const skeleton = document.getElementById('acc-skeleton');
   const empty    = document.getElementById('acc-empty');
-  skeleton.classList.add('show');
+  skeleton.style.display = 'grid';
   document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.acc-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
   setTimeout(() => {
-    skeleton.classList.remove('show');
+    skeleton.style.display = 'none';
     const panel = document.getElementById('apanel-' + tab);
     panel.classList.add('active');
     // Show empty state if panel has no cards
