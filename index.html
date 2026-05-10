@@ -1001,19 +1001,19 @@ footer::before{
 
 /* ─── CAROUSEL DE ROTORES ─── */
 .asp-intro-text{font-size:.95rem;color:var(--muted);max-width:60ch;line-height:1.6;margin:0 auto 2.5rem;text-align:center}
-.rotor-section{display:flex;gap:3rem;align-items:center;margin:2.5rem 0 3rem}
-.rotor-content{flex:1;min-width:0}
-.rotor-text{font-size:0.95rem;color:var(--dk);line-height:1.6;margin:0}
-.rotor-image{flex:0 0 30%;min-width:0}
-.rotor-image img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.rotor-image img:hover{transform:scale(1.02)}
+.products-intro-section{display:flex;gap:3rem;align-items:flex-start;margin-bottom:3rem}
+.products-intro-text{flex:1}
+.products-intro-image{flex:0 0 280px;min-width:0}
+.products-intro-image img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.products-intro-image img:hover{transform:scale(1.02)}
+.rotor-text{font-size:0.95rem;color:var(--dk);line-height:1.6;margin:0 0 2rem}
 .asp-products-grid.rotor-carousel{display:block;overflow:hidden;padding:1.5rem 0}
 .rotor-track{display:flex;gap:1.5rem;animation:rotorScroll 45s linear infinite;user-select:none;padding:.5rem 0}
 .rotor-track:hover{animation-play-state:paused}
 .rotor-carousel .asp-prod-card{flex:0 0 320px}
 @keyframes rotorScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
-@media(max-width:768px){.rotor-section{flex-direction:column-reverse;gap:2rem}.rotor-image{flex:0 0 auto;max-width:250px}.rotor-text{font-size:.9rem}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}}
-@media(max-width:480px){.rotor-section{margin:1.5rem 0 2rem}.rotor-image{max-width:200px}}
+@media(max-width:768px){.products-intro-section{flex-direction:column;gap:2rem}.products-intro-image{flex:0 0 auto;max-width:250px}.rotor-text{font-size:.9rem}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}}
+@media(max-width:480px){.products-intro-image{max-width:200px}}
 
 /* ─── SKELETON SCREEN ─── */
 @keyframes shimmer{
@@ -1513,22 +1513,21 @@ i {
     </div>
   </div>
   <div class="detail-body">
-    <p class="dl-lead">Instalamos aspersores Hunter para céspedes, jardines y espacios abiertos. Cobertura uniforme, ajuste de radio y arco, y bajo consumo energético. El sistema trabaja mientras vos no estás.</p>
+    <div class="products-intro-section">
+      <div class="products-intro-text">
+        <p class="dl-lead">Instalamos aspersores Hunter para céspedes, jardines y espacios abiertos. Cobertura uniforme, ajuste de radio y arco, y bajo consumo energético. El sistema trabaja mientras vos no estás.</p>
+        <h2 class="dl-section-title">Nuestros productos</h2>
+        <p class="dl-section-sub">Trabajamos con Hunter y Rain Bird — los dos estándares internacionales para riego residencial y profesional. Cada modelo tiene su aplicación específica según la superficie y el caudal disponible.</p>
+      </div>
+      <div class="products-intro-image">
+        <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
+      </div>
+    </div>
 
     <div class="dl-section">
-      <h2 class="dl-section-title">Nuestros productos</h2>
-      <p class="dl-section-sub">Trabajamos con Hunter y Rain Bird — los dos estándares internacionales para riego residencial y profesional. Cada modelo tiene su aplicación específica según la superficie y el caudal disponible.</p>
-
       <!-- ── ROTORES ── -->
       <h3 class="asp-sub-title">Rotores</h3>
-      <div class="rotor-section">
-        <div class="rotor-content">
-          <p class="rotor-text">Utilizamos rotores para cubrir superficies amplias de manera uniforme y eficiente, especialmente en jardines, parques y áreas verdes de gran tamaño.</p>
-        </div>
-        <div class="rotor-image">
-          <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
-        </div>
-      </div>
+      <p class="rotor-text">Utilizamos rotores para cubrir superficies amplias de manera uniforme y eficiente, especialmente en jardines, parques y áreas verdes de gran tamaño.</p>
       <div class="asp-products-grid rotor-carousel">
         <div class="rotor-track">
 
