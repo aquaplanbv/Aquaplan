@@ -1010,8 +1010,8 @@ footer::before{
 .carousel-3d-slide img{width:100%;height:100%;object-fit:cover}
 .carousel-3d-slide.active{opacity:1;transform:scale(1) translateX(0);z-index:2}
 .carousel-3d-slide.prev{opacity:0.4;transform:scale(0.85) translateX(-30px);z-index:1;filter:brightness(0.7)}
-.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(74,140,92,0.9);border:none;color:white;font-size:24px;cursor:pointer;z-index:10;transition:all 0.2s;font-weight:300;line-height:1}
-.carousel-nav:hover{background:rgba(74,140,92,1);transform:translateY(-50%) scale(1.1)}
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:white;border:none;color:#999;font-size:24px;cursor:pointer;z-index:10;transition:all 0.2s;font-weight:300;line-height:1;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.carousel-nav:hover{background:white;color:#666;transform:translateY(-50%) scale(1.1);box-shadow:0 6px 16px rgba(0,0,0,0.15)}
 .carousel-nav-prev{left:-60px}
 .carousel-nav-next{right:-60px}
 .carousel-3d-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
@@ -1544,12 +1544,16 @@ i {
             <div class="carousel-3d-slide" data-index="1">
               <img loading="lazy" src="aspersor-2.jpg" alt="Sistema de riego instalado">
             </div>
+            <div class="carousel-3d-slide" data-index="2">
+              <img loading="lazy" src="aspersor-3.jpg" alt="Detalle de aspersor en funcionamiento">
+            </div>
           </div>
         </div>
         <button class="carousel-nav carousel-nav-next" onclick="carousel3dNext()">›</button>
         <div class="carousel-3d-dots">
           <span class="dot active" onclick="carousel3dGoto(0)"></span>
           <span class="dot" onclick="carousel3dGoto(1)"></span>
+          <span class="dot" onclick="carousel3dGoto(2)"></span>
         </div>
       </div>
     </div>
@@ -1701,8 +1705,10 @@ i {
       </div>
 
       <!-- ── TOBERAS ── -->
-      <h3 class="asp-sub-title" style="margin-top:2.5rem">Toberas Hunter PSU</h3>
-      <div class="asp-products-grid asp-products-grid--toberas">
+      <h3 class="asp-sub-title" style="margin-top:2.5rem">Toberas</h3>
+      <p class="rotor-text">Ideales para jardines de tamaño moderado, canteros, áreas verdes residenciales y espacios con geometrías específicas.</p>
+      <div class="asp-products-grid rotor-carousel">
+        <div class="rotor-track">
 
         <!-- 4A -->
         <div class="asp-prod-card">
@@ -1823,6 +1829,59 @@ i {
           </div>
         </div>
 
+        <!-- Toberas duplicadas para loop infinito -->
+        <!-- 4A (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-4A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-4A</div>
+            <p class="asp-prod-desc">Tobera de corto alcance ideal para canteros angostos y bordes. Distribución uniforme con bajo caudal.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>1,2 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>0° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6A (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-6A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-6A</div>
+            <p class="asp-prod-desc">Tobera de alcance medio-bajo para difusores estándar. Eficiente en espacios reducidos con cobertura circular completa.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>1,8 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>0° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8A (duplicado) -->
+        <div class="asp-prod-card">
+          <div class="asp-prod-img">
+            <img loading="lazy" src="https://hidronorte.com.ar/wp-content/uploads/2025/02/TOBERA-10A.jpg" alt="Tobera PSU-04-8A"
+                 onerror="this.src='pexels-malcolnphoto-35090073.jpg'">
+          </div>
+          <div class="asp-prod-body">
+            <span class="asp-prod-badge asp-prod-badge--alt">Tobera difusor</span>
+            <div class="asp-prod-name">PSU-04-8A</div>
+            <p class="asp-prod-desc">Tobera versátil para jardines medianos. Balance ideal entre radio de cobertura y consumo de agua.</p>
+            <div class="asp-prod-specs">
+              <div class="asp-spec"><span>Radio</span><strong>2,4 m</strong></div>
+              <div class="asp-spec"><span>Arco</span><strong>0° – 360°</strong></div>
+            </div>
+          </div>
+        </div>
+
+        </div>
       </div>
     </div>
 
