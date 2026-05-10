@@ -3827,6 +3827,71 @@ document.addEventListener('keydown', (e) => {
     });
   });
 })();
+
+// ── Productos carousel auto-scroll infinito (mobile) ──
+(function() {
+  const prodRow = document.querySelector('.prod-row');
+  if (!prodRow || window.innerWidth > 480) return;
+
+  // Duplicar items para crear efecto infinito
+  const items = Array.from(prodRow.querySelectorAll('.prod-item'));
+  if (items.length === 0) return;
+
+  items.forEach(item => {
+    const clone = item.cloneNode(true);
+    clone.classList.add('carousel-clone');
+    prodRow.appendChild(clone);
+  });
+
+  let scrollPos = 0;
+  const scrollSpeed = 0.8; // píxeles por frame
+  let isManualScrolling = false;
+  let scrollTimeout;
+
+  function autoScroll() {
+    if (!isManualScrolling) {
+      scrollPos += scrollSpeed;
+      prodRow.scrollLeft = scrollPos;
+
+      // Loop infinito: cuando lleguemos a la mitad, volvemos al inicio
+      if (prodRow.scrollLeft >= prodRow.scrollWidth / 2) {
+        scrollPos = 0;
+        prodRow.scrollLeft = 0;
+      }
+    }
+  }
+
+  // Iniciar auto-scroll
+  let scrollInterval = setInterval(autoScroll, 30);
+
+  // Pausar cuando el usuario interactúa
+  prodRow.addEventListener('mousedown', () => {
+    isManualScrolling = true;
+    clearInterval(scrollInterval);
+  });
+
+  prodRow.addEventListener('touchstart', () => {
+    isManualScrolling = true;
+    clearInterval(scrollInterval);
+  });
+
+  // Reanudar después de que el usuario termine de interactuar
+  prodRow.addEventListener('mouseup', () => {
+    isManualScrolling = false;
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      scrollInterval = setInterval(autoScroll, 30);
+    }, 500);
+  });
+
+  prodRow.addEventListener('touchend', () => {
+    isManualScrolling = false;
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      scrollInterval = setInterval(autoScroll, 30);
+    }, 500);
+  });
+})();
 </script>
 
 <!-- ── CARRITO PANEL ── -->
