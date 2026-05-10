@@ -3833,64 +3833,66 @@ document.addEventListener('keydown', (e) => {
   const prodRow = document.querySelector('.prod-row');
   if (!prodRow || window.innerWidth > 480) return;
 
-  // Duplicar items para crear efecto infinito
-  const items = Array.from(prodRow.querySelectorAll('.prod-item'));
-  if (items.length === 0) return;
+  // Esperar a que se carguen los items
+  setTimeout(() => {
+    const items = Array.from(prodRow.querySelectorAll('.prod-item:not(.carousel-clone)'));
+    if (items.length === 0) return;
 
-  items.forEach(item => {
-    const clone = item.cloneNode(true);
-    clone.classList.add('carousel-clone');
-    prodRow.appendChild(clone);
-  });
+    // Duplicar items exactamente
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.classList.add('carousel-clone');
+      prodRow.appendChild(clone);
+    });
 
-  let scrollPos = 0;
-  const scrollSpeed = 0.8; // píxeles por frame
-  let isManualScrolling = false;
-  let scrollTimeout;
+    // Calcular el ancho exacto de un set completo (4 items)
+    const firstItem = prodRow.querySelector('.prod-item');
+    const gapSize = parseInt(window.getComputedStyle(prodRow).gap) || 24;
+    const itemWidth = firstItem.offsetWidth;
+    const loopWidth = itemWidth * 4 + gapSize * 3; // 4 items + 3 gaps
 
-  function autoScroll() {
-    if (!isManualScrolling) {
-      scrollPos += scrollSpeed;
-      prodRow.scrollLeft = scrollPos;
+    let scrollPos = 0;
+    const scrollSpeed = 1; // píxeles por frame (suave)
+    let isManualScrolling = false;
+    let scrollTimeout;
+    let lastScrollPos = 0;
 
-      // Loop infinito: cuando lleguemos a la mitad, volvemos al inicio
-      if (prodRow.scrollLeft >= prodRow.scrollWidth / 2) {
-        scrollPos = 0;
-        prodRow.scrollLeft = 0;
+    function autoScroll() {
+      if (!isManualScrolling) {
+        scrollPos += scrollSpeed;
+        prodRow.scrollLeft = scrollPos;
+
+        // Reset imperceptible cuando alcanza el ancho de un set
+        if (scrollPos >= loopWidth) {
+          scrollPos = 0;
+          prodRow.scrollLeft = 0;
+        }
       }
     }
-  }
 
-  // Iniciar auto-scroll
-  let scrollInterval = setInterval(autoScroll, 30);
+    // Iniciar auto-scroll
+    let scrollInterval = setInterval(autoScroll, 24);
 
-  // Pausar cuando el usuario interactúa
-  prodRow.addEventListener('mousedown', () => {
-    isManualScrolling = true;
-    clearInterval(scrollInterval);
-  });
+    // Pausar cuando el usuario interactúa
+    const pauseAutoScroll = () => {
+      isManualScrolling = true;
+      clearInterval(scrollInterval);
+    };
 
-  prodRow.addEventListener('touchstart', () => {
-    isManualScrolling = true;
-    clearInterval(scrollInterval);
-  });
+    const resumeAutoScroll = () => {
+      isManualScrolling = false;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        scrollPos = prodRow.scrollLeft; // Continuar desde donde el usuario dejó
+        scrollInterval = setInterval(autoScroll, 24);
+      }, 800);
+    };
 
-  // Reanudar después de que el usuario termine de interactuar
-  prodRow.addEventListener('mouseup', () => {
-    isManualScrolling = false;
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      scrollInterval = setInterval(autoScroll, 30);
-    }, 500);
-  });
-
-  prodRow.addEventListener('touchend', () => {
-    isManualScrolling = false;
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      scrollInterval = setInterval(autoScroll, 30);
-    }, 500);
-  });
+    prodRow.addEventListener('mousedown', pauseAutoScroll);
+    prodRow.addEventListener('touchstart', pauseAutoScroll);
+    prodRow.addEventListener('mouseup', resumeAutoScroll);
+    prodRow.addEventListener('touchend', resumeAutoScroll);
+  }, 100);
 })();
 </script>
 
