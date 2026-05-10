@@ -1001,16 +1001,19 @@ footer::before{
 
 /* ─── CAROUSEL DE ROTORES ─── */
 .asp-intro-text{font-size:.95rem;color:var(--muted);max-width:60ch;line-height:1.6;margin:0 auto 2.5rem;text-align:center}
-.rotor-image-section{width:60%;max-width:500px;margin:2.5rem auto 3rem;text-align:center}
-.rotor-image-section img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.rotor-image-section img:hover{transform:scale(1.02)}
+.rotor-section{display:flex;gap:3rem;align-items:center;margin:2.5rem 0 3rem}
+.rotor-content{flex:1;min-width:0}
+.rotor-text{font-size:0.95rem;color:var(--dk);line-height:1.6;margin:0}
+.rotor-image{flex:0 0 30%;min-width:0}
+.rotor-image img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.rotor-image img:hover{transform:scale(1.02)}
 .asp-products-grid.rotor-carousel{display:block;overflow:hidden;padding:1.5rem 0}
 .rotor-track{display:flex;gap:1.5rem;animation:rotorScroll 45s linear infinite;user-select:none;padding:.5rem 0}
 .rotor-track:hover{animation-play-state:paused}
 .rotor-carousel .asp-prod-card{flex:0 0 320px}
 @keyframes rotorScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
-@media(max-width:768px){.rotor-image-section{width:85%}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}.asp-intro-text{font-size:.9rem;margin-bottom:1.5rem}}
-@media(max-width:480px){.rotor-image-section{margin:1.5rem auto 2rem}}
+@media(max-width:768px){.rotor-section{flex-direction:column-reverse;gap:2rem}.rotor-image{flex:0 0 auto;max-width:250px}.rotor-text{font-size:.9rem}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}}
+@media(max-width:480px){.rotor-section{margin:1.5rem 0 2rem}.rotor-image{max-width:200px}}
 
 /* ─── SKELETON SCREEN ─── */
 @keyframes shimmer{
@@ -1518,9 +1521,13 @@ i {
 
       <!-- ── ROTORES ── -->
       <h3 class="asp-sub-title">Rotores</h3>
-      <p class="asp-intro-text">Los rotores se utilizan para cubrir grandes áreas con bajo caudal. Ofrecen alcances de hasta 15 metros con arcos configurables según tu necesidad.</p>
-      <div class="rotor-image-section">
-        <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
+      <div class="rotor-section">
+        <div class="rotor-content">
+          <p class="rotor-text">Utilizamos rotores para cubrir superficies amplias de manera uniforme y eficiente, especialmente en jardines, parques y áreas verdes de gran tamaño.</p>
+        </div>
+        <div class="rotor-image">
+          <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
+        </div>
       </div>
       <div class="asp-products-grid rotor-carousel">
         <div class="rotor-track">
