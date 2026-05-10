@@ -775,6 +775,35 @@ footer::before{
   footer{flex-direction:column;gap:.75rem;text-align:center;padding:2rem 1.5rem}
 }
 
+@media(max-width:480px){
+  /* ── Productos: carousel horizontal en mobile ── */
+  .prod-row{
+    display:flex !important;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
+    gap:1.5rem;
+    padding:0 1.5rem 3.5rem !important;
+    scrollbar-width:none;
+    align-items:center;
+    grid-template-columns:unset !important;
+  }
+  .prod-row::-webkit-scrollbar{display:none}
+  .prod-item{
+    flex:0 0 calc(100% - 3rem);
+    min-width:0;
+    border:none !important;
+    padding:1.5rem 0 1.25rem !important;
+  }
+  .prod-item:nth-child(2),
+  .prod-item:nth-child(3),
+  .prod-item:nth-child(4){
+    border-top:none !important;
+    border-left:none !important;
+  }
+}
+
 /* ═══ PRODUCT DETAIL OVERLAYS ═══ */
 .detail-overlay{
   position:fixed;inset:0;z-index:500;
