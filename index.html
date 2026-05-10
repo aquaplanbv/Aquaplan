@@ -1018,16 +1018,18 @@ footer::before{
 .carousel-3d-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.3s;border:none;padding:0}
 .carousel-3d-dots .dot.active{background:white;width:24px;border-radius:4px}
 @media(max-width:768px){.carousel-3d-wrapper{flex:0 0 100%;gap:1rem}.carousel-3d-container{height:350px}.carousel-nav{width:40px;height:40px;font-size:20px}.carousel-nav-prev{left:-50px}.carousel-nav-next{right:-50px}}
-@media(max-width:480px){.carousel-3d-wrapper{flex:0 0 100%}.carousel-3d-container{height:300px}.carousel-nav-prev{left:8px}.carousel-nav-next{right:8px}}
+@media(max-width:480px){.carousel-3d-wrapper{flex:0 0 100%;padding:0 45px}.carousel-3d-container{height:280px}.carousel-nav{width:36px;height:36px;font-size:18px}.carousel-nav-prev{left:2px}.carousel-nav-next{right:2px}.carousel-3d-dots{bottom:8px}}
 .products-intro-image img:hover{transform:scale(1.02)}
 .rotor-text{font-size:0.95rem;color:var(--dk);line-height:1.6;margin:0 0 2rem}
 .asp-products-grid.rotor-carousel{display:block;overflow:hidden;padding:1.5rem 0}
 .rotor-track{display:flex;gap:1.5rem;animation:rotorScroll 45s linear infinite;user-select:none;padding:.5rem 0}
 .rotor-track:hover{animation-play-state:paused}
+.rotor-carousel{cursor:grab}
+.rotor-carousel.dragging{cursor:grabbing}
 .rotor-carousel .asp-prod-card{flex:0 0 320px}
 @keyframes rotorScroll{0%{transform:translateX(0)} 100%{transform:translateX(-50%)}}
-@media(max-width:768px){.products-intro-section{flex-direction:column;gap:2rem}.products-intro-image{flex:0 0 auto;max-width:250px}.rotor-text{font-size:.9rem}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}}
-@media(max-width:480px){.products-intro-image{max-width:200px}}
+@media(max-width:768px){.products-intro-section{flex-direction:column;gap:2rem}.products-intro-image{flex:0 0 auto;max-width:250px}.rotor-text{font-size:.9rem}.rotor-track{gap:1rem}.rotor-carousel .asp-prod-card{flex:0 0 280px}.rotor-carousel{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}}
+@media(max-width:480px){.products-intro-image{max-width:200px}.rotor-carousel{padding:1rem 0}.rotor-carousel .asp-prod-card{flex:0 0 240px}.rotor-track{gap:0.75rem;padding-left:1rem;padding-right:1rem}}
 
 /* ─── SKELETON SCREEN ─── */
 @keyframes shimmer{
@@ -3666,7 +3668,86 @@ document.addEventListener('keydown', (e) => {
       const walk = (x - startX) * 1.5;
       carousel.scrollLeft = scrollLeft - walk;
     });
+
+    // Touch support para Rotores
+    carousel.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      track.style.animation = 'none';
+    });
+
+    carousel.addEventListener('touchend', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
   }
+})();
+
+// ── Toberas carousel drag (igual a Rotores) ──
+(function() {
+  const carousels = document.querySelectorAll('.rotor-carousel');
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.rotor-track');
+    if (!track || carousel.classList.contains('done-drag')) return;
+    carousel.classList.add('done-drag');
+
+    let isDown = false, startX, scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      track.style.animation = 'none';
+      carousel.style.cursor = 'grabbing';
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+      carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mouseup', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+      carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch support para Toberas
+    carousel.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      track.style.animation = 'none';
+    });
+
+    carousel.addEventListener('touchend', () => {
+      isDown = false;
+      track.style.animation = 'rotorScroll 45s linear infinite';
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+  });
 })();
 </script>
 
