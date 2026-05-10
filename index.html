@@ -1003,8 +1003,22 @@ footer::before{
 .asp-intro-text{font-size:.95rem;color:var(--muted);max-width:60ch;line-height:1.6;margin:0 auto 2.5rem;text-align:center}
 .products-intro-section{display:flex;gap:3rem;align-items:flex-start;margin-bottom:3rem}
 .products-intro-text{flex:1}
-.products-intro-image{flex:0 0 280px;min-width:0}
-.products-intro-image img{width:100%;height:auto;border-radius:12px;box-shadow:0 12px 40px rgba(26,43,30,.15);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.carousel-3d-wrapper{flex:0 0 340px;position:relative;perspective:1000px;display:flex;align-items:center;gap:1.5rem}
+.carousel-3d-container{flex:1;height:450px;position:relative;overflow:hidden;border-radius:16px;box-shadow:0 20px 60px rgba(26,43,30,.2)}
+.carousel-3d-track{position:relative;width:100%;height:100%;transition:none}
+.carousel-3d-slide{position:absolute;width:100%;height:100%;top:0;left:0;opacity:0;transition:all 0.6s cubic-bezier(.22,1,.36,1);transform:scale(0.8) translateX(20px);z-index:0}
+.carousel-3d-slide img{width:100%;height:100%;object-fit:cover}
+.carousel-3d-slide.active{opacity:1;transform:scale(1) translateX(0);z-index:2}
+.carousel-3d-slide.prev{opacity:0.4;transform:scale(0.85) translateX(-30px);z-index:1;filter:brightness(0.7)}
+.carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(74,140,92,0.9);border:none;color:white;font-size:24px;cursor:pointer;z-index:10;transition:all 0.2s;font-weight:300;line-height:1}
+.carousel-nav:hover{background:rgba(74,140,92,1);transform:translateY(-50%) scale(1.1)}
+.carousel-nav-prev{left:-60px}
+.carousel-nav-next{right:-60px}
+.carousel-3d-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+.carousel-3d-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.3s;border:none;padding:0}
+.carousel-3d-dots .dot.active{background:white;width:24px;border-radius:4px}
+@media(max-width:768px){.carousel-3d-wrapper{flex:0 0 100%;gap:1rem}.carousel-3d-container{height:350px}.carousel-nav{width:40px;height:40px;font-size:20px}.carousel-nav-prev{left:-50px}.carousel-nav-next{right:-50px}}
+@media(max-width:480px){.carousel-3d-wrapper{flex:0 0 100%}.carousel-3d-container{height:300px}.carousel-nav-prev{left:8px}.carousel-nav-next{right:8px}}
 .products-intro-image img:hover{transform:scale(1.02)}
 .rotor-text{font-size:0.95rem;color:var(--dk);line-height:1.6;margin:0 0 2rem}
 .asp-products-grid.rotor-carousel{display:block;overflow:hidden;padding:1.5rem 0}
@@ -1520,8 +1534,23 @@ i {
         <p class="dl-section-sub">Cada modelo ofrece ajuste de radio y arco configurable, bajo consumo energético y compatibilidad con automatización, optimizando la cobertura uniforme según el tipo de vegetación y caudal disponible.</p>
         <p class="dl-section-sub">El sistema trabaja automáticamente garantizando resultados profesionales en cualquier contexto.</p>
       </div>
-      <div class="products-intro-image">
-        <img loading="lazy" src="rotor-hero.jpg" alt="Rotor Hunter en funcionamiento">
+      <div class="carousel-3d-wrapper">
+        <button class="carousel-nav carousel-nav-prev" onclick="carousel3dPrev()">‹</button>
+        <div class="carousel-3d-container">
+          <div class="carousel-3d-track" id="carousel3dTrack">
+            <div class="carousel-3d-slide" data-index="0">
+              <img loading="lazy" src="aspersor-1.jpg" alt="Aspersor Hunter en funcionamiento">
+            </div>
+            <div class="carousel-3d-slide" data-index="1">
+              <img loading="lazy" src="aspersor-2.jpg" alt="Sistema de riego instalado">
+            </div>
+          </div>
+        </div>
+        <button class="carousel-nav carousel-nav-next" onclick="carousel3dNext()">›</button>
+        <div class="carousel-3d-dots">
+          <span class="dot active" onclick="carousel3dGoto(0)"></span>
+          <span class="dot" onclick="carousel3dGoto(1)"></span>
+        </div>
       </div>
     </div>
 
@@ -3431,6 +3460,49 @@ function copiar(btn, text) {
     });
   }, 300);
 })();
+
+// ── Carrusel 3D de Aspersores ──
+let carousel3dIndex = 0;
+const carousel3dSlides = document.querySelectorAll('.carousel-3d-slide');
+const carousel3dTotal = carousel3dSlides.length;
+
+function carousel3dUpdateUI() {
+  carousel3dSlides.forEach((slide, i) => {
+    slide.classList.remove('active', 'prev');
+    if (i === carousel3dIndex) {
+      slide.classList.add('active');
+    } else if (i === (carousel3dIndex - 1 + carousel3dTotal) % carousel3dTotal) {
+      slide.classList.add('prev');
+    }
+  });
+  document.querySelectorAll('.carousel-3d-dots .dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === carousel3dIndex);
+  });
+}
+
+function carousel3dNext() {
+  carousel3dIndex = (carousel3dIndex + 1) % carousel3dTotal;
+  carousel3dUpdateUI();
+}
+
+function carousel3dPrev() {
+  carousel3dIndex = (carousel3dIndex - 1 + carousel3dTotal) % carousel3dTotal;
+  carousel3dUpdateUI();
+}
+
+function carousel3dGoto(index) {
+  carousel3dIndex = index % carousel3dTotal;
+  carousel3dUpdateUI();
+}
+
+// Inicializar carrusel
+carousel3dUpdateUI();
+
+// Soporte para teclado
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') carousel3dPrev();
+  if (e.key === 'ArrowRight') carousel3dNext();
+});
 
 // ── Obras carousel drag ──
 (function() {
