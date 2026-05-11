@@ -822,77 +822,154 @@ footer::before{
 }
 
 @media(max-width:480px){
-  /* ── Productos: carousel con navegacion por flechas ── */
+  /* ── Productos: carousel profesional con navegación ── */
   #productos {
     position: relative;
   }
   .prod-row{
     display:block !important;
     overflow:hidden;
-    padding:2rem 0 3.5rem !important;
+    padding:2.5rem 0 1rem !important;
     grid-template-columns:unset !important;
     position:relative;
-    min-height:420px;
+    min-height:440px;
     width: 100%;
+    touch-action: pan-y;
   }
-  /* Flechas de navegacion */
+  /* Flechas de navegación elegantes */
   .prod-carousel-btn {
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.9);
-    border: 1px solid var(--bd);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(74, 140, 92, 0.15);
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.5rem;
+    width: 42px;
+    height: 42px;
     color: var(--sg);
-    font-weight: 700;
     cursor: pointer;
     padding: 0;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 16px rgba(26, 43, 30, 0.08), 0 1px 3px rgba(26, 43, 30, 0.04);
+    font-size: 0;
+  }
+  .prod-carousel-btn::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+  }
+  .prod-carousel-btn.prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+  }
+  .prod-carousel-btn.next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
   }
   .prod-carousel-btn:hover,
   .prod-carousel-btn:active {
     background: var(--sg);
     color: white;
     border-color: var(--sg);
+    box-shadow: 0 6px 20px rgba(74, 140, 92, 0.35);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .prod-carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
   }
   .prod-carousel-btn.prev {
-    left: 0.75rem;
+    left: 0.6rem;
   }
   .prod-carousel-btn.next {
-    right: 0.75rem;
+    right: 0.6rem;
   }
+  /* Dots indicadores */
+  .prod-carousel-dots {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+  }
+  .prod-carousel-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(74, 140, 92, 0.25);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .prod-carousel-dot.active {
+    background: var(--sg);
+    width: 22px;
+    border-radius: 4px;
+  }
+  /* Ocultar texto auxiliar */
   #productos>div:last-of-type{
     display:none;
   }
+  /* Items - posición absoluta con slide animation */
   .prod-item{
     position: absolute !important;
     inset: 0 !important;
     width: auto !important;
     height: auto !important;
-    transform: none !important;
     border:none !important;
-    padding:2rem 4.5rem !important;
+    padding:1.5rem 4rem !important;
     display:flex !important;
     flex-direction:column !important;
     align-items:center !important;
     justify-content:center !important;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transform: translateX(40px) !important;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.5s;
     pointer-events: none;
+  }
+  .prod-item.slide-out-left {
+    opacity: 0;
+    transform: translateX(-40px) !important;
   }
   .prod-item.active {
     opacity: 1;
     visibility: visible;
+    transform: translateX(0) !important;
     pointer-events: auto;
+  }
+  /* Mejorar tipografía del item activo */
+  .prod-item .prod-num {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.25em !important;
+    margin-top: 1rem !important;
+    color: var(--sg) !important;
+    opacity: 0.7;
+  }
+  .prod-item .prod-name {
+    font-size: 1.5rem !important;
+    margin-top: 0.4rem !important;
+  }
+  .prod-item .prod-cta {
+    margin-top: 0.6rem !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase;
+    color: var(--sg);
+    opacity: 0.8;
   }
   .prod-item:nth-child(2),
   .prod-item:nth-child(3),
@@ -2399,7 +2476,7 @@ i {
   </div>
 
   <div class="prod-row">
-    <button class="prod-carousel-btn prev" onclick="carouselNav('prev')">←</button>
+    <button class="prod-carousel-btn prev" onclick="carouselNav('prev')" aria-label="Producto anterior"></button>
 
     <!-- 01 · DISEÑO -->
     <div class="prod-item reveal" data-detail="diseno" onclick="openOverlay('diseno')">
@@ -2453,7 +2530,13 @@ i {
       <span class="prod-cta">Ver más →</span>
     </div>
 
-    <button class="prod-carousel-btn next" onclick="carouselNav('next')">→</button>
+    <button class="prod-carousel-btn next" onclick="carouselNav('next')" aria-label="Siguiente producto"></button>
+    <div class="prod-carousel-dots" role="tablist" aria-label="Navegación de productos">
+      <button class="prod-carousel-dot active" onclick="carouselGoTo(0)" aria-label="Ir a Diseño"></button>
+      <button class="prod-carousel-dot" onclick="carouselGoTo(1)" aria-label="Ir a Aspersores"></button>
+      <button class="prod-carousel-dot" onclick="carouselGoTo(2)" aria-label="Ir a Goteo"></button>
+      <button class="prod-carousel-dot" onclick="carouselGoTo(3)" aria-label="Ir a Automatización"></button>
+    </div>
   </div>
 </section>
 
@@ -3293,13 +3376,18 @@ function toggleMobileAccesorios(event) {
   submenu.classList.toggle('open');
 }
 
-// ── Carousel navigation ──
+// ── Carousel navigation profesional ──
 let carouselIndex = 0;
+let carouselDirection = 'next';
 const carouselItems = () => document.querySelectorAll('.prod-row > .prod-item');
+const carouselDots = () => document.querySelectorAll('.prod-carousel-dot');
 
 function carouselNav(direction) {
   const items = carouselItems();
   if (items.length === 0) return;
+
+  carouselDirection = direction;
+  const prevIndex = carouselIndex;
 
   if (direction === 'next') {
     carouselIndex = (carouselIndex + 1) % items.length;
@@ -3307,41 +3395,113 @@ function carouselNav(direction) {
     carouselIndex = (carouselIndex - 1 + items.length) % items.length;
   }
 
-  updateCarouselPosition();
+  updateCarouselPosition(prevIndex);
 }
 
-function updateCarouselPosition() {
+function carouselGoTo(index) {
   const items = carouselItems();
+  if (items.length === 0 || index === carouselIndex) return;
+
+  carouselDirection = index > carouselIndex ? 'next' : 'prev';
+  const prevIndex = carouselIndex;
+  carouselIndex = index;
+  updateCarouselPosition(prevIndex);
+}
+
+function updateCarouselPosition(prevIndex) {
+  const items = carouselItems();
+  const dots = carouselDots();
   if (items.length === 0) return;
 
   items.forEach((item, idx) => {
+    item.classList.remove('active', 'slide-out-left');
     if (idx === carouselIndex) {
+      // Forzar reflow para reiniciar animación
+      void item.offsetWidth;
       item.classList.add('active');
-    } else {
-      item.classList.remove('active');
+    } else if (idx === prevIndex && carouselDirection === 'next') {
+      item.classList.add('slide-out-left');
     }
+  });
+
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === carouselIndex);
   });
 }
 
-// Initialize carousel on load
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.innerWidth <= 480) {
-    updateCarouselPosition();
-  }
-});
+// Swipe táctil
+function initCarouselSwipe() {
+  const row = document.querySelector('.prod-row');
+  if (!row) return;
 
-// Init on resize too
-window.addEventListener('resize', () => {
+  let startX = 0;
+  let startY = 0;
+  let isSwiping = false;
+
+  row.addEventListener('touchstart', (e) => {
+    if (window.innerWidth > 480) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isSwiping = true;
+  }, { passive: true });
+
+  row.addEventListener('touchmove', (e) => {
+    if (!isSwiping || window.innerWidth > 480) return;
+    const dx = Math.abs(e.touches[0].clientX - startX);
+    const dy = Math.abs(e.touches[0].clientY - startY);
+    // Si scroll vertical es mayor, cancelar swipe
+    if (dy > dx) isSwiping = false;
+  }, { passive: true });
+
+  row.addEventListener('touchend', (e) => {
+    if (!isSwiping || window.innerWidth > 480) return;
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+      carouselNav(diff > 0 ? 'next' : 'prev');
+    }
+    isSwiping = false;
+  }, { passive: true });
+}
+
+// Navegación con teclado (cuando carousel está visible)
+function initCarouselKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (window.innerWidth > 480) return;
+    const row = document.querySelector('.prod-row');
+    if (!row) return;
+    const rect = row.getBoundingClientRect();
+    // Solo si está visible
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+    if (e.key === 'ArrowRight') carouselNav('next');
+    if (e.key === 'ArrowLeft') carouselNav('prev');
+  });
+}
+
+// Initialize carousel
+function initCarousel() {
   if (window.innerWidth <= 480) {
+    carouselIndex = 0;
     updateCarouselPosition();
   } else {
-    carouselItems().forEach(item => item.classList.remove('active'));
+    carouselItems().forEach(item => item.classList.remove('active', 'slide-out-left'));
   }
-}, { passive:true });
+}
 
-// Init immediately for the case when DOMContentLoaded already fired
-if (document.readyState !== 'loading' && window.innerWidth <= 480) {
-  updateCarouselPosition();
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel();
+  initCarouselSwipe();
+  initCarouselKeyboard();
+});
+
+window.addEventListener('resize', initCarousel, { passive: true });
+
+if (document.readyState !== 'loading') {
+  initCarousel();
+  initCarouselSwipe();
+  initCarouselKeyboard();
 }
 
 // ── Open accesorios with category pre-selected ──
