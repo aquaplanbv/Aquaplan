@@ -827,60 +827,72 @@ footer::before{
     position: relative;
   }
   .prod-row{
-    display:flex !important;
+    display:block !important;
     overflow:hidden;
-    gap:1.5rem;
-    padding:2rem 3.5rem 3.5rem !important;
-    align-items:center;
-    justify-content:center;
+    padding:2rem 0 3.5rem !important;
     grid-template-columns:unset !important;
     position:relative;
     min-height:420px;
     width: 100%;
-  }
-  /* Contenedor de items con transform para navegacion */
-  .prod-carousel-inner {
-    display: flex;
-    gap: 1.5rem;
-    width: 100%;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
   /* Flechas de navegacion */
   .prod-carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 2.2rem;
-    color: #d0d0d0;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--bd);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    color: var(--sg);
     font-weight: 700;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0;
     z-index: 10;
-    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
-  .prod-carousel-btn:hover {
-    color: var(--sg);
+  .prod-carousel-btn:hover,
+  .prod-carousel-btn:active {
+    background: var(--sg);
+    color: white;
+    border-color: var(--sg);
   }
   .prod-carousel-btn.prev {
-    left: 0.5rem;
+    left: 0.75rem;
   }
   .prod-carousel-btn.next {
-    right: 0.5rem;
+    right: 0.75rem;
   }
   #productos>div:last-of-type{
     display:none;
   }
   .prod-item{
-    flex:0 0 calc(100% - 3rem);
-    min-width:0;
+    position: absolute !important;
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
     border:none !important;
-    padding:0 !important;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    padding:2rem 4.5rem !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    pointer-events: none;
+  }
+  .prod-item.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   .prod-item:nth-child(2),
   .prod-item:nth-child(3),
@@ -3283,7 +3295,7 @@ function toggleMobileAccesorios(event) {
 
 // ── Carousel navigation ──
 let carouselIndex = 0;
-const carouselItems = () => document.querySelectorAll('.prod-item');
+const carouselItems = () => document.querySelectorAll('.prod-row > .prod-item');
 
 function carouselNav(direction) {
   const items = carouselItems();
@@ -3302,27 +3314,35 @@ function updateCarouselPosition() {
   const items = carouselItems();
   if (items.length === 0) return;
 
-  // Only apply on mobile
-  if (window.innerWidth > 480) return;
-
-  const row = document.querySelector('.prod-row');
-  const itemWidth = 100 / items.length;
-  const offset = -(carouselIndex * itemWidth);
-
   items.forEach((item, idx) => {
-    item.style.transform = `translateX(${offset}%)`;
+    if (idx === carouselIndex) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
   });
 }
 
-// Reset carousel on resize to desktop
+// Initialize carousel on load
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 480) {
+    updateCarouselPosition();
+  }
+});
+
+// Init on resize too
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 480) {
-    carouselIndex = 0;
-    carouselItems().forEach(item => {
-      item.style.transform = '';
-    });
+  if (window.innerWidth <= 480) {
+    updateCarouselPosition();
+  } else {
+    carouselItems().forEach(item => item.classList.remove('active'));
   }
 }, { passive:true });
+
+// Init immediately for the case when DOMContentLoaded already fired
+if (document.readyState !== 'loading' && window.innerWidth <= 480) {
+  updateCarouselPosition();
+}
 
 // ── Open accesorios with category pre-selected ──
 function openAccesoriosWithCategory(category) {
@@ -3955,75 +3975,6 @@ document.addEventListener('keydown', (e) => {
   });
 })();
 
-// ── Productos carousel auto-scroll infinito (mobile) ──
-(function() {
-  const prodRow = document.querySelector('.prod-row');
-  if (!prodRow || window.innerWidth > 480) return;
-
-  // Esperar a que se carguen los items
-  setTimeout(() => {
-    const items = Array.from(prodRow.querySelectorAll('.prod-item:not(.carousel-clone)'));
-    if (items.length === 0) return;
-
-    // Duplicar items exactamente
-    items.forEach(item => {
-      const clone = item.cloneNode(true);
-      clone.classList.add('carousel-clone');
-      prodRow.appendChild(clone);
-    });
-
-    // Desactivar snap para permitir auto-scroll suave
-    prodRow.style.scrollSnapType = 'none';
-
-    // Calcular el ancho exacto de un set completo (4 items)
-    const firstItem = prodRow.querySelector('.prod-item');
-    const gapSize = parseInt(window.getComputedStyle(prodRow).gap) || 24;
-    const itemWidth = firstItem.offsetWidth;
-    const loopWidth = itemWidth * 4 + gapSize * 3; // 4 items + 3 gaps
-
-    let scrollPos = 0;
-    const scrollSpeed = 1; // píxeles por frame (suave)
-    let isManualScrolling = false;
-    let scrollTimeout;
-
-    function autoScroll() {
-      if (!isManualScrolling) {
-        scrollPos += scrollSpeed;
-
-        // Reset imperceptible justo antes de alcanzar el final
-        if (scrollPos >= loopWidth) {
-          scrollPos = 0;
-          prodRow.scrollLeft = 0;
-        } else {
-          prodRow.scrollLeft = scrollPos;
-        }
-      }
-    }
-
-    // Iniciar auto-scroll
-    let scrollInterval = setInterval(autoScroll, 24);
-
-    // Pausar cuando el usuario interactúa
-    const pauseAutoScroll = () => {
-      isManualScrolling = true;
-      clearInterval(scrollInterval);
-    };
-
-    const resumeAutoScroll = () => {
-      isManualScrolling = false;
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        scrollPos = prodRow.scrollLeft; // Continuar desde donde el usuario dejó
-        scrollInterval = setInterval(autoScroll, 24);
-      }, 800);
-    };
-
-    prodRow.addEventListener('mousedown', pauseAutoScroll);
-    prodRow.addEventListener('touchstart', pauseAutoScroll);
-    prodRow.addEventListener('mouseup', resumeAutoScroll);
-    prodRow.addEventListener('touchend', resumeAutoScroll);
-  }, 100);
-})();
 </script>
 
 <!-- ── CARRITO PANEL ── -->
