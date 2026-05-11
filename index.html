@@ -829,9 +829,9 @@ footer::before{
     overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
     scroll-behavior:smooth;
-    scroll-snap-type:x mandatory;
+    scroll-snap-type:x proximity;
     gap:1.5rem;
-    padding:2rem 4.5rem 3.5rem !important;
+    padding:2rem 1.5rem 3.5rem !important;
     scrollbar-width:none;
     align-items:center;
     justify-content:flex-start;
@@ -880,12 +880,12 @@ footer::before{
     opacity:0.65;
   }
   .prod-item{
-    flex:0 0 calc(100% - 3rem);
+    flex:0 0 calc(50% - 1rem);
     min-width:0;
     border:none !important;
     padding:1.5rem 0 1.25rem !important;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
+    scroll-snap-align:center;
+    scroll-snap-stop:none;
     display:flex;
     flex-direction:column;
     align-items:center;
