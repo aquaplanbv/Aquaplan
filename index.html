@@ -829,8 +829,11 @@ footer::before{
     overflow-y:hidden;
     -webkit-overflow-scrolling:touch;
     scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:calc(50% - 150px);
+    scroll-padding-right:calc(50% - 150px);
     gap:1.5rem;
-    padding:2rem 1.5rem 3.5rem 1.5rem !important;
+    padding:2rem 0 3.5rem 0 !important;
     scrollbar-width:none;
     align-items:center;
     justify-content:flex-start;
@@ -839,23 +842,10 @@ footer::before{
     min-height:420px;
   }
   .prod-row::-webkit-scrollbar{display:none}
-  /* Flecha izquierda gris - hidden si no hay scroll */
-  .prod-row::before{
-    content:'←';
-    position:absolute;
-    left:0.5rem;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:2.2rem;
-    color:#d0d0d0;
-    font-weight:700;
-    pointer-events:none;
-    z-index:2;
-    opacity:0.6;
-  }
-  /* Flecha derecha - oculta para no interferir con scroll */
+  /* Sin flechas */
+  .prod-row::before,
   .prod-row::after{
-    display:none;
+    display:none !important;
   }
   #productos>div:last-of-type{
     content:'Deslizar horizontalmente';
@@ -872,7 +862,9 @@ footer::before{
     flex:0 0 calc(50% - 1rem);
     min-width:0;
     border:none !important;
-    padding:1.5rem 0 1.25rem !important;
+    padding:1.5rem 1.5rem 1.25rem 1.5rem !important;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
     display:flex;
     flex-direction:column;
     align-items:center;
