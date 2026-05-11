@@ -3740,17 +3740,51 @@ if (document.readyState !== 'loading') {
 
 // ── Open accesorios with category pre-selected ──
 function openAccesoriosWithCategory(category) {
-  // Open the accesorios section
-  document.getElementById('catalogo-section').scrollIntoView({behavior:'smooth'});
-  toggleSection('catalogo');
+  const content = document.getElementById('catalogo-content');
+  const arrow = document.getElementById('catalogo-toggle-arrow');
 
-  // Pre-select the category tab after opening
+  // Asegurar que la sección esté ABIERTA (no togglear)
+  if (content && content.style.display === 'none') {
+    content.style.display = 'block';
+    if (arrow) arrow.textContent = 'Cerrar ▲';
+  }
+
+  // Pause Lenis para evitar interferencias con scrollTo nativo
+  if (typeof lenis !== 'undefined') lenis.stop();
+
+  // Seleccionar la categoría
+  const tab = document.querySelector(`.acc-tab[onclick*="'${category}'"]`);
+  if (tab) {
+    switchAccTab(category, tab);
+  }
+
+  // Esperar a que el panel termine de renderizar (switchAccTab tiene un setTimeout de ~300ms)
+  // y luego hacer scroll. Usamos requestAnimationFrame doble para asegurar el reflow.
   setTimeout(() => {
-    const tab = document.querySelector(`.acc-tab[onclick*="'${category}'"]`);
-    if (tab) {
-      switchAccTab(category, tab);
-    }
-  }, 300); // Wait for section to be visible
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const section = document.getElementById('catalogo-section');
+        if (section) {
+          // Calcular posición precisa después del re-render
+          const navHeight = 64;
+          const offsetTop = section.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+
+        // Scroll horizontal de los tabs para mostrar el activo
+        const tabsContainer = document.querySelector('#catalogo-section .acc-tabs');
+        if (tab && tabsContainer && tabsContainer.scrollWidth > tabsContainer.clientWidth) {
+          const scrollLeft = tab.offsetLeft - (tabsContainer.clientWidth / 2) + (tab.clientWidth / 2);
+          tabsContainer.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
+        }
+
+        // Resume Lenis después del scroll
+        setTimeout(() => {
+          if (typeof lenis !== 'undefined') lenis.start();
+        }, 1000);
+      });
+    });
+  }, 400); // Esperar a que el switchAccTab termine de renderizar
 }
 
 // ── Scroll reveal ──
