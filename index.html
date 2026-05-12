@@ -821,6 +821,12 @@ footer::before{
   footer{flex-direction:column;gap:.75rem;text-align:center;padding:2rem 1.5rem}
 }
 
+/* Carrusel: solo visible en mobile - ocultar por defecto */
+.prod-carousel-btn,
+.prod-carousel-dots {
+  display: none;
+}
+
 @media(max-width:480px){
   /* ── Productos: carousel profesional con navegación ── */
   #productos {
