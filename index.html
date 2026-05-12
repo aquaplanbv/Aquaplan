@@ -1178,21 +1178,11 @@ footer::before{
 .acc-header h2 em{color:inherit;font-style:italic}
 .acc-sub{font-size:.9rem;color:var(--muted);max-width:44ch;margin:0 auto}
 .acc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;padding:0 2rem;margin-bottom:3rem}
-.acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--sg);border:1.5px solid var(--sg);border-radius:100px;color:var(--wh);transition:background .35s cubic-bezier(.22,1,.36,1), border-color .35s cubic-bezier(.22,1,.36,1), transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 12px rgba(74,140,92,.2);position:relative;overflow:hidden}
-.acc-tab::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.25);transform:translate(-50%,-50%);transition:width .5s ease-out, height .5s ease-out, opacity .5s ease-out;pointer-events:none;opacity:0}
-.acc-tab:active::before{width:200%;height:200%;opacity:1;transition:width 0s, height 0s, opacity 0s}
+.acc-tab{padding:.6rem 1.4rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:var(--sg);border:1.5px solid var(--sg);border-radius:100px;color:var(--wh);transition:all .3s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 12px rgba(74,140,92,.2)}
 .acc-tab:hover{background:var(--sgl);border-color:var(--sgl);color:var(--wh);transform:translateY(-3px);box-shadow:0 8px 24px rgba(74,140,92,.35)}
-.acc-tab.active{background:var(--dk);border-color:var(--dk);color:var(--wh);box-shadow:0 6px 16px rgba(26,43,30,.35);transform:translateY(-1px)}
-.acc-panel{display:block;padding:0 3.5rem 0;max-height:0;overflow:hidden;opacity:0;transform:translateY(8px);transition:max-height .45s cubic-bezier(.22,1,.36,1), opacity .35s cubic-bezier(.22,1,.36,1) .1s, transform .45s cubic-bezier(.22,1,.36,1) .1s}
-.acc-panel.active{max-height:2000px;opacity:1;transform:translateY(0)}
-.acc-card{animation:cardFadeIn .5s cubic-bezier(.22,1,.36,1) both}
-.acc-panel.active .acc-card:nth-child(1){animation-delay:.05s}
-.acc-panel.active .acc-card:nth-child(2){animation-delay:.1s}
-.acc-panel.active .acc-card:nth-child(3){animation-delay:.15s}
-.acc-panel.active .acc-card:nth-child(4){animation-delay:.2s}
-.acc-panel.active .acc-card:nth-child(5){animation-delay:.25s}
-.acc-panel.active .acc-card:nth-child(6){animation-delay:.3s}
-@keyframes cardFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.acc-tab.active{background:var(--sg);border-color:var(--sg);color:var(--wh);box-shadow:0 6px 16px rgba(74,140,92,.3)}
+.acc-panel{display:block;padding:0 3.5rem 0;max-height:0;overflow:hidden;transition:max-height .35s ease-in-out}
+.acc-panel.active{max-height:2000px}
 .acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
 .acc-card{background:var(--wh);border-radius:12px;overflow:hidden;border:1px solid var(--bd);transition:box-shadow .3s,transform .3s;display:flex;flex-direction:column}
 .acc-card:hover{box-shadow:0 8px 32px rgba(26,43,30,.1);transform:translateY(-3px)}
