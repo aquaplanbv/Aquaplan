@@ -158,22 +158,32 @@ body, p, span, a, button, input, textarea {
 .logo-aqua{fill:#ffffff;transition:fill .4s}
 .logo-plan{fill:#A5C4D8}
 #nav.solid .logo-aqua{fill:#1A2B1E}
-.nav-links{display:flex;align-items:center;gap:2.5rem;flex:1;justify-content:center;flex-shrink:0}
-.nav-links a{
+.nav-links{
+  display:flex;align-items:center;gap:2.25rem;
+  flex:1;justify-content:center;flex-shrink:0;
+  line-height:1;
+}
+.nav-links > a,
+.nav-links > .nav-dropdown-wrapper > .nav-dropdown-toggle{
   font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
   color:rgba(255,255,255,.8);transition:color .3s;
-  position:relative;padding-bottom:3px;
+  position:relative;padding:.4rem 0;
+  display:inline-flex;align-items:center;line-height:1;
+  white-space:nowrap;
 }
 /* Indicador de sección activa — subrayado verde */
-.nav-links a::after{
+.nav-links > a::after,
+.nav-links > .nav-dropdown-wrapper > .nav-dropdown-toggle::after{
   content:'';position:absolute;bottom:-1px;left:0;right:0;
   height:2px;background:var(--sgl);border-radius:2px;
   transform:scaleX(0);transform-origin:left center;
   transition:transform .28s cubic-bezier(.22,1,.36,1);
 }
-.nav-links a:hover::after,
-.nav-links a.nav-active::after{transform:scaleX(1)}
-.nav-links a.nav-active{color:var(--sgl)!important}
+.nav-links > a:hover::after,
+.nav-links > .nav-dropdown-wrapper:hover > .nav-dropdown-toggle::after,
+.nav-links > a.nav-active::after{transform:scaleX(1)}
+.nav-links > a.nav-active{color:var(--sgl)!important}
+.nav-dropdown-wrapper{display:inline-flex;align-items:center}
 #nav.solid .nav-links a{color:var(--dk)}
 #nav.solid .nav-links a:hover{color:var(--sg)}
 /* Carrito posicionado a la derecha */
