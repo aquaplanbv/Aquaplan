@@ -256,34 +256,105 @@ body, p, span, a, button, input, textarea {
 .nav-dropdown-menu a:hover{
   background:var(--cr);color:var(--sg);border-left-color:var(--sg)
 }
-/* Dropdown agrupado (Riego / Jardinería) */
-.nav-dropdown-menu--grouped{min-width:240px;padding:.4rem 0}
-.nav-dropdown-group{padding:.25rem 0}
-.nav-dropdown-label{
-  display:flex;align-items:center;gap:.5rem;
-  padding:.5rem 1.25rem .35rem;margin:0;
-  font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--sg);opacity:.85;
+/* Dropdown 2 niveles: Riego/Jardinería → categorías */
+.nav-dropdown-menu--two-level{min-width:230px;padding:.4rem 0}
+
+/* Botón de grupo (Riego / Jardinería) */
+.nav-dropdown-group-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;cursor:pointer;
+  padding:.85rem 1.25rem;
+  font-family:inherit;color:var(--dk);
+  font-size:.92rem;font-weight:500;
+  border-left:3px solid transparent;
+  transition:background .2s, color .2s, border-color .2s;
+  text-align:left;
 }
-.nav-dropdown-label svg{width:12px;height:12px;flex-shrink:0;opacity:.85}
-.nav-dropdown-divider{
-  height:1px;margin:.4rem .75rem;
-  background:linear-gradient(to right, transparent, var(--bd), transparent);
+.nav-dropdown-group-name{
+  display:flex;align-items:center;gap:.6rem;
+}
+.nav-dropdown-group-name svg{width:14px;height:14px;flex-shrink:0;color:var(--sg);opacity:.8}
+.nav-dropdown-chevron{
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+  color:var(--muted);flex-shrink:0;
+}
+.nav-dropdown-group-btn:hover{
+  background:var(--cr);color:var(--sg);border-left-color:var(--sg);
+}
+.nav-dropdown-group-btn:hover .nav-dropdown-group-name svg,
+.nav-dropdown-group-btn:hover .nav-dropdown-chevron{opacity:1;color:var(--sg)}
+.nav-dropdown-group-btn.open{
+  background:var(--cr);color:var(--sg);border-left-color:var(--sg);
+}
+.nav-dropdown-group-btn.open .nav-dropdown-chevron{
+  transform:rotate(90deg);color:var(--sg);
 }
 
-/* Mobile submenu labels */
-.nav-mobile-submenu-label{
-  display:flex;align-items:center;gap:.5rem;
-  padding:.85rem 2rem .5rem;margin:0;
-  font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--sg);opacity:.85;
-  border-top:1px solid var(--bd);
+/* Sublista de categorías (oculta por defecto) */
+.nav-dropdown-sublist{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.22,1,.36,1);
+  background:rgba(74,140,92,.04);
 }
-.nav-mobile-submenu-label:first-child{border-top:none}
-.nav-mobile-submenu-label svg{width:12px;height:12px;flex-shrink:0}
-.nav-mobile-submenu a + .nav-mobile-submenu-label{margin-top:.35rem}
-/* Reset border-top de los a en mobile cuando vienen después de un label */
-.nav-mobile-submenu-label + a{border-top:none}
+.nav-dropdown-sublist.open{max-height:300px}
+.nav-dropdown-sublist a{
+  display:block;padding:.7rem 1.25rem .7rem 2.6rem;
+  color:var(--muted);font-size:.86rem;
+  border-left:3px solid transparent;
+  transition:all .2s;
+}
+.nav-dropdown-sublist a:hover{
+  background:white;color:var(--sg);border-left-color:var(--sg);
+}
+
+/* Mobile: botón de grupo expandible (Nivel 2) */
+.nav-mobile-group-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;cursor:pointer;
+  padding:.95rem 1.75rem;
+  font-family:inherit;color:var(--dk);
+  font-size:.95rem;font-weight:500;
+  border-left:3px solid transparent;border-top:1px solid var(--bd);
+  transition:all .2s;
+  text-align:left;
+}
+.nav-mobile-group-btn:first-child,
+.nav-mobile-submenu .nav-mobile-group-btn:first-of-type{border-top:none}
+.nav-mobile-group-name{
+  display:flex;align-items:center;gap:.6rem;
+}
+.nav-mobile-group-name svg{width:14px;height:14px;flex-shrink:0;color:var(--sg);opacity:.8}
+.nav-mobile-group-chevron{
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+  color:var(--muted);flex-shrink:0;
+}
+.nav-mobile-group-btn:hover{
+  background:var(--cr);color:var(--sg);border-left-color:var(--sg);
+}
+.nav-mobile-group-btn.open{
+  background:var(--cr);color:var(--sg);border-left-color:var(--sg);
+}
+.nav-mobile-group-btn.open .nav-mobile-group-chevron{
+  transform:rotate(180deg);color:var(--sg);
+}
+
+/* Sublista mobile */
+.nav-mobile-sublist{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.22,1,.36,1);
+  background:rgba(74,140,92,.04);
+}
+.nav-mobile-sublist.open{max-height:400px}
+.nav-mobile-sublist a{
+  display:block;padding:.7rem 1.75rem .7rem 3rem;
+  color:var(--muted);font-size:.88rem;
+  border-left:3px solid transparent;border-top:1px solid rgba(74,140,92,.08);
+  transition:all .2s;
+}
+.nav-mobile-sublist a:first-child{border-top:none}
+.nav-mobile-sublist a:hover{
+  background:white;color:var(--sg);border-left-color:var(--sg);
+}
 
 /* ─── MOBILE MENU EXPANDABLE ─── */
 .nav-mobile-expandable{width:100%}
@@ -2641,24 +2712,30 @@ body {
     <a href="#" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'});return false;">Instalación</a>
     <div class="nav-dropdown-wrapper">
       <a href="#" class="nav-dropdown-toggle" onclick="return false;">Accesorios</a>
-      <div class="nav-dropdown-menu nav-dropdown-menu--grouped">
-        <div class="nav-dropdown-group">
-          <p class="nav-dropdown-label">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+      <div class="nav-dropdown-menu nav-dropdown-menu--two-level">
+        <button class="nav-dropdown-group-btn" data-group="riego" onclick="toggleDesktopGroup(event,'riego')">
+          <span class="nav-dropdown-group-name">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
             Riego
-          </p>
+          </span>
+          <svg class="nav-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="nav-dropdown-sublist" data-sublist="riego">
           <a href="#" onclick="openAccesoriosWithCategory('controladores','riego')">Controladores y Sensores</a>
           <a href="#" onclick="openAccesoriosWithCategory('valvulas','riego')">Válvulas</a>
           <a href="#" onclick="openAccesoriosWithCategory('cajas','riego')">Cajas de válvulas</a>
           <a href="#" onclick="openAccesoriosWithCategory('rotores','riego')">Rotores y Toberas</a>
           <a href="#" onclick="openAccesoriosWithCategory('canos','riego')">Caños</a>
         </div>
-        <div class="nav-dropdown-divider"></div>
-        <div class="nav-dropdown-group">
-          <p class="nav-dropdown-label">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M5 12c0-3.87 3.13-7 7-7M19 12c0-3.87-3.13-7-7-7M12 22a5 5 0 005-5H7a5 5 0 005 5z"/></svg>
+
+        <button class="nav-dropdown-group-btn" data-group="jardineria" onclick="toggleDesktopGroup(event,'jardineria')">
+          <span class="nav-dropdown-group-name">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M5 12c0-3.87 3.13-7 7-7M19 12c0-3.87-3.13-7-7-7M12 22a5 5 0 005-5H7a5 5 0 005 5z"/></svg>
             Jardinería
-          </p>
+          </span>
+          <svg class="nav-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="nav-dropdown-sublist" data-sublist="jardineria">
           <a href="#" onclick="openAccesoriosWithCategory('tunel','jardineria')">Túnel invernadero</a>
           <a href="#" onclick="openAccesoriosWithCategory('tutores','jardineria')">Tutores</a>
           <a href="#" onclick="openAccesoriosWithCategory('flejes','jardineria')">Flejes</a>
@@ -2692,23 +2769,35 @@ body {
         </svg>
       </button>
       <div class="nav-mobile-submenu" id="nav-mobile-accesorios">
-        <p class="nav-mobile-submenu-label">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
-          Riego
-        </p>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('controladores','riego')">Controladores y Sensores</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('valvulas','riego')">Válvulas</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('cajas','riego')">Cajas de válvulas</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('rotores','riego')">Rotores y Toberas</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('canos','riego')">Caños</a>
+        <!-- Nivel 2: Riego -->
+        <button class="nav-mobile-group-btn" onclick="toggleMobileGroup(event,'riego')">
+          <span class="nav-mobile-group-name">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+            Riego
+          </span>
+          <svg class="nav-mobile-group-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mobile-sublist" data-mobile-sublist="riego">
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('controladores','riego')">Controladores y Sensores</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('valvulas','riego')">Válvulas</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('cajas','riego')">Cajas de válvulas</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('rotores','riego')">Rotores y Toberas</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('canos','riego')">Caños</a>
+        </div>
 
-        <p class="nav-mobile-submenu-label">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M5 12c0-3.87 3.13-7 7-7M19 12c0-3.87-3.13-7-7-7M12 22a5 5 0 005-5H7a5 5 0 005 5z"/></svg>
-          Jardinería
-        </p>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('tunel','jardineria')">Túnel invernadero</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('tutores','jardineria')">Tutores</a>
-        <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('flejes','jardineria')">Flejes</a>
+        <!-- Nivel 2: Jardinería -->
+        <button class="nav-mobile-group-btn" onclick="toggleMobileGroup(event,'jardineria')">
+          <span class="nav-mobile-group-name">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M5 12c0-3.87 3.13-7 7-7M19 12c0-3.87-3.13-7-7-7M12 22a5 5 0 005-5H7a5 5 0 005 5z"/></svg>
+            Jardinería
+          </span>
+          <svg class="nav-mobile-group-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-mobile-sublist" data-mobile-sublist="jardineria">
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('tunel','jardineria')">Túnel invernadero</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('tutores','jardineria')">Tutores</a>
+          <a href="#" onclick="closeMobileMenu();openAccesoriosWithCategory('flejes','jardineria')">Flejes</a>
+        </div>
       </div>
     </div>
     <a href="#" onclick="closeMobileMenu();document.getElementById('calc-section').scrollIntoView({behavior:'smooth'});return false;">Calculadora</a>
@@ -3696,6 +3785,69 @@ function toggleMobileAccesorios(event) {
   const submenu = document.getElementById('nav-mobile-accesorios');
   btn.classList.toggle('open');
   submenu.classList.toggle('open');
+  // Cerrar sublistas al cerrar el submenu padre
+  if (!submenu.classList.contains('open')) {
+    document.querySelectorAll('.nav-mobile-sublist.open').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.nav-mobile-group-btn.open').forEach(b => b.classList.remove('open'));
+  }
+}
+
+// Desktop dropdown: toggle grupo (Riego / Jardinería)
+function toggleDesktopGroup(event, group) {
+  event.preventDefault();
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  const sublist = document.querySelector(`.nav-dropdown-sublist[data-sublist="${group}"]`);
+  const isOpen = btn.classList.contains('open');
+
+  // Cerrar todos los grupos del dropdown desktop
+  document.querySelectorAll('.nav-dropdown-group-btn.open').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.nav-dropdown-sublist.open').forEach(s => s.classList.remove('open'));
+
+  // Abrir solo el que se clickeó (si no estaba abierto)
+  if (!isOpen) {
+    btn.classList.add('open');
+    if (sublist) sublist.classList.add('open');
+  }
+}
+
+// Mobile menu: toggle grupo (Riego / Jardinería)
+function toggleMobileGroup(event, group) {
+  event.preventDefault();
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  const sublist = document.querySelector(`.nav-mobile-sublist[data-mobile-sublist="${group}"]`);
+  const isOpen = btn.classList.contains('open');
+
+  // Cerrar todos los grupos del menú mobile
+  document.querySelectorAll('.nav-mobile-group-btn.open').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.nav-mobile-sublist.open').forEach(s => s.classList.remove('open'));
+
+  // Abrir solo el que se clickeó (si no estaba abierto)
+  if (!isOpen) {
+    btn.classList.add('open');
+    if (sublist) sublist.classList.add('open');
+  }
+}
+
+// Cerrar dropdown desktop al salir del wrapper o clickear fuera
+document.addEventListener('click', (e) => {
+  const wrapper = document.querySelector('.nav-dropdown-wrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    document.querySelectorAll('.nav-dropdown-group-btn.open').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.nav-dropdown-sublist.open').forEach(s => s.classList.remove('open'));
+  }
+});
+const _navWrapper = document.querySelector('.nav-dropdown-wrapper');
+if (_navWrapper) {
+  _navWrapper.addEventListener('mouseleave', () => {
+    setTimeout(() => {
+      if (!_navWrapper.matches(':hover')) {
+        document.querySelectorAll('.nav-dropdown-group-btn.open').forEach(b => b.classList.remove('open'));
+        document.querySelectorAll('.nav-dropdown-sublist.open').forEach(s => s.classList.remove('open'));
+      }
+    }, 200);
+  });
 }
 
 // ── Carousel navigation profesional ──
