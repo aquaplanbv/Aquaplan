@@ -366,6 +366,113 @@ body, p, span, a, button, input, textarea {
   background:white;color:var(--sg);border-left-color:var(--sg);
 }
 
+/* ═══════════════════════════════════════════════
+   MOBILE NAV OPTIMIZATIONS
+   ═══════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* Botón de grupo Riego/Jardinería - tap target grande */
+  .nav-mobile-group-btn{
+    padding:1.1rem 1.75rem !important;
+    font-size:.95rem !important;
+    font-weight:600 !important;
+    min-height:54px;
+    letter-spacing:.02em;
+    border-top-color:rgba(0,0,0,0.05) !important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-mobile-group-name{
+    gap:.75rem !important;
+  }
+  .nav-mobile-group-name svg{
+    width:18px !important;height:18px !important;
+    opacity:1 !important;
+    transition:transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-mobile-group-chevron{
+    width:18px !important;height:18px !important;
+  }
+  .nav-mobile-group-btn:active{
+    background:rgba(74,140,92,.08);
+    transform:scale(0.995);
+    transition:transform .1s, background .15s;
+  }
+  .nav-mobile-group-btn.open{
+    background:linear-gradient(90deg, rgba(74,140,92,.08) 0%, rgba(74,140,92,.02) 100%) !important;
+    border-left-width:4px !important;
+  }
+  .nav-mobile-group-btn.open .nav-mobile-group-name svg{
+    transform:scale(1.1);
+  }
+
+  /* Sublist - tap targets grandes para categorías */
+  .nav-mobile-sublist{
+    transition:max-height .4s cubic-bezier(.22,1,.36,1) !important;
+    background:rgba(74,140,92,.025) !important;
+  }
+  .nav-mobile-sublist.open{
+    max-height:500px !important;
+  }
+  .nav-mobile-sublist a{
+    padding:.95rem 1.75rem .95rem 3.25rem !important;
+    font-size:.88rem !important;
+    min-height:46px;
+    display:flex !important;align-items:center;
+    color:var(--dk) !important;opacity:.78;
+    border-top-color:rgba(74,140,92,.06) !important;
+    -webkit-tap-highlight-color:transparent;
+    transition:all .25s ease !important;
+  }
+  .nav-mobile-sublist a:active{
+    background:white !important;color:var(--sg) !important;
+    border-left-color:var(--sg) !important;
+    opacity:1;
+    transform:translateX(2px);
+  }
+
+  /* Submenu padre: más altura para fitear los expandidos */
+  .nav-mobile-submenu.open{
+    max-height:900px !important;
+  }
+
+  /* Menú mobile general: mejor spacing */
+  #nav-mobile{
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    background:rgba(255,255,255,0.96);
+  }
+  #nav-mobile a,
+  .nav-mobile-toggle{
+    min-height:54px;
+    display:flex !important;align-items:center;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .nav-mobile-toggle{
+    padding:1.1rem 1.5rem !important;
+    font-weight:600 !important;
+    letter-spacing:.02em;
+  }
+  .nav-mobile-toggle:active{
+    background:rgba(74,140,92,.06);
+  }
+  #nav-mobile > .nav-mobile-inner > a:active{
+    background:rgba(74,140,92,.06);
+    border-left-color:var(--sg);
+  }
+
+  /* Chevron animations más elegantes */
+  .nav-mobile-group-btn .nav-mobile-group-chevron{
+    color:var(--sg) !important;opacity:.5;
+  }
+  .nav-mobile-group-btn.open .nav-mobile-group-chevron{
+    opacity:1;color:var(--sg) !important;
+  }
+
+  /* Separación visual entre grupos cuando ambos cerrados */
+  .nav-mobile-sublist + .nav-mobile-group-btn{
+    margin-top:0;
+  }
+}
+
 /* ─── MOBILE MENU EXPANDABLE ─── */
 .nav-mobile-expandable{width:100%}
 .nav-mobile-toggle{
