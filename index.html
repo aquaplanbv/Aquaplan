@@ -3788,21 +3788,29 @@ body {
 </section>
 
 <!-- ═══ ACERCA DE NOSOTROS ═══ -->
-<section id="nosotros" style="background:var(--dk);padding:6rem 3rem">
-  <div style="max-width:800px;margin:0 auto">
-    <div>
-      <p style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sgl);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem">
-        <span style="flex:0 0 28px;height:1px;background:var(--sgl);display:inline-block"></span>
-        Quiénes somos
+<section id="nosotros" style="background:var(--dk);border-top:1px solid rgba(255,255,255,.07)">
+  <button id="nosotros-toggle"
+    onclick="(function(){var b=document.getElementById('nosotros-body');var i=document.getElementById('nosotros-arrow');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.style.transform=open?'rotate(0deg)':'rotate(180deg)';})()"
+    style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:2rem 3rem;background:none;border:none;cursor:pointer;text-align:left">
+    <div style="display:flex;align-items:center;gap:1.25rem">
+      <span style="flex:0 0 28px;height:1px;background:var(--sgl);display:inline-block"></span>
+      <span style="font-family:Georgia,serif;font-size:clamp(1.1rem,2vw,1.4rem);font-weight:500;color:var(--wh);letter-spacing:-.01em">
+        Instalamos el sistema de riego que necesitás
+      </span>
+    </div>
+    <svg id="nosotros-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"
+      style="flex-shrink:0;transition:transform .3s ease;color:var(--sgl)">
+      <path d="M3 6l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div id="nosotros-body" style="display:none">
+    <div style="max-width:800px;margin:0 auto;padding:0 3rem 3rem">
+      <p style="font-size:.97rem;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:1.25rem">
+        Somos una empresa de Bella Vista, GBA, especializada en el diseño e instalación de sistemas de riego automático. Nos adaptamos a cada proyecto: jardines residenciales, espacios verdes, canchas deportivas, cultivos y proyectos agrícolas de pequeña y mediana escala.
       </p>
-      <h2 style="font-family:Georgia,serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;color:var(--wh);line-height:1.2;letter-spacing:-.015em;margin-bottom:1.75rem">
-        Instaladores de riego automático, desde Bella Vista.
-      </h2>
-      <p style="font-size:.97rem;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:1.5rem">
-        Somos una empresa especializada en el diseño e instalación de sistemas de riego automático para el Gran Buenos Aires. Trabajamos con jardines residenciales, espacios verdes, canchas deportivas, cultivos y proyectos agrícolas de pequeña y mediana escala.
-      </p>
-      <p style="font-size:.97rem;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:2.5rem">
-        Cada proyecto arranca con un plano hidráulico propio, pensado para el terreno real. Usamos productos Hunter y Rain Bird de primera línea, con garantía de instalación y acompañamiento post-obra.
+      <p style="font-size:.97rem;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:2rem">
+        Cada obra arranca con un plano hidráulico propio, pensado para el terreno real. Usamos productos Hunter y Rain Bird de primera línea, con garantía de instalación y acompañamiento post-obra.
       </p>
       <a href="https://wa.me/5491178225461" target="_blank" rel="noopener"
         style="display:inline-flex;align-items:center;gap:.5rem;color:var(--sgl);font-size:.8rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid rgba(111,175,127,.45);text-decoration:none;transition:border-color .25s,color .25s">
@@ -3811,8 +3819,10 @@ body {
     </div>
   </div>
   <style>
+    #nosotros-toggle:hover span[style*="Georgia"]{color:var(--sgl)}
     @media(max-width:480px){
-      #nosotros{padding:4rem 1.5rem !important}
+      #nosotros-toggle{padding:1.5rem !important}
+      #nosotros-body > div{padding:0 1.5rem 2rem !important}
     }
   </style>
 </section>
